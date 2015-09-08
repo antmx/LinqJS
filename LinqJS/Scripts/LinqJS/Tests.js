@@ -127,3 +127,37 @@ function TestAverageWithTransform() {
 }
 
 TestAverageWithTransform();
+
+
+function TestLinqJquery() {
+
+	window.Logger.LogFunction(arguments.callee);
+
+	var list = $().linqify([1, 2, 3, 4])
+		 .Where(function (i) { return i % 2 === 0; });
+
+	window.Logger.LogArray(list);
+}
+
+TestLinqJquery();
+
+
+function TestSelect() {
+
+	window.Logger.LogFunction(arguments.callee);
+
+	var items = [
+		 { Name: "One", Number: 1 },
+		 { Name: "Two", Number: 2 },
+		 { Name: "Three", Number: 3 },
+		 { Name: "Four", Number: 4 }
+	].Linqify();
+
+	var result = items
+		 .Where(function (o) { return o.Number % 2 === 0; })
+		 .Select(function (o) { return o.Name; });
+
+	window.Logger.LogArray(result);
+}
+
+TestSelect();

@@ -77,6 +77,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { AggregateWithSeedAndResultSelector: Netricity.LinqJS.LinqifyHelper.aggregateWithSeedAndResultSelector });
 	Netricity.Utilities.extend(list, { Average: Netricity.LinqJS.LinqifyHelper.average });
 	Netricity.Utilities.extend(list, { AverageWithTransform: Netricity.LinqJS.LinqifyHelper.averageWithTransform });
+	Netricity.Utilities.extend(list, { Select: Netricity.LinqJS.LinqifyHelper.select });
 
 	// todo
 	// Where DONE
@@ -93,18 +94,20 @@ Netricity.LinqJS.Linqify = function (list) {
 	// Distinct
 	// ElementAt
 	// Except
-	// ForEach
+	// First DONE
+	// ForEach DONE
 	// GroupBy
 	// GroupJoin
 	// Intersect
 	// Join
+	// Last DONE
 	// LongCount
 	// Max
 	// Min
 	// OrderBy
 	// OrderByDescending
 	// Reverse
-	// Select (projection)
+	// Select (projection) DONE
 	// SelectMany (project and flatten)
 	// SequenceEqual
 	// SetValue (not LINQ but useful)

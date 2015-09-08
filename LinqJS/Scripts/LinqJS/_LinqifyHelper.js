@@ -55,3 +55,7 @@ Netricity.LinqJS._LinqifyHelper.prototype.average = function () {
 Netricity.LinqJS._LinqifyHelper.prototype.averageWithTransform = function (transformerLambda) {
 	return Netricity.LinqJS.Helper.averageWithTransform(this, transformerLambda);
 };
+
+Netricity.LinqJS._LinqifyHelper.prototype.select = function (lambda) {
+	return Netricity.LinqJS.Helper.select(this, lambda);
+};

@@ -227,3 +227,17 @@ Netricity.LinqJS.LinqHelper.prototype.averageWithTransform = function (items, tr
 
 	return avg;
 };
+
+/// select
+Netricity.LinqJS.LinqHelper.prototype.select = function (items, lambda) {
+	//var results = [].Linqify();
+	var results = Netricity.LinqJS.Linqify([]);
+	var enumerator = items.GetEnumerator();
+
+	while (enumerator.MoveNext()) {
+		var obj = lambda(enumerator.Current);
+		results.push(obj);
+	}
+
+	return results;
+};
