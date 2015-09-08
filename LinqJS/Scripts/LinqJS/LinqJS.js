@@ -3,30 +3,11 @@
 /// <reference path="~/Scripts/LinqJS/LinqHelper.js" />
 
 Namespace.Define("Netricity.LinqJS");
+
 Netricity.LinqJS.Helper = new Netricity.LinqJS.LinqHelper();
+Netricity.LinqJS.LinqifyHelper = new Netricity.LinqJS._LinqifyHelper();
 
 Array.prototype.Linqify = function () {
-
-	//if (typeof this.length === 'undefined')
-	//	throw new Error('Linqify requires an array');
-
-	//if (this._linqified)
-	//	return this;
-
-	//this._linqified = true;
-
-	//// Add extra methods to the INSTANCE
-	//Netricity.Utilities.extend(this, { Where: Netricity.LinqJS.Where });
-	//Netricity.Utilities.extend(this, { Any: Netricity.LinqJS.Any });
-	//Netricity.Utilities.extend(this, { First: Netricity.LinqJS.First });
-	//Netricity.Utilities.extend(this, { Last: Netricity.LinqJS.Last });
-	//Netricity.Utilities.extend(this, { All: Netricity.LinqJS.All });
-	//Netricity.Utilities.extend(this, { ForEach: Netricity.LinqJS.ForEach });
-	//Netricity.Utilities.extend(this, { GetEnumerator: Netricity.LinqJS.GetEnumerator });
-	//Netricity.Utilities.extend(this, { Aggregate: Netricity.LinqJS.Aggregate });
-	//Netricity.Utilities.extend(this, { AggregateWithSeed: Netricity.LinqJS.AggregateWithSeed });
-	//Netricity.Utilities.extend(this, { AggregateWithSeedAndResultSelector: Netricity.LinqJS.AggregateWithSeedAndResultSelector });
-	//Netricity.Utilities.extend(this, { Average: Netricity.LinqJS.Average });
 
 	// todo
 	// Where DONE
@@ -84,18 +65,18 @@ Netricity.LinqJS.Linqify = function (list) {
 	list._linqified = true;
 
 	// Add extra methods to the INSTANCE
-	Netricity.Utilities.extend(list, { Where: Netricity.LinqJS.Where });
-	Netricity.Utilities.extend(list, { Any: Netricity.LinqJS.Any });
-	Netricity.Utilities.extend(list, { First: Netricity.LinqJS.First });
-	Netricity.Utilities.extend(list, { Last: Netricity.LinqJS.Last });
-	Netricity.Utilities.extend(list, { All: Netricity.LinqJS.All });
-	Netricity.Utilities.extend(list, { ForEach: Netricity.LinqJS.ForEach });
-	Netricity.Utilities.extend(list, { GetEnumerator: Netricity.LinqJS.GetEnumerator });
-	Netricity.Utilities.extend(list, { Aggregate: Netricity.LinqJS.Aggregate });
-	Netricity.Utilities.extend(list, { AggregateWithSeed: Netricity.LinqJS.AggregateWithSeed });
-	Netricity.Utilities.extend(list, { AggregateWithSeedAndResultSelector: Netricity.LinqJS.AggregateWithSeedAndResultSelector });
-	Netricity.Utilities.extend(list, { Average: Netricity.LinqJS.Average });
-	Netricity.Utilities.extend(list, { AverageWithTransform: Netricity.LinqJS.AverageWithTransform });
+	Netricity.Utilities.extend(list, { Where: Netricity.LinqJS.LinqifyHelper.where });
+	Netricity.Utilities.extend(list, { Any: Netricity.LinqJS.LinqifyHelper.any });
+	Netricity.Utilities.extend(list, { First: Netricity.LinqJS.LinqifyHelper.first });
+	Netricity.Utilities.extend(list, { Last: Netricity.LinqJS.LinqifyHelper.last });
+	Netricity.Utilities.extend(list, { All: Netricity.LinqJS.LinqifyHelper.all });
+	Netricity.Utilities.extend(list, { ForEach: Netricity.LinqJS.LinqifyHelper.forEach });
+	Netricity.Utilities.extend(list, { GetEnumerator: Netricity.LinqJS.LinqifyHelper.getEnumerator });
+	Netricity.Utilities.extend(list, { Aggregate: Netricity.LinqJS.LinqifyHelper.aggregate });
+	Netricity.Utilities.extend(list, { AggregateWithSeed: Netricity.LinqJS.LinqifyHelper.aggregateWithSeed });
+	Netricity.Utilities.extend(list, { AggregateWithSeedAndResultSelector: Netricity.LinqJS.LinqifyHelper.aggregateWithSeedAndResultSelector });
+	Netricity.Utilities.extend(list, { Average: Netricity.LinqJS.LinqifyHelper.average });
+	Netricity.Utilities.extend(list, { AverageWithTransform: Netricity.LinqJS.LinqifyHelper.averageWithTransform });
 
 	// todo
 	// Where DONE
@@ -104,7 +85,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	// Last DONE
 	// All DONE
 	// Aggregate DONE
-	// Average
+	// Average DONE
 	// Concat
 	// Contains
 	// Count
@@ -140,53 +121,3 @@ Netricity.LinqJS.Linqify = function (list) {
 	
 	return list;
 }
-
-Netricity.LinqJS.Where = function (lambda) {
-	return Netricity.LinqJS.Helper.where(this, lambda);
-};
-
-Netricity.LinqJS.Any = function (lambda) {
-	return Netricity.LinqJS.Helper.any(this, lambda);
-};
-
-Netricity.LinqJS.First = function (lambda) {
-	return Netricity.LinqJS.Helper.first(this, lambda);
-};
-
-Netricity.LinqJS.Last = function (lambda) {
-	return Netricity.LinqJS.Helper.last(this, lambda);
-};
-
-Netricity.LinqJS.All = function (lambda) {
-	return Netricity.LinqJS.Helper.all(this, lambda);
-};
-
-Netricity.LinqJS.ForEach = function (lamda) {
-	return Netricity.LinqJS.Helper.forEach(this, lambda);
-};
-
-/// Returns an enumerator that iterates over the array.
-Netricity.LinqJS.GetEnumerator = function () {
-	return Netricity.LinqJS.Helper.getEnumerator(this);
-};
-
-// Applies an accumulator function over an array.
-Netricity.LinqJS.Aggregate = function (lambda) {
-	return Netricity.LinqJS.Helper.aggregate(this, lambda);
-};
-
-Netricity.LinqJS.AggregateWithSeed = function (lambda, seed) {
-	return Netricity.LinqJS.Helper.aggregateWithSeed(this, lambda, seed);
-};
-
-Netricity.LinqJS.AggregateWithSeedAndResultSelector = function (lambda, seed, resultSelector) {
-	return Netricity.LinqJS.Helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector);
-};
-
-Netricity.LinqJS.Average = function () {
-	return Netricity.LinqJS.Helper.average(this);
-};
-
-Netricity.LinqJS.AverageWithTransform = function (transformerLambda) {
-	return Netricity.LinqJS.Helper.averageWithTransform(this, transformerLambda);
-};

@@ -2,8 +2,6 @@
 
 Namespace.Define("Netricity.LinqJS");
 
-//Netricity.LinqJS = Netricity.LinqJS || function () { };
-
 Netricity.LinqJS.LinqHelper = function () {
 
 }
@@ -66,7 +64,7 @@ Netricity.LinqJS.LinqHelper.prototype.where = function (items, lambda) {
 	return results;
 }
 
-
+/// any
 Netricity.LinqJS.LinqHelper.prototype.any = function (items, lambda) {
 	if (typeof (lambda) === "undefined")
 		return items.length > 0;
@@ -83,7 +81,7 @@ Netricity.LinqJS.LinqHelper.prototype.any = function (items, lambda) {
 	return false;
 };
 
-
+/// first
 Netricity.LinqJS.LinqHelper.prototype.first = function (items, lambda) {
 	if (typeof (lambda) === "undefined") {
 
@@ -104,6 +102,7 @@ Netricity.LinqJS.LinqHelper.prototype.first = function (items, lambda) {
 	throw new Error("Array contains no matching items");
 };
 
+/// last
 Netricity.LinqJS.LinqHelper.prototype.last = function (items, lambda) {
 	if (typeof (lambda) === "undefined") {
 
@@ -124,6 +123,7 @@ Netricity.LinqJS.LinqHelper.prototype.last = function (items, lambda) {
 	throw new Error("Array contains no matching items");
 };
 
+/// all
 Netricity.LinqJS.LinqHelper.prototype.all = function (items, lambda) {
 	this.ensureLambda(lambda);
 
@@ -137,6 +137,7 @@ Netricity.LinqJS.LinqHelper.prototype.all = function (items, lambda) {
 	return true;
 };
 
+/// forEach
 Netricity.LinqJS.LinqHelper.prototype.forEach = function (items, lamda) {
 	this.ensureLambda(lamda);
 
@@ -147,6 +148,7 @@ Netricity.LinqJS.LinqHelper.prototype.forEach = function (items, lamda) {
 	}
 };
 
+/// aggregate
 Netricity.LinqJS.LinqHelper.prototype.aggregate = function (items, lambda) {
 	this.ensureLambda(lambda);
 	this.ensureItems(items);
@@ -164,6 +166,7 @@ Netricity.LinqJS.LinqHelper.prototype.aggregate = function (items, lambda) {
 	return result;
 };
 
+/// aggregateWithSeed
 Netricity.LinqJS.LinqHelper.prototype.aggregateWithSeed = function (items, lambda, seed) {
 	this.ensureLambda(lambda);
 	this.ensureItems(items);
@@ -177,6 +180,7 @@ Netricity.LinqJS.LinqHelper.prototype.aggregateWithSeed = function (items, lambd
 	return result;
 };
 
+/// aggregateWithSeedAndResultSelector
 Netricity.LinqJS.LinqHelper.prototype.aggregateWithSeedAndResultSelector = function (items, lambda, seed, resultSelector) {
 	this.ensureLambda(lambda);
 	this.ensureLambda(resultSelector);
@@ -192,6 +196,7 @@ Netricity.LinqJS.LinqHelper.prototype.aggregateWithSeedAndResultSelector = funct
 	return result;
 };
 
+/// average
 Netricity.LinqJS.LinqHelper.prototype.average = function (items) {
 
 	var enumerator = this.getEnumerator(items);
@@ -206,6 +211,7 @@ Netricity.LinqJS.LinqHelper.prototype.average = function (items) {
 	return avg;
 };
 
+/// averageWithTransform
 Netricity.LinqJS.LinqHelper.prototype.averageWithTransform = function (items, transformerLambda) {
 	this.ensureLambda(transformerLambda);
 
