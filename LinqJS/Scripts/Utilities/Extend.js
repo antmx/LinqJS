@@ -2,10 +2,22 @@
 
 // Copied from angular.js - use this to add extra functions to an INSTANCE of a type
 
-Namespace.Create("Netricity.Utilities");
+//Namespace.Define("Netricity.Utilities");
 
-//function extend(dst) {
+//Namespace.Define("Netricity");
+
+//Netricity.Utilities = Netricity.Utilities || function () { };
+
+//var Netricity = Netricity || {};
+
+Namespace.Define("Netricity.Utilities");
+
 Netricity.Utilities.extend = function (dst) {
+
+	//(function () {
+
+	//function extend(dst) {
+	//Netricity.Utilities.extend = function (dst) {
 	var h = dst.$$hashKey;
 	forEach(arguments, function (obj) {
 		if (obj !== dst) {
@@ -78,4 +90,6 @@ Netricity.Utilities.extend = function (dst) {
 			delete obj.$$hashKey;
 		}
 	}
-}
+};
+
+//})();

@@ -115,3 +115,15 @@ function TestAverage() {
 }
 
 TestAverage();
+
+
+function TestAverageWithTransform() {
+	window.Logger.LogFunction(arguments.callee);
+
+	var items = [2, 4, 6, 8].Linqify();
+	var avg = items.AverageWithTransform(function (i) { return i * 10; });
+
+	console.log(avg);
+}
+
+TestAverageWithTransform();

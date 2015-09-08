@@ -12,7 +12,7 @@ var a = [1,2];
 
 var x = {};
 
-Namespace.Create("Netricity.LinqJS");
+Namespace.Define("Netricity.LinqJS");
 
 Netricity.LinqJS.Where = function(lambda){
 	console.log('Netricity.LinqJS.Where + ' + this.length);

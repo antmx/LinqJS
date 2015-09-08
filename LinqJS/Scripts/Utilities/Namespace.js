@@ -7,7 +7,7 @@
 	Namespace.prototype = {
 
 		/// <summary>Creates a namespace from the given string</summary>
-		Create: function (ns) {
+		Define: function (ns) {
 			var n, o;
 			n = ns.split('.');
 			o = window[n[0]] = window[n[0]] || {};

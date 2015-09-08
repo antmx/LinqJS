@@ -63,6 +63,7 @@
     <Content Include="Scripts\Lib\jasmine.js" />
     <Content Include="Scripts\Lib\jquery-1.9.1.js" />
     <Content Include="Scripts\Lib\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\LinqJS\LinqHelper.js" />
     <Content Include="Scripts\LinqJS\LinqJS.js" />
     <Content Include="Scripts\LinqJS\Tests.js" />
     <Content Include="Scripts\Utilities\Extend.js" />
