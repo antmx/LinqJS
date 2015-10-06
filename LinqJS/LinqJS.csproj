@@ -43,6 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="jasmine.html" />
     <Content Include="packages.config" />
     <Content Include="Scripts\Lib\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
@@ -63,6 +64,7 @@
     <Content Include="Scripts\Lib\jasmine.js" />
     <Content Include="Scripts\Lib\jquery-1.9.1.js" />
     <Content Include="Scripts\Lib\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\LinqJS\JasmineTests.js" />
     <Content Include="Scripts\LinqJS\LinqHelper.js" />
     <Content Include="Scripts\LinqJS\LinqJquery.js" />
     <Content Include="Scripts\LinqJS\_LinqifyHelper.js" />

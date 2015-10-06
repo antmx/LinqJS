@@ -2,14 +2,6 @@
 
 // Copied from angular.js - use this to add extra functions to an INSTANCE of a type
 
-//Namespace.Define("Netricity.Utilities");
-
-//Namespace.Define("Netricity");
-
-//Netricity.Utilities = Netricity.Utilities || function () { };
-
-//var Netricity = Netricity || {};
-
 Namespace.Define("Netricity.Utilities");
 
 Netricity.Utilities.extend = function (dst) {
@@ -91,5 +83,3 @@ Netricity.Utilities.extend = function (dst) {
 		}
 	}
 };
-
-//})();
