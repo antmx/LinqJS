@@ -52,6 +52,7 @@
     <Content Include="lib\jasmine-2.3.4\jasmine.js" />
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\specs\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
