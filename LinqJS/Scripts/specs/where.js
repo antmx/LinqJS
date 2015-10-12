@@ -11,12 +11,20 @@ describe("LinqHelper where", function () {
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
-	it("Finds", function () {
+	it("Finds matching items", function () {
 		var result = helper.where(
 			items,
 			function (i) { return i % 2 == 0; });
 
-		expect(result).toEqual(2, 4, 6, 8);
+		var expected = [2, 4, 6, 8];
+
+		expect(result.length).toEqual(4);
+
+		var e = helper.getEnumerator(result);
+
+		while (e.MoveNext()) {
+			expect(e.Current).toEqual(expected[e.CurrentIdx]);
+		}
 	});
 
 });

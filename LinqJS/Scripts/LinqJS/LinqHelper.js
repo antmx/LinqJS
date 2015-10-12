@@ -1,4 +1,5 @@
 ﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
+/// <reference path="~/Scripts/Utilities/Enumerator.js" />
 
 Namespace.Define("Netricity.LinqJS");
 
@@ -12,7 +13,7 @@ Netricity.LinqJS.LinqHelper.prototype.helloWorld = function () {
 
 Netricity.LinqJS.LinqHelper.prototype.getEnumerator = function (items) {
 	if (items.enumerator == null)
-		items.enumerator = new Netricity.LinqJS.Enumerator(items);
+		items.enumerator = new Netricity.Utilities.Enumerator(items);
 	else {
 		items.enumerator.reset();
 	}
@@ -120,8 +121,8 @@ Netricity.LinqJS.LinqHelper.prototype.all = function (items, lambda) {
 };
 
 /// forEach
-Netricity.LinqJS.LinqHelper.prototype.forEach = function (items, lamda) {
-	this.ensureLambda(lamda);
+Netricity.LinqJS.LinqHelper.prototype.forEach = function (items, lambda) {
+	this.ensureLambda(lambda);
 
 	for (var idx = 0; idx < items.length; idx++) {
 		var obj = items[idx];
@@ -137,8 +138,8 @@ Netricity.LinqJS.LinqHelper.prototype.aggregate = function (items, lambda) {
 
 	var e = this.getEnumerator(items);
 
-	if (!e.MoveNext())
-		throw new Error("Array must contain at least 1 element");
+	//if (!e.MoveNext())
+	//	throw new Error("Array must contain at least 1 element");
 
 	var result = e.Current;
 

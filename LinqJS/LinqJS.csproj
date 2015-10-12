@@ -67,7 +67,15 @@
     <None Include="lib\jquery-1.9.1\jquery-1.9.1.intellisense.js" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.js" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\LinqJS\Enumerator.js" />
+    <Content Include="Scripts\specs\aggregateWithSeedAndResultSelector.js" />
+    <Content Include="Scripts\specs\aggregateWithSeed.js" />
+    <Content Include="Scripts\specs\aggregate.js" />
+    <Content Include="Scripts\specs\forEach.js" />
+    <Content Include="Scripts\specs\all.js" />
+    <Content Include="Scripts\specs\last.js" />
+    <Content Include="Scripts\specs\first.js" />
+    <Content Include="Scripts\specs\any.js" />
+    <Content Include="Scripts\Utilities\Enumerator.js" />
     <Content Include="Scripts\specs\getEnumerator.js" />
     <Content Include="Scripts\specs\helloWorld.js" />
     <Content Include="Scripts\LinqJS\LinqHelper.js" />

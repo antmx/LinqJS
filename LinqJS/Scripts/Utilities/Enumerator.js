@@ -1,17 +1,18 @@
 ﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
 
-Namespace.Define("Netricity.LinqJS");
+Namespace.Define("Netricity.Utilities");
 
 /// Enumerator 'class' - supports a simple iteration over an array.
-Netricity.LinqJS.Enumerator = function (items) {
-	var currentIdx = 0;
+Netricity.Utilities.Enumerator = function (items) {
 	var self = this;
 	this.Current = null;
+	this.CurrentIdx = -1;
 
 	this.MoveNext = function () {
-		if (items.length > currentIdx) {
-			self.Current = items[currentIdx];
-			currentIdx++;
+
+		if (items.length > self.CurrentIdx + 1) {
+			self.CurrentIdx++;
+			self.Current = items[self.CurrentIdx];
 			return true;
 		}
 
@@ -19,7 +20,7 @@ Netricity.LinqJS.Enumerator = function (items) {
 	}
 
 	this.reset = function () {
-		currentIdx = 0;
+		this.CurrentIdx = -1;
 		this.Current = null;
 	}
 };

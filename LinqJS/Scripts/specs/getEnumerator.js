@@ -37,6 +37,7 @@ describe("LinqHelper getEnumerator", function () {
 
 		e.reset();
 
+		expect(e.CurrentIdx).toEqual(-1);
 		expect(e.Current).toBeNull();
 	});
 });
