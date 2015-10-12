@@ -1,7 +1,7 @@
 ﻿/// <reference path="~/Scripts/LinqJS/LinqHelper.js" />
 /// <reference path="~/lib/jasmine-2.3.4/jasmine.js" />
 
-describe("LinqHelper aggregateWithSeed", function () {
+describe("LinqHelper aggregateWithSeedAndResultSelector", function () {
 
 	var helper;
 	var items;
