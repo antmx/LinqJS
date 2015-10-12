@@ -16,7 +16,7 @@
     <RootNamespace>LinqJS</RootNamespace>
     <AssemblyName>LinqJS</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -45,7 +45,13 @@
   <ItemGroup>
     <Content Include="jasmine.html" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\Lib\jquery-1.9.1.min.map" />
+    <Content Include="lib\jasmine-2.3.4\boot.js" />
+    <Content Include="lib\jasmine-2.3.4\console.js" />
+    <Content Include="lib\jasmine-2.3.4\jasmine-html.js" />
+    <Content Include="lib\jasmine-2.3.4\jasmine.css" />
+    <Content Include="lib\jasmine-2.3.4\jasmine.js" />
+    <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
+    <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -54,22 +60,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\favicon.ico" />
-    <Content Include="Content\jasmine.css" />
+    <Content Include="lib\bootstrap-3.3.5\bootstrap.min.css" />
+    <Content Include="lib\bootstrap-3.3.5\favicon.ico" />
     <Content Include="Index.html" />
-    <Content Include="Content\bootstrap.css.map" />
-    <None Include="Scripts\Lib\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\Lib\jasmine-html.js" />
-    <Content Include="Scripts\Lib\jasmine.js" />
-    <Content Include="Scripts\Lib\jquery-1.9.1.js" />
-    <Content Include="Scripts\Lib\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\LinqJS\JasmineTests.js" />
+    <Content Include="lib\bootstrap-3.3.5\bootstrap.css.map" />
+    <None Include="lib\jquery-1.9.1\jquery-1.9.1.intellisense.js" />
+    <Content Include="lib\jquery-1.9.1\jquery-1.9.1.js" />
+    <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\LinqJS\Enumerator.js" />
+    <Content Include="Scripts\specs\getEnumerator.js" />
+    <Content Include="Scripts\specs\helloWorld.js" />
     <Content Include="Scripts\LinqJS\LinqHelper.js" />
     <Content Include="Scripts\LinqJS\LinqJquery.js" />
     <Content Include="Scripts\LinqJS\_LinqifyHelper.js" />
     <Content Include="Scripts\LinqJS\LinqJS.js" />
     <Content Include="Scripts\LinqJS\Tests.js" />
+    <Content Include="Scripts\specs\where.js" />
     <Content Include="Scripts\Utilities\Extend.js" />
     <Content Include="Scripts\LinqJS\Where.js" />
     <Content Include="Scripts\Utilities\Logger.js" />
@@ -94,7 +100,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61718</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61718/</IISUrl>
+          <IISUrl>http://localhost/LinqJS</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -6,6 +6,10 @@ Netricity.LinqJS._LinqifyHelper = function () {
 
 }
 
+Netricity.LinqJS._LinqifyHelper.prototype.helloWorld = function (lambda) {
+	return Netricity.LinqJS.Helper.helloWorld();
+};
+
 Netricity.LinqJS._LinqifyHelper.prototype.where = function (lambda) {
 	return Netricity.LinqJS.Helper.where(this, lambda);
 };

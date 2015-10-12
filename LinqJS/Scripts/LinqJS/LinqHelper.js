@@ -6,27 +6,9 @@ Netricity.LinqJS.LinqHelper = function () {
 
 }
 
-/// Supports a simple iteration over an array.
-Netricity.LinqJS.Enumerator = function (items) {
-	var currentIdx = 0;
-	var self = this;
-	this.Current = null;
-
-	this.MoveNext = function () {
-		if (items.length > currentIdx) {
-			self.Current = items[currentIdx];
-			currentIdx++;
-			return true;
-		}
-
-		return false;
-	}
-
-	this.reset = function () {
-		currentIdx = 0;
-		this.Current = null;
-	}
-};
+Netricity.LinqJS.LinqHelper.prototype.helloWorld = function () {
+	return "Hello, World!";
+}
 
 Netricity.LinqJS.LinqHelper.prototype.getEnumerator = function (items) {
 	if (items.enumerator == null)
