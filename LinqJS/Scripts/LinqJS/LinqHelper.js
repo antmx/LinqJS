@@ -213,9 +213,8 @@ Netricity.LinqJS.LinqHelper.prototype.averageWithTransform = function (items, tr
 
 /// select
 Netricity.LinqJS.LinqHelper.prototype.select = function (items, lambda) {
-	//var results = [].Linqify();
 	var results = Netricity.LinqJS.Linqify([]);
-	var enumerator = items.GetEnumerator();
+	var enumerator = this.getEnumerator(items);
 
 	while (enumerator.MoveNext()) {
 		var obj = lambda(enumerator.Current);
@@ -224,3 +223,77 @@ Netricity.LinqJS.LinqHelper.prototype.select = function (items, lambda) {
 
 	return results;
 };
+
+/// concat
+Netricity.LinqJS.LinqHelper.prototype.concat = function (firstItems,secondItems) {
+
+	var results = [];
+
+	var e = this.getEnumerator(firstItems);
+
+	while (e.MoveNext()) {
+		results.push(e.Current);
+	}
+
+	e = this.getEnumerator(secondItems);
+
+	while (e.MoveNext()) {
+		results.push(e.Current);
+	}
+
+	return results;
+}
+
+/// contains
+Netricity.LinqJS.LinqHelper.prototype.contains = function (items, value) {
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		if (e.Current == value)
+			return true;
+	}
+
+	return false;
+}
+
+/// count
+Netricity.LinqJS.LinqHelper.prototype.count = function (items) {
+
+	return items.length;
+}
+
+/// defaultIfEmpty
+Netricity.LinqJS.LinqHelper.prototype.defaultIfEmpty = function (items, defaultValue) {
+	
+	if (items != null && items.length > 0)
+		return items;
+
+	return [defaultValue];
+}
+
+/// distinct
+Netricity.LinqJS.LinqHelper.prototype.distinct = function (items) {
+
+	var results = [];
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		if (!this.contains(results, e.Current))
+			results.push(e.Current);
+	}
+
+	delete results.enumerator;
+
+	return results;
+}
+
+/// elementAt
+Netricity.LinqJS.LinqHelper.prototype.elementAt = function (items, index) {
+
+	if (items.length > index)
+		return items[index];
+
+	return null;
+}

@@ -52,6 +52,14 @@
     <Content Include="lib\jasmine-2.3.4\jasmine.js" />
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\specs\elementAt.js" />
+    <Content Include="Scripts\specs\distinct.js" />
+    <Content Include="Scripts\specs\defaultIfEmpty.js" />
+    <Content Include="Scripts\specs\count.js" />
+    <Content Include="Scripts\specs\contains.js" />
+    <Content Include="Scripts\specs\concat.js" />
+    <Content Include="Scripts\specs\select.js" />
+    <Content Include="Scripts\specs\averageWithTransform.js" />
     <Content Include="Scripts\specs\average.js" />
     <Content Include="Scripts\specs\README.md" />
     <None Include="Web.Debug.config">

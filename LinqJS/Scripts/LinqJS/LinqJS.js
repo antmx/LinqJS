@@ -9,47 +9,6 @@ Netricity.LinqJS.LinqifyHelper = new Netricity.LinqJS._LinqifyHelper();
 
 Array.prototype.Linqify = function () {
 
-	// todo
-	// Where DONE
-	// Any DONE
-	// First DONE
-	// Last DONE
-	// All DONE
-	// Aggregate DONE
-	// Average
-	// Concat
-	// Contains
-	// Count
-	// DefaultIfEmpty
-	// Distinct
-	// ElementAt
-	// Except
-	// ForEach
-	// GroupBy
-	// GroupJoin
-	// Intersect
-	// Join
-	// LongCount
-	// Max
-	// Min
-	// OrderBy
-	// OrderByDescending
-	// Reverse
-	// Select (projection)
-	// SelectMany (project and flatten)
-	// SequenceEqual
-	// SetValue (not LINQ but useful)
-	// Single
-	// Skip
-	// SkipWhile
-	// Sum
-	// Sum(selector)
-	// Take
-	// TakeWhile
-	// ToLookup ?
-	// Union
-	// Zip
-
 	Netricity.LinqJS.Linqify(this);
 
 	return this;
@@ -78,36 +37,25 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Average: Netricity.LinqJS.LinqifyHelper.average });
 	Netricity.Utilities.extend(list, { AverageWithTransform: Netricity.LinqJS.LinqifyHelper.averageWithTransform });
 	Netricity.Utilities.extend(list, { Select: Netricity.LinqJS.LinqifyHelper.select });
+	Netricity.Utilities.extend(list, { Concat: Netricity.LinqJS.LinqifyHelper.concat });
+	Netricity.Utilities.extend(list, { Contains: Netricity.LinqJS.LinqifyHelper.contains });
+	Netricity.Utilities.extend(list, { Count: Netricity.LinqJS.LinqifyHelper.count });
+	Netricity.Utilities.extend(list, { DefaultIfEmpty: Netricity.LinqJS.LinqifyHelper.defaultIfEmpty });
+	Netricity.Utilities.extend(list, { Distinct: Netricity.LinqJS.LinqifyHelper.distinct });
+	Netricity.Utilities.extend(list, { ElementAt: Netricity.LinqJS.LinqifyHelper.elementAt });
 
 	// todo
-	// Where DONE
-	// Any DONE
-	// First DONE
-	// Last DONE
-	// All DONE
-	// Aggregate DONE
-	// Average DONE
-	// Concat
-	// Contains
-	// Count
-	// DefaultIfEmpty
-	// Distinct
-	// ElementAt
 	// Except
-	// First DONE
-	// ForEach DONE
 	// GroupBy
 	// GroupJoin
 	// Intersect
 	// Join
-	// Last DONE
 	// LongCount
 	// Max
 	// Min
 	// OrderBy
 	// OrderByDescending
 	// Reverse
-	// Select (projection) DONE
 	// SelectMany (project and flatten)
 	// SequenceEqual
 	// SetValue (not LINQ but useful)

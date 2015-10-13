@@ -40,7 +40,7 @@ TestGetEnumerator();
 
 
 function TestWhere() {
-	debugger;
+
 	window.Logger.LogFunction(arguments.callee);
 
 	var items = [1, 2, 3, 4].Linqify();
