@@ -328,7 +328,7 @@ Netricity.LinqJS.LinqHelper.prototype.except = function (firstItems, secondItems
 
 /// intersect
 Netricity.LinqJS.LinqHelper.prototype.intersect = function (firstItems, secondItems, comparerLambda) {
-	debugger;
+
 	var results = [];
 
 	firstItems = this.distinct(firstItems, comparerLambda);
@@ -341,4 +341,25 @@ Netricity.LinqJS.LinqHelper.prototype.intersect = function (firstItems, secondIt
 	}
 
 	return results;
+}
+
+/// max
+Netricity.LinqJS.LinqHelper.prototype.max = function (items, comparerLambda) {
+
+	if (typeof (comparerLambda) !== "function") {
+		comparerLambda = function (first, second) {
+			return first > second;
+		}
+	};
+
+	var result;
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		if (typeof (result) === "undefined" || comparerLambda(e.Current, result))
+			result = e.Current;
+	}
+
+	return result;
 }
