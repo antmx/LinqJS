@@ -138,9 +138,6 @@ Netricity.LinqJS.LinqHelper.prototype.aggregate = function (items, lambda) {
 
 	var e = this.getEnumerator(items);
 
-	//if (!e.MoveNext())
-	//	throw new Error("Array must contain at least 1 element");
-
 	var result = e.Current;
 
 	while (e.MoveNext())
@@ -225,7 +222,7 @@ Netricity.LinqJS.LinqHelper.prototype.select = function (items, lambda) {
 };
 
 /// concat
-Netricity.LinqJS.LinqHelper.prototype.concat = function (firstItems,secondItems) {
+Netricity.LinqJS.LinqHelper.prototype.concat = function (firstItems, secondItems) {
 
 	var results = [];
 
@@ -245,12 +242,18 @@ Netricity.LinqJS.LinqHelper.prototype.concat = function (firstItems,secondItems)
 }
 
 /// contains
-Netricity.LinqJS.LinqHelper.prototype.contains = function (items, value) {
+Netricity.LinqJS.LinqHelper.prototype.contains = function (items, value, comparerLambda) {
 
 	var e = this.getEnumerator(items);
 
+	if (typeof (comparerLambda) !== "function") {
+		comparerLambda = function (first, second) {
+			return first == second;
+		}
+	};
+
 	while (e.MoveNext()) {
-		if (e.Current == value)
+		if (comparerLambda(e.Current, value))
 			return true;
 	}
 
@@ -273,14 +276,14 @@ Netricity.LinqJS.LinqHelper.prototype.defaultIfEmpty = function (items, defaultV
 }
 
 /// distinct
-Netricity.LinqJS.LinqHelper.prototype.distinct = function (items) {
+Netricity.LinqJS.LinqHelper.prototype.distinct = function (items, comparerLambda) {
 
 	var results = [];
 
 	var e = this.getEnumerator(items);
 
 	while (e.MoveNext()) {
-		if (!this.contains(results, e.Current))
+		if (!this.contains(results, e.Current, comparerLambda))
 			results.push(e.Current);
 	}
 
@@ -296,4 +299,46 @@ Netricity.LinqJS.LinqHelper.prototype.elementAt = function (items, index) {
 		return items[index];
 
 	return null;
+}
+
+/// except
+Netricity.LinqJS.LinqHelper.prototype.except = function (firstItems, secondItems, comparerLambda) {
+
+	var results = [];
+
+	firstItems = this.distinct(firstItems, comparerLambda);
+	secondItems = this.distinct(secondItems, comparerLambda);
+
+	var e = this.getEnumerator(firstItems);
+
+	while (e.MoveNext()) {
+		if (!this.contains(secondItems, e.Current, comparerLambda))
+			results.push(e.Current);
+	}
+
+	e = this.getEnumerator(secondItems);
+
+	while (e.MoveNext()) {
+		if (!this.contains(firstItems, e.Current, comparerLambda))
+			results.push(e.Current);
+	}
+
+	return results;
+}
+
+/// intersect
+Netricity.LinqJS.LinqHelper.prototype.intersect = function (firstItems, secondItems, comparerLambda) {
+	debugger;
+	var results = [];
+
+	firstItems = this.distinct(firstItems, comparerLambda);
+
+	var e = this.getEnumerator(firstItems);
+
+	while (e.MoveNext()) {
+		if (this.contains(secondItems, e.Current, comparerLambda))
+			results.push(e.Current);
+	}
+
+	return results;
 }

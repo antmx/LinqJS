@@ -43,9 +43,9 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { DefaultIfEmpty: Netricity.LinqJS.LinqifyHelper.defaultIfEmpty });
 	Netricity.Utilities.extend(list, { Distinct: Netricity.LinqJS.LinqifyHelper.distinct });
 	Netricity.Utilities.extend(list, { ElementAt: Netricity.LinqJS.LinqifyHelper.elementAt });
+	Netricity.Utilities.extend(list, { Except: Netricity.LinqJS.LinqifyHelper.except });
 
 	// todo
-	// Except
 	// GroupBy
 	// GroupJoin
 	// Intersect
