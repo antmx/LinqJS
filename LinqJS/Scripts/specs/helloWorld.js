@@ -1,12 +1,4 @@
-﻿/// <reference path="~/Scripts/LinqJS/LinqHelper.js" />
-
-//describe("LinqHelper Where", function () {
-//	it("Finds odd numbers", function () {
-//		//expect(helloWorld()).toEqual("Hello world!");
-
-
-//	});
-//});
+﻿/// <reference path="_references.js" />
 
 describe("LinqHelper helloWorld", function () {
 

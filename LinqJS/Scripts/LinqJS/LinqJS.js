@@ -1,6 +1,6 @@
-﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
-/// <reference path="~/Scripts/Utilities/Extend.js" />
-/// <reference path="~/Scripts/LinqJS/LinqHelper.js" />
+﻿/// <reference path="../Utilities/Extend.js" />
+/// <reference path="../Utilities/Namespace.js" />
+/// <reference path="LinqHelper.js" />
 
 Namespace.Define("Netricity.LinqJS");
 
@@ -46,13 +46,13 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Except: Netricity.LinqJS.LinqifyHelper.except });
 	Netricity.Utilities.extend(list, { Intersect: Netricity.LinqJS.LinqifyHelper.intersect });
 	Netricity.Utilities.extend(list, { Max: Netricity.LinqJS.LinqifyHelper.max });
+	Netricity.Utilities.extend(list, { Min: Netricity.LinqJS.LinqifyHelper.min });
 
 	// todo
 	// GroupBy
 	// GroupJoin
 	// Join
 	// LongCount
-	// Min
 	// OrderBy
 	// OrderByDescending
 	// Reverse

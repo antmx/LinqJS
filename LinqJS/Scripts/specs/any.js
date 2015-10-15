@@ -1,5 +1,4 @@
-﻿/// <reference path="~/Scripts/LinqJS/LinqHelper.js" />
-/// <reference path="~/lib/jasmine-2.3.4/jasmine.js" />
+﻿/// <reference path="_references.js" />
 
 describe("LinqHelper any", function () {
 

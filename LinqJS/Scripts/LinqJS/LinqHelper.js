@@ -363,3 +363,24 @@ Netricity.LinqJS.LinqHelper.prototype.max = function (items, comparerLambda) {
 
 	return result;
 }
+
+/// min
+Netricity.LinqJS.LinqHelper.prototype.min = function (items, comparerLambda) {
+
+	if (typeof (comparerLambda) !== "function") {
+		comparerLambda = function (first, second) {
+			return first < second;
+		}
+	};
+
+	var result;
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		if (typeof (result) === "undefined" || comparerLambda(e.Current, result))
+			result = e.Current;
+	}
+
+	return result;
+}

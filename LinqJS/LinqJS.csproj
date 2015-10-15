@@ -52,6 +52,7 @@
     <Content Include="lib\jasmine-2.3.4\jasmine.js" />
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\specs\min.js" />
     <Content Include="Scripts\specs\max.js" />
     <Content Include="Scripts\specs\intersect.js" />
     <Content Include="Scripts\specs\except.js" />
@@ -88,6 +89,7 @@
     <Content Include="Scripts\specs\last.js" />
     <Content Include="Scripts\specs\first.js" />
     <Content Include="Scripts\specs\any.js" />
+    <None Include="Scripts\specs\_references.js" />
     <Content Include="Scripts\Utilities\Enumerator.js" />
     <Content Include="Scripts\specs\getEnumerator.js" />
     <Content Include="Scripts\specs\helloWorld.js" />
