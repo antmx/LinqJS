@@ -49,6 +49,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Min: Netricity.LinqJS.LinqifyHelper.min });
 	Netricity.Utilities.extend(list, { OrderBy: Netricity.LinqJS.LinqifyHelper.orderBy });
 	Netricity.Utilities.extend(list, { OrderByDescending: Netricity.LinqJS.LinqifyHelper.orderByDescending });
+	Netricity.Utilities.extend(list, { Sum: Netricity.LinqJS.LinqifyHelper.sum });
 
 	// todo
 	// GroupBy
@@ -62,7 +63,6 @@ Netricity.LinqJS.Linqify = function (list) {
 	// Single
 	// Skip
 	// SkipWhile
-	// Sum
 	// Sum(selector)
 	// Take
 	// TakeWhile
