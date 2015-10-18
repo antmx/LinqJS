@@ -427,3 +427,10 @@ Netricity.LinqJS.LinqHelper.prototype.orderBy = function (items, keySelectorLamb
 
 	return items;
 }
+
+/// orderByDescending
+Netricity.LinqJS.LinqHelper.prototype.orderByDescending = function (items, keySelectorLambda, comparerLambda) {
+
+	return this.orderBy(items, keySelectorLambda, comparerLambda).reverse();
+
+}

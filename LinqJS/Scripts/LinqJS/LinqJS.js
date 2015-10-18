@@ -47,14 +47,14 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Intersect: Netricity.LinqJS.LinqifyHelper.intersect });
 	Netricity.Utilities.extend(list, { Max: Netricity.LinqJS.LinqifyHelper.max });
 	Netricity.Utilities.extend(list, { Min: Netricity.LinqJS.LinqifyHelper.min });
+	Netricity.Utilities.extend(list, { OrderBy: Netricity.LinqJS.LinqifyHelper.orderBy });
+	Netricity.Utilities.extend(list, { OrderByDescending: Netricity.LinqJS.LinqifyHelper.orderByDescending });
 
 	// todo
 	// GroupBy
 	// GroupJoin
 	// Join
 	// LongCount
-	// OrderBy
-	// OrderByDescending
 	// Reverse
 	// SelectMany (project and flatten)
 	// SequenceEqual
