@@ -1,19 +1,23 @@
-﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
-/// <reference path="~/Scripts/Utilities/Enumerator.js" />
+﻿/// <reference path="../Utilities/Enumerator.js" />
+/// <reference path="../Utilities/Namespace.js" />
+/// <reference path="EnumerableSorter.js" />
+
+"use strict";
 
 Namespace.Define("Netricity.LinqJS");
 
 Netricity.LinqJS.LinqHelper = function () {
 
-}
+};
 
 Netricity.LinqJS.LinqHelper.prototype.helloWorld = function () {
 	return "Hello, World!";
-}
+};
 
 Netricity.LinqJS.LinqHelper.prototype.getEnumerator = function (items) {
-	if (items.enumerator == null)
+	if (items.enumerator == null) {
 		items.enumerator = new Netricity.Utilities.Enumerator(items);
+	}
 	else {
 		items.enumerator.reset();
 	}
@@ -25,6 +29,12 @@ Netricity.LinqJS.LinqHelper.prototype.getEnumerator = function (items) {
 Netricity.LinqJS.LinqHelper.prototype.ensureLambda = function (lambda) {
 	if (typeof (lambda) !== "function")
 		throw new Error("lambda must be a function");
+};
+
+/// Checks the specified object is a function, if it isn't null
+Netricity.LinqJS.LinqHelper.prototype.ensureLambdaIfNotNull = function (lambda) {
+	if ((typeof (lambda) !== "undefined"))
+		this.ensureLambda(lambda);
 };
 
 /// Checks the specified object is an array containing at least 1 item
@@ -268,7 +278,7 @@ Netricity.LinqJS.LinqHelper.prototype.count = function (items) {
 
 /// defaultIfEmpty
 Netricity.LinqJS.LinqHelper.prototype.defaultIfEmpty = function (items, defaultValue) {
-	
+
 	if (items != null && items.length > 0)
 		return items;
 
@@ -383,4 +393,37 @@ Netricity.LinqJS.LinqHelper.prototype.min = function (items, comparerLambda) {
 	}
 
 	return result;
+}
+
+/// orderBy
+Netricity.LinqJS.LinqHelper.prototype.orderBy = function (items, keySelectorLambda, comparerLambda) {
+
+	this.ensureItems(items);
+
+	items = items.slice(); // Clone the array so .sort doesn't re-order the original
+
+	this.ensureLambdaIfNotNull(keySelectorLambda);
+
+	this.ensureLambdaIfNotNull(comparerLambda);
+
+	if (typeof (keySelectorLambda) === "undefined")
+		keySelectorLambda = function (o) { return o; };
+
+	var comparefn;
+
+	if (typeof (comparerLambda) === "undefined")
+		comparefn = function (a, b) { return keySelectorLambda(a) - keySelectorLambda(b); };
+	else
+	{
+		comparefn = function (a, b) {
+			a = keySelectorLambda(a);
+			b = keySelectorLambda(b);
+
+			return comparerLambda(a, b);
+		}
+	}
+	
+	items.sort(comparefn);
+
+	return items;
 }

@@ -2,7 +2,8 @@
 function Logger() { };
 
 Logger.prototype.LogArray = function (items) {
-	var enumerator = items.GetEnumerator();
+
+	var enumerator = new Netricity.Utilities.Enumerator(items);
 
 	while (enumerator.MoveNext()) {
 		console.log(enumerator.Current);
