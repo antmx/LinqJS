@@ -21,12 +21,8 @@ describe("LinqHelper orderByDescending", function () {
 
 		var items = [1, 3, 2, 4, 5, 0];
 
-		window.Logger.LogArray(items);
-
 		var result = helper.orderByDescending(
 			items);
-
-		window.Logger.LogArray(items);
 
 		var expected = [5, 4, 3, 2, 1, 0];
 

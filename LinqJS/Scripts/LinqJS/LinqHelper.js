@@ -434,3 +434,23 @@ Netricity.LinqJS.LinqHelper.prototype.orderByDescending = function (items, keySe
 	return this.orderBy(items, keySelectorLambda, comparerLambda).reverse();
 
 }
+
+/// sum
+Netricity.LinqJS.LinqHelper.prototype.sum = function (items, valueSelectorLambda) {
+
+	this.ensureItems(items);
+
+	if (typeof (valueSelectorLambda) === "undefined") {
+		valueSelectorLambda = function (o) { return o; };
+	}
+
+	var total = 0;
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		total += valueSelectorLambda(e.Current);
+	}
+
+	return total;
+}
