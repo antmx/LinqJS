@@ -1,4 +1,4 @@
-﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
+﻿/// <reference path="Namespace.js" />
 
 // Copied from angular.js - use this to add extra functions to an INSTANCE of a type
 

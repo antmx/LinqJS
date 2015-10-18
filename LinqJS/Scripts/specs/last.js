@@ -1,4 +1,4 @@
-﻿//// <reference path="_references.js" />
+﻿/// <reference path="_references.js" />
 
 describe("LinqHelper last", function () {
 

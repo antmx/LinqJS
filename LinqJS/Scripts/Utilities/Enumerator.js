@@ -1,4 +1,4 @@
-﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
+﻿/// <reference path="Namespace.js" />
 
 Namespace.Define("Netricity.Utilities");
 

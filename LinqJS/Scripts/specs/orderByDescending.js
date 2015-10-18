@@ -1,7 +1,5 @@
 ﻿/// <reference path="_references.js" />
 
-Namespace.Define("Netricity.LinqJS.LinqHelper.specs");
-
 describe("LinqHelper orderByDescending", function () {
 
 	var helper;

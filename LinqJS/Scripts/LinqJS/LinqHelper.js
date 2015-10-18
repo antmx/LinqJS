@@ -47,7 +47,7 @@ Netricity.LinqJS.LinqHelper.prototype.ensureItems = function (list) {
 Netricity.LinqJS.LinqHelper.prototype.where = function (items, lambda) {
 	this.ensureLambda(lambda);
 	var enumerator = this.getEnumerator(items);
-	var results = Netricity.LinqJS.Linqify([]);
+	var results = [];
 
 	while (enumerator.MoveNext()) {
 		if (lambda(enumerator.Current))
@@ -220,7 +220,8 @@ Netricity.LinqJS.LinqHelper.prototype.averageWithTransform = function (items, tr
 
 /// select
 Netricity.LinqJS.LinqHelper.prototype.select = function (items, lambda) {
-	var results = Netricity.LinqJS.Linqify([]);
+
+	var results = [];
 	var enumerator = this.getEnumerator(items);
 
 	while (enumerator.MoveNext()) {

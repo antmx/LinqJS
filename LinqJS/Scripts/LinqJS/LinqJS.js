@@ -63,7 +63,6 @@ Netricity.LinqJS.Linqify = function (list) {
 	// Single
 	// Skip
 	// SkipWhile
-	// Sum(selector)
 	// Take
 	// TakeWhile
 	// ToLookup ?
