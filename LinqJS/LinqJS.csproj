@@ -53,6 +53,7 @@
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
     <Content Include="Scripts\LinqJS\EnumerableSorter.js" />
+    <Content Include="Scripts\specs\single.js" />
     <Content Include="Scripts\specs\sum.js" />
     <Content Include="Scripts\specs\orderByDescending.js" />
     <Content Include="Scripts\specs\orderBy.js" />

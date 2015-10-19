@@ -39,6 +39,9 @@ Netricity.LinqJS.LinqHelper.prototype.ensureLambdaIfNotNull = function (lambda) 
 
 /// Checks the specified object is an array containing at least 1 item
 Netricity.LinqJS.LinqHelper.prototype.ensureItems = function (list) {
+	if (list == null)
+		throw new Error("Array must not be null");
+
 	if (list.length == 0)
 		throw new Error("Array must contain at least one item");
 };
@@ -454,4 +457,37 @@ Netricity.LinqJS.LinqHelper.prototype.sum = function (items, valueSelectorLambda
 	}
 
 	return total;
+}
+
+/// single
+Netricity.LinqJS.LinqHelper.prototype.single = function (items, lambda) {
+	debugger;
+	this.ensureItems(items);
+
+	var count = 0;
+
+	if (typeof (lambda) !== "function") {
+		lambda = function (item) {
+			return true;
+		}
+	};
+
+	var result;
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		if (lambda(e.Current)) {
+			result = e.Current;
+			count++;
+		}
+	}
+
+	switch (count) {
+		case 0: throw new Error("No match found");
+		case 1: return result;
+	}
+
+	throw new Error("More than 1 match found");
+
+	return result;
 }
