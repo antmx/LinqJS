@@ -107,7 +107,6 @@
     <Content Include="Scripts\LinqJS\Tests.js" />
     <Content Include="Scripts\specs\where.js" />
     <Content Include="Scripts\Utilities\Extend.js" />
-    <Content Include="Scripts\LinqJS\Where.js" />
     <Content Include="Scripts\Utilities\Logger.js" />
     <Content Include="Scripts\Utilities\Namespace.js" />
     <Content Include="Web.config" />
