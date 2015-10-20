@@ -461,7 +461,7 @@ Netricity.LinqJS.LinqHelper.prototype.sum = function (items, valueSelectorLambda
 
 /// single
 Netricity.LinqJS.LinqHelper.prototype.single = function (items, lambda) {
-	debugger;
+	
 	this.ensureItems(items);
 
 	var count = 0;
@@ -488,6 +488,38 @@ Netricity.LinqJS.LinqHelper.prototype.single = function (items, lambda) {
 	}
 
 	throw new Error("More than 1 match found");
+}
 
-	return result;
+/// singleOrDefault
+Netricity.LinqJS.LinqHelper.prototype.singleOrDefault = function (items, lambda, defaultValue) {
+	
+	this.ensureItems(items);
+
+	if (typeof (defaultValue) === "undefined")
+		throw new Error("defaultValue must be provided");
+
+	var count = 0;
+
+	if (typeof (lambda) !== "function") {
+		lambda = function (item) {
+			return true;
+		}
+	};
+
+	var result;
+	var e = this.getEnumerator(items);
+	
+	while (e.MoveNext()) {
+		if (lambda(e.Current)) {
+			result = e.Current;
+			count++;
+		}
+	}
+
+	switch (count) {
+		case 0: return defaultValue;
+		case 1: return result;
+	}
+
+	throw new Error("More than 1 match found");
 }
