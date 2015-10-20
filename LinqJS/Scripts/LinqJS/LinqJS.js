@@ -52,14 +52,13 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Sum: Netricity.LinqJS.LinqifyHelper.sum });
 	Netricity.Utilities.extend(list, { Single: Netricity.LinqJS.LinqifyHelper.single });
 	Netricity.Utilities.extend(list, { SingleOrDefault: Netricity.LinqJS.LinqifyHelper.singleOrDefault });
-	
+	Netricity.Utilities.extend(list, { Reverse: Netricity.LinqJS.LinqifyHelper.reverse });
 
 	// todo
 	// GroupBy
 	// GroupJoin
 	// Join
 	// LongCount
-	// Reverse
 	// SelectMany (project and flatten)
 	// SequenceEqual
 	// SetValue (not LINQ but useful)

@@ -523,3 +523,17 @@ Netricity.LinqJS.LinqHelper.prototype.singleOrDefault = function (items, lambda,
 
 	throw new Error("More than 1 match found");
 }
+
+/// reverse
+Netricity.LinqJS.LinqHelper.prototype.reverse = function (items) {
+
+	if (items == null)
+		throw new Error("Array must not be null");
+
+	if (items.length === 0)
+		return items;
+
+	items = items.slice(); // Clone the array so .sort doesn't re-order the original
+
+	return items.reverse();
+}
