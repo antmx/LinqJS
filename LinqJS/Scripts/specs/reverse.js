@@ -29,7 +29,6 @@ describe("LinqHelper reverse", function () {
 		var expected = [3, 'c', 2, 'b', 1, 'a'];
 
 		expect(result).toEqual(expected);
-
 	});
 
 });

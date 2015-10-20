@@ -533,7 +533,7 @@ Netricity.LinqJS.LinqHelper.prototype.reverse = function (items) {
 	if (items.length === 0)
 		return items;
 
-	items = items.slice(); // Clone the array so .sort doesn't re-order the original
+	items = items.slice(); // Clone the array so .reverse doesn't re-order the original
 
 	return items.reverse();
 }

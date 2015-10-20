@@ -15,7 +15,12 @@ describe("LinqHelper any", function () {
 			items,
 			function (i) { return i % 3 == 0 });
 
-		var expected = true;
+		expect(result).toBeTruthy();
+	});
+
+	it("Returns true when any items", function () {
+		var result = helper.any(
+			items);
 
 		expect(result).toBeTruthy();
 	});
@@ -25,7 +30,12 @@ describe("LinqHelper any", function () {
 			items,
 			function (i) { return i > 100 });
 
-		var expected = false;
+		expect(result).toBeFalsy();
+	});
+
+	it("Returns false when no items", function () {
+		var result = helper.any(
+			[]);
 
 		expect(result).toBeFalsy();
 	});
