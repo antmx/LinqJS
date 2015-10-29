@@ -54,6 +54,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { SingleOrDefault: Netricity.LinqJS.LinqifyHelper.singleOrDefault });
 	Netricity.Utilities.extend(list, { Reverse: Netricity.LinqJS.LinqifyHelper.reverse });
 	Netricity.Utilities.extend(list, { SelectMany: Netricity.LinqJS.LinqifyHelper.selectMany });
+	Netricity.Utilities.extend(list, { Zip: Netricity.LinqJS.LinqifyHelper.zip });
 
 	// todo
 	// GroupBy
@@ -68,7 +69,6 @@ Netricity.LinqJS.Linqify = function (list) {
 	// TakeWhile
 	// ToLookup ?
 	// Union
-	// Zip
-	
+
 	return list;
 }

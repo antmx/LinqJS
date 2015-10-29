@@ -569,3 +569,24 @@ Netricity.LinqJS.LinqHelper.prototype.selectMany = function (items, collectionSe
 
 	return result;
 }
+
+/// zip
+Netricity.LinqJS.LinqHelper.prototype.zip = function (items1, items2, lambda) {
+	
+	this.ensureItems(items1);
+	this.ensureItems(items2);
+	this.ensureLambda(lambda);
+
+	var result = [];
+	var e1 = this.getEnumerator(items1);
+	var e2 = this.getEnumerator(items2);
+
+	var minLength = Math.min(items1.length, items2.length);
+
+	while (e1.MoveNext() && e2.MoveNext()) {
+		var item = lambda(e1.Current, e2.Current);
+		result.push(item);
+	}
+
+	return result;
+}

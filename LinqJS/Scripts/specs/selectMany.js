@@ -20,8 +20,6 @@ describe("LinqHelper selectMany", function () {
 		var expected = ["Scruffy", "Sam", "Walker", "Sugar", "Scratches", "Diesel"];
 
 		expect(result).toEqual(expected);
-
-		Logger.LogArray(result);
 	});
 
 	it("Projects item to a new list and combines the resulting list into one list, applying a transformation function to each item in the new list.", function () {
@@ -33,8 +31,6 @@ describe("LinqHelper selectMany", function () {
 		var expected = ["SCRUFFY", "SAM", "WALKER", "SUGAR", "SCRATCHES", "DIESEL"];
 
 		expect(result).toEqual(expected);
-
-		Logger.LogArray(result);
 	});
 
 	it("Projects each to a new list and combines the resulting list into one sequence, applying a function that accepts an index to each item in the new list.", function () {
@@ -46,8 +42,6 @@ describe("LinqHelper selectMany", function () {
 		var expected = ["0 Scruffy", "0 Sam", "1 Walker", "1 Sugar", "2 Scratches", "2 Diesel"];
 
 		expect(result).toEqual(expected);
-
-		Logger.LogArray(result);
 	});
 
 });
