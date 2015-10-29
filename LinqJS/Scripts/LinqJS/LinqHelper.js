@@ -581,12 +581,37 @@ Netricity.LinqJS.LinqHelper.prototype.zip = function (items1, items2, lambda) {
 	var e1 = this.getEnumerator(items1);
 	var e2 = this.getEnumerator(items2);
 
-	var minLength = Math.min(items1.length, items2.length);
-
 	while (e1.MoveNext() && e2.MoveNext()) {
 		var item = lambda(e1.Current, e2.Current);
 		result.push(item);
 	}
 
 	return result;
+}
+
+/// union
+Netricity.LinqJS.LinqHelper.prototype.union = function (firstItems, secondItems, comparerLambda) {
+	
+	var results = [];
+
+	firstItems = this.distinct(firstItems, comparerLambda);
+	secondItems = this.distinct(secondItems, comparerLambda);
+
+	var e = this.getEnumerator(firstItems);
+
+	while (e.MoveNext()) {
+		if (!this.contains(results, e.Current, comparerLambda))
+			results.push(e.Current);
+	}
+
+	e = this.getEnumerator(secondItems);
+
+	while (e.MoveNext()) {
+		if (!this.contains(results, e.Current, comparerLambda))
+			results.push(e.Current);
+	}
+
+	delete results.enumerator;
+	
+	return results;
 }

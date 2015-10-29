@@ -23,8 +23,6 @@ describe("LinqHelper zip", function () {
 		var expected = ["1 one", "2 two", "3 three"];
 
 		expect(result).toEqual(expected);
-
-		Logger.LogArray(result);
 	});
 
 });
