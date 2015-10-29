@@ -537,3 +537,35 @@ Netricity.LinqJS.LinqHelper.prototype.reverse = function (items) {
 
 	return items.reverse();
 }
+
+/// selectMany
+Netricity.LinqJS.LinqHelper.prototype.selectMany = function (items, collectionSelectorLambda, transformLambda) {
+
+	this.ensureItems(items);
+
+	this.ensureLambda(collectionSelectorLambda);
+
+	this.ensureLambdaIfNotNull(transformLambda);
+
+	if (items.length === 0)
+		return items;
+
+	var result = [];
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		var subElements = collectionSelectorLambda(e.Current);
+		var eSub = this.getEnumerator(subElements);
+
+		while (eSub.MoveNext()) {
+			if (transformLambda) {
+				var o = transformLambda(eSub.Current, e.CurrentIdx);
+				result.push(o);
+			} else {
+				result.push(eSub.Current);
+			}
+		}
+	}
+
+	return result;
+}

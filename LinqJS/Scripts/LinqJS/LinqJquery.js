@@ -1,4 +1,4 @@
-/// <reference path="~/Scripts/LinqJS/LinqJS.js" />
+/// <reference path="LinqJS.js" />
 
 (function ($) {
     $.fn.linqify = function (list) {

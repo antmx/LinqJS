@@ -10,7 +10,7 @@ describe("LinqHelper any", function () {
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
-	it("Returns true when are matching items", function () {
+	it("Returns true when there are matching items", function () {
 		var result = helper.any(
 			items,
 			function (i) { return i % 3 == 0 });
@@ -18,14 +18,14 @@ describe("LinqHelper any", function () {
 		expect(result).toBeTruthy();
 	});
 
-	it("Returns true when any items", function () {
+	it("Returns true when there are any items", function () {
 		var result = helper.any(
 			items);
 
 		expect(result).toBeTruthy();
 	});
 
-	it("Returns false when no matching items", function () {
+	it("Returns false when there are no matching items", function () {
 		var result = helper.any(
 			items,
 			function (i) { return i > 100 });
@@ -33,7 +33,7 @@ describe("LinqHelper any", function () {
 		expect(result).toBeFalsy();
 	});
 
-	it("Returns false when no items", function () {
+	it("Returns false when there are no items", function () {
 		var result = helper.any(
 			[]);
 
