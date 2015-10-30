@@ -38,11 +38,14 @@ Netricity.LinqJS.LinqHelper.prototype.ensureLambdaIfNotNull = function (lambda) 
 };
 
 /// Checks the specified object is an array containing at least 1 item
-Netricity.LinqJS.LinqHelper.prototype.ensureItems = function (list) {
+Netricity.LinqJS.LinqHelper.prototype.ensureItems = function (list, canBeEmpty) {
 	if (list == null)
 		throw new Error("Array must not be null");
 
-	if (list.length == 0)
+	if (Object.prototype.toString.call(list) !== '[object Array]')
+		throw new Error("list must be an array");
+
+	if (list.length == 0 && canBeEmpty !== true)
 		throw new Error("Array must contain at least one item");
 };
 
@@ -96,6 +99,27 @@ Netricity.LinqJS.LinqHelper.prototype.first = function (items, lambda) {
 	}
 
 	throw new Error("Array contains no matching items");
+};
+
+/// firstOrDefault
+Netricity.LinqJS.LinqHelper.prototype.firstOrDefault = function (items, lambda, defaultValue) {
+	this.ensureLambdaIfNotNull(lambda);
+
+	if (typeof (lambda) === "undefined") {
+
+		this.ensureItems(items, true);
+
+		return items.length == 0 ? defaultValue : items[0];
+	}
+
+	for (var idx = 0; idx < items.length; idx++) {
+		var obj = items[idx];
+
+		if (lambda(obj))
+			return obj;
+	}
+
+	return defaultValue;
 };
 
 /// last
@@ -613,5 +637,34 @@ Netricity.LinqJS.LinqHelper.prototype.union = function (firstItems, secondItems,
 
 	delete results.enumerator;
 	
+	return results;
+}
+
+/// groupBy
+Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, lambda) {
+
+	this.ensureLambda(lambda);
+	var results = [];
+
+	if (items == null || items.length == 0)
+		return results;
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		var currentKey = lambda(e.Current);
+
+		var item = this.firstOrDefault(
+			results,
+			function (o) { return o.Key == currentKey },
+			{ Key: currentKey, Count: 0 });
+
+		if (item.Count == 0) {
+			results.push(item);
+		}
+
+		item.Count++;
+	}
+
 	return results;
 }

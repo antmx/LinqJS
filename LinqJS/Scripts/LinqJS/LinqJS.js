@@ -27,6 +27,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Where: Netricity.LinqJS.LinqifyHelper.where });
 	Netricity.Utilities.extend(list, { Any: Netricity.LinqJS.LinqifyHelper.any });
 	Netricity.Utilities.extend(list, { First: Netricity.LinqJS.LinqifyHelper.first });
+	Netricity.Utilities.extend(list, { FirstOrDefault: Netricity.LinqJS.LinqifyHelper.firstOrDefault });
 	Netricity.Utilities.extend(list, { Last: Netricity.LinqJS.LinqifyHelper.last });
 	Netricity.Utilities.extend(list, { All: Netricity.LinqJS.LinqifyHelper.all });
 	Netricity.Utilities.extend(list, { ForEach: Netricity.LinqJS.LinqifyHelper.forEach });
@@ -56,9 +57,9 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { SelectMany: Netricity.LinqJS.LinqifyHelper.selectMany });
 	Netricity.Utilities.extend(list, { Zip: Netricity.LinqJS.LinqifyHelper.zip });
 	Netricity.Utilities.extend(list, { Union: Netricity.LinqJS.LinqifyHelper.union });
+	Netricity.Utilities.extend(list, { GroupBy: Netricity.LinqJS.LinqifyHelper.groupBy });
 
 	// todo
-	// GroupBy
 	// GroupJoin
 	// Join
 	// LongCount
