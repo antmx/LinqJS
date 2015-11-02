@@ -641,9 +641,9 @@ Netricity.LinqJS.LinqHelper.prototype.union = function (firstItems, secondItems,
 }
 
 /// groupBy
-Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, lambda) {
+Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, keySelectorLambda) {
 
-	this.ensureLambda(lambda);
+	this.ensureLambda(keySelectorLambda);
 	var results = [];
 
 	if (items == null || items.length == 0)
@@ -652,7 +652,7 @@ Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, lambda) {
 	var e = this.getEnumerator(items);
 
 	while (e.MoveNext()) {
-		var currentKey = lambda(e.Current);
+		var currentKey = keySelectorLambda(e.Current);
 
 		var item = this.firstOrDefault(
 			results,
@@ -664,6 +664,25 @@ Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, lambda) {
 		}
 
 		item.Count++;
+	}
+
+	return results;
+}
+
+/// take
+Netricity.LinqJS.LinqHelper.prototype.take = function (items, count) {
+
+	this.ensureItems(items, true);
+
+	var results = [];
+
+	if (count <= 0)
+		return results;
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext() && e.CurrentIdx < count) {
+		results.push(e.Current);
 	}
 
 	return results;

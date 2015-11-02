@@ -58,6 +58,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { Zip: Netricity.LinqJS.LinqifyHelper.zip });
 	Netricity.Utilities.extend(list, { Union: Netricity.LinqJS.LinqifyHelper.union });
 	Netricity.Utilities.extend(list, { GroupBy: Netricity.LinqJS.LinqifyHelper.groupBy });
+	Netricity.Utilities.extend(list, { Take: Netricity.LinqJS.LinqifyHelper.take });
 
 	// todo
 	// GroupJoin
@@ -67,7 +68,6 @@ Netricity.LinqJS.Linqify = function (list) {
 	// SetValue (not LINQ but useful)
 	// Skip
 	// SkipWhile
-	// Take
 	// TakeWhile
 	// ToLookup ?
 
