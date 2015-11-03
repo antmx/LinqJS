@@ -54,6 +54,7 @@
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
     <Content Include="Scripts\LinqJS\EnumerableSorter.js" />
     <Content Include="Scripts\specs\firstOrDefault.js" />
+    <Content Include="Scripts\specs\takeWhile.js" />
     <Content Include="Scripts\specs\take.js" />
     <Content Include="Scripts\specs\groupBy.js" />
     <Content Include="Scripts\specs\union.js" />

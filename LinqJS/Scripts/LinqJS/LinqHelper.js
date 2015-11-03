@@ -687,3 +687,23 @@ Netricity.LinqJS.LinqHelper.prototype.take = function (items, count) {
 
 	return results;
 }
+
+/// takeWhile
+Netricity.LinqJS.LinqHelper.prototype.takeWhile = function (items, predicate) {
+
+	this.ensureItems(items, true);
+
+	var results = [];
+
+	var e = this.getEnumerator(items);
+
+	while (e.MoveNext()) {
+		if (predicate(e.Current, e.CurrentIdx)) {
+			results.push(e.Current);
+		} else {
+			break;
+		}
+	}
+
+	return results;
+}
