@@ -707,3 +707,48 @@ Netricity.LinqJS.LinqHelper.prototype.takeWhile = function (items, predicate) {
 
 	return results;
 }
+
+/// skip
+Netricity.LinqJS.LinqHelper.prototype.skip = function (items, count) {
+
+	this.ensureItems(items, true);
+
+	var results = [];
+
+	if (count <= 0)
+		return results;
+
+	var e = this.getEnumerator(items);
+
+	while (count > 0 && e.MoveNext())
+		count--;
+
+	if (count <= 0) {
+		while (e.MoveNext())
+			results.push(e.Current);
+	}
+
+	return results;
+}
+
+/// skipWhile
+Netricity.LinqJS.LinqHelper.prototype.skipWhile = function (items, predicate) {
+
+	this.ensureItems(items, true);
+
+	var results = [];
+
+	var e = this.getEnumerator(items);
+
+	var yielding = false;
+
+	while (e.MoveNext()) {
+		if (!yielding && !predicate(e.Current, e.CurrentIdx))
+			yielding = true;
+
+		if (yielding)
+			results.push(e.Current);
+	}
+
+	return results;
+}

@@ -60,6 +60,7 @@ Netricity.LinqJS.Linqify = function (list) {
 	Netricity.Utilities.extend(list, { GroupBy: Netricity.LinqJS.LinqifyHelper.groupBy });
 	Netricity.Utilities.extend(list, { Take: Netricity.LinqJS.LinqifyHelper.take });
 	Netricity.Utilities.extend(list, { TakeWhile: Netricity.LinqJS.LinqifyHelper.takeWhile });
+	Netricity.Utilities.extend(list, { Skip: Netricity.LinqJS.LinqifyHelper.skip });
 
 	// todo
 	// GroupJoin
