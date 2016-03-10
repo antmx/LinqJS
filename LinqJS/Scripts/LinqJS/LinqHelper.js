@@ -23,57 +23,86 @@ Netricity.LinqJS.LinqHelper.prototype.getEnumerator = function (items) {
 	}
 
 	return items.enumerator;
-}
+};
 
 /// Checks the specified object is a function
 Netricity.LinqJS.LinqHelper.prototype.ensureLambda = function (lambda) {
-	if (typeof (lambda) !== "function")
+	if (typeof (lambda) !== "function") {
 		throw new Error("lambda must be a function");
+	}
 };
 
 /// Checks the specified object is a function, if it isn't null
 Netricity.LinqJS.LinqHelper.prototype.ensureLambdaIfNotNull = function (lambda) {
-	if ((typeof (lambda) !== "undefined"))
+	if (typeof (lambda) !== "undefined") {
 		this.ensureLambda(lambda);
+	}
 };
 
 /// Checks the specified object is an array containing at least 1 item
 Netricity.LinqJS.LinqHelper.prototype.ensureItems = function (list, canBeEmpty) {
-	if (list == null)
+	if (list == null) {
 		throw new Error("Array must not be null");
+	}
 
-	if (Object.prototype.toString.call(list) !== '[object Array]')
+	if (!this.isArray(list)) {
 		throw new Error("list must be an array");
+	}
 
-	if (list.length == 0 && canBeEmpty !== true)
+	if (list.length == 0 && canBeEmpty !== true) {
 		throw new Error("Array must contain at least one item");
+	}
+
+	return true;
+};
+
+/// Determines if the specified object is an array
+Netricity.LinqJS.LinqHelper.prototype.isArray = function (obj) {
+	if (obj == null) {
+		throw new Error("obj must not be null");
+	}
+
+	if (Object.prototype.toString.call(obj) !== '[object Array]') {
+		return false;
+	}
+
+	return true;
 };
 
 /// where
 Netricity.LinqJS.LinqHelper.prototype.where = function (items, lambda) {
 	this.ensureLambda(lambda);
-	var enumerator = this.getEnumerator(items);
+	//var enumerator = this.getEnumerator(items);
 	var results = [];
 
-	while (enumerator.MoveNext()) {
-		if (lambda(enumerator.Current))
-			results.push(enumerator.Current);
-	}
+	//while (enumerator.MoveNext()) {
+	//	if (lambda(enumerator.Current))
+	//		results.push(enumerator.Current);
+	//}
+
+	this.forEach(items, function (indexInArray, valueOfElement) {
+		if (lambda(valueOfElement)) {
+			results.push(valueOfElement);
+		}
+	});
 
 	return results;
-}
+};
 
 /// any
 Netricity.LinqJS.LinqHelper.prototype.any = function (items, lambda) {
-	if (typeof (lambda) === "undefined")
+	if (typeof (lambda) === "undefined") {
 		return items.length > 0;
+	}
 
 	this.ensureLambda(lambda);
 
-	for (var idx = 0; idx < items.length; idx++) {
-		var obj = items[idx];
+	var item;
 
-		if (lambda(obj))
+	for (var idx = 0; idx < items.length; idx++) {
+		item = items[idx];
+
+		if (lambda(item))
 			return true;
 	}
 
@@ -91,11 +120,13 @@ Netricity.LinqJS.LinqHelper.prototype.first = function (items, lambda) {
 
 	this.ensureLambda(lambda);
 
-	for (var idx = 0; idx < items.length; idx++) {
-		var obj = items[idx];
+	var item;
 
-		if (lambda(obj))
-			return obj;
+	for (var idx = 0; idx < items.length; idx++) {
+		item = items[idx];
+
+		if (lambda(item))
+			return item;
 	}
 
 	throw new Error("Array contains no matching items");
@@ -112,11 +143,13 @@ Netricity.LinqJS.LinqHelper.prototype.firstOrDefault = function (items, lambda, 
 		return items.length == 0 ? defaultValue : items[0];
 	}
 
-	for (var idx = 0; idx < items.length; idx++) {
-		var obj = items[idx];
+	var item;
 
-		if (lambda(obj))
-			return obj;
+	for (var idx = 0; idx < items.length; idx++) {
+		item = items[idx];
+
+		if (lambda(item))
+			return item;
 	}
 
 	return defaultValue;
@@ -133,11 +166,13 @@ Netricity.LinqJS.LinqHelper.prototype.last = function (items, lambda) {
 
 	this.ensureLambda(lambda);
 
-	for (var idx = items.length - 1; idx >= 0; idx--) {
-		var obj = items[idx];
+	var item;
 
-		if (lambda(obj))
-			return obj;
+	for (var idx = items.length - 1; idx >= 0; idx--) {
+		item = items[idx];
+
+		if (lambda(item))
+			return item;
 	}
 
 	throw new Error("Array contains no matching items");
@@ -147,10 +182,12 @@ Netricity.LinqJS.LinqHelper.prototype.last = function (items, lambda) {
 Netricity.LinqJS.LinqHelper.prototype.all = function (items, lambda) {
 	this.ensureLambda(lambda);
 
-	for (var idx = 0; idx < items.length; idx++) {
-		var obj = items[idx];
+	var item;
 
-		if (!lambda(obj))
+	for (var idx = 0; idx < items.length; idx++) {
+		item = items[idx];
+
+		if (!lambda(item))
 			return false;
 	}
 
@@ -160,11 +197,13 @@ Netricity.LinqJS.LinqHelper.prototype.all = function (items, lambda) {
 /// forEach
 Netricity.LinqJS.LinqHelper.prototype.forEach = function (items, lambda) {
 	this.ensureLambda(lambda);
+	var indexInArray = 0;
+	var valueOfElement;
 
-	for (var idx = 0; idx < items.length; idx++) {
-		var obj = items[idx];
+	for (; indexInArray < items.length; indexInArray++) {
+		valueOfElement = items[indexInArray];
 
-		lambda(obj);
+		lambda(indexInArray, valueOfElement);
 	}
 };
 
@@ -248,12 +287,15 @@ Netricity.LinqJS.LinqHelper.prototype.averageWithTransform = function (items, tr
 /// select
 Netricity.LinqJS.LinqHelper.prototype.select = function (items, lambda) {
 
+	this.ensureItems(items, true);
 	var results = [];
 	var enumerator = this.getEnumerator(items);
 
+	var item;
+
 	while (enumerator.MoveNext()) {
-		var obj = lambda(enumerator.Current);
-		results.push(obj);
+		item = lambda(enumerator.Current);
+		results.push(item);
 	}
 
 	return results;
@@ -277,7 +319,7 @@ Netricity.LinqJS.LinqHelper.prototype.concat = function (firstItems, secondItems
 	}
 
 	return results;
-}
+};
 
 /// contains
 Netricity.LinqJS.LinqHelper.prototype.contains = function (items, value, comparerLambda) {
@@ -296,13 +338,15 @@ Netricity.LinqJS.LinqHelper.prototype.contains = function (items, value, compare
 	}
 
 	return false;
-}
+};
 
 /// count
 Netricity.LinqJS.LinqHelper.prototype.count = function (items) {
 
+	this.ensureItems(items, true);
+
 	return items.length;
-}
+};
 
 /// defaultIfEmpty
 Netricity.LinqJS.LinqHelper.prototype.defaultIfEmpty = function (items, defaultValue) {
@@ -311,7 +355,7 @@ Netricity.LinqJS.LinqHelper.prototype.defaultIfEmpty = function (items, defaultV
 		return items;
 
 	return [defaultValue];
-}
+};
 
 /// distinct
 Netricity.LinqJS.LinqHelper.prototype.distinct = function (items, comparerLambda) {
@@ -328,7 +372,7 @@ Netricity.LinqJS.LinqHelper.prototype.distinct = function (items, comparerLambda
 	delete results.enumerator;
 
 	return results;
-}
+};
 
 /// elementAt
 Netricity.LinqJS.LinqHelper.prototype.elementAt = function (items, index) {
@@ -337,7 +381,7 @@ Netricity.LinqJS.LinqHelper.prototype.elementAt = function (items, index) {
 		return items[index];
 
 	return null;
-}
+};
 
 /// except
 Netricity.LinqJS.LinqHelper.prototype.except = function (firstItems, secondItems, comparerLambda) {
@@ -362,7 +406,7 @@ Netricity.LinqJS.LinqHelper.prototype.except = function (firstItems, secondItems
 	}
 
 	return results;
-}
+};
 
 /// intersect
 Netricity.LinqJS.LinqHelper.prototype.intersect = function (firstItems, secondItems, comparerLambda) {
@@ -379,7 +423,7 @@ Netricity.LinqJS.LinqHelper.prototype.intersect = function (firstItems, secondIt
 	}
 
 	return results;
-}
+};
 
 /// max
 Netricity.LinqJS.LinqHelper.prototype.max = function (items, comparerLambda) {
@@ -400,7 +444,7 @@ Netricity.LinqJS.LinqHelper.prototype.max = function (items, comparerLambda) {
 	}
 
 	return result;
-}
+};
 
 /// min
 Netricity.LinqJS.LinqHelper.prototype.min = function (items, comparerLambda) {
@@ -421,7 +465,7 @@ Netricity.LinqJS.LinqHelper.prototype.min = function (items, comparerLambda) {
 	}
 
 	return result;
-}
+};
 
 /// orderBy
 Netricity.LinqJS.LinqHelper.prototype.orderBy = function (items, keySelectorLambda, comparerLambda) {
@@ -441,8 +485,7 @@ Netricity.LinqJS.LinqHelper.prototype.orderBy = function (items, keySelectorLamb
 
 	if (typeof (comparerLambda) === "undefined")
 		comparefn = function (a, b) { return keySelectorLambda(a) - keySelectorLambda(b); };
-	else
-	{
+	else {
 		comparefn = function (a, b) {
 			a = keySelectorLambda(a);
 			b = keySelectorLambda(b);
@@ -450,23 +493,23 @@ Netricity.LinqJS.LinqHelper.prototype.orderBy = function (items, keySelectorLamb
 			return comparerLambda(a, b);
 		}
 	}
-	
+
 	items.sort(comparefn);
 
 	return items;
-}
+};
 
 /// orderByDescending
 Netricity.LinqJS.LinqHelper.prototype.orderByDescending = function (items, keySelectorLambda, comparerLambda) {
 
 	return this.orderBy(items, keySelectorLambda, comparerLambda).reverse();
 
-}
+};
 
 /// sum
 Netricity.LinqJS.LinqHelper.prototype.sum = function (items, valueSelectorLambda) {
 
-	this.ensureItems(items);
+	this.ensureItems(items, true);
 
 	if (typeof (valueSelectorLambda) === "undefined") {
 		valueSelectorLambda = function (o) { return o; };
@@ -474,18 +517,22 @@ Netricity.LinqJS.LinqHelper.prototype.sum = function (items, valueSelectorLambda
 
 	var total = 0;
 
-	var e = this.getEnumerator(items);
+	//var e = this.getEnumerator(items);
 
-	while (e.MoveNext()) {
-		total += valueSelectorLambda(e.Current);
-	}
+	//while (e.MoveNext()) {
+	//	total += valueSelectorLambda(e.Current);
+	//}
+
+	this.forEach(items, function (indexInArray, valueOfElement) {
+		total += valueSelectorLambda(valueOfElement);
+	});
 
 	return total;
-}
+};
 
 /// single
 Netricity.LinqJS.LinqHelper.prototype.single = function (items, lambda) {
-	
+
 	this.ensureItems(items);
 
 	var count = 0;
@@ -512,11 +559,11 @@ Netricity.LinqJS.LinqHelper.prototype.single = function (items, lambda) {
 	}
 
 	throw new Error("More than 1 match found");
-}
+};
 
 /// singleOrDefault
 Netricity.LinqJS.LinqHelper.prototype.singleOrDefault = function (items, lambda, defaultValue) {
-	
+
 	this.ensureItems(items);
 
 	if (typeof (defaultValue) === "undefined")
@@ -532,7 +579,7 @@ Netricity.LinqJS.LinqHelper.prototype.singleOrDefault = function (items, lambda,
 
 	var result;
 	var e = this.getEnumerator(items);
-	
+
 	while (e.MoveNext()) {
 		if (lambda(e.Current)) {
 			result = e.Current;
@@ -546,7 +593,7 @@ Netricity.LinqJS.LinqHelper.prototype.singleOrDefault = function (items, lambda,
 	}
 
 	throw new Error("More than 1 match found");
-}
+};
 
 /// reverse
 Netricity.LinqJS.LinqHelper.prototype.reverse = function (items) {
@@ -560,15 +607,13 @@ Netricity.LinqJS.LinqHelper.prototype.reverse = function (items) {
 	items = items.slice(); // Clone the array so .reverse doesn't re-order the original
 
 	return items.reverse();
-}
+};
 
 /// selectMany
 Netricity.LinqJS.LinqHelper.prototype.selectMany = function (items, collectionSelectorLambda, transformLambda) {
 
-	this.ensureItems(items);
-
+	this.ensureItems(items, true);
 	this.ensureLambda(collectionSelectorLambda);
-
 	this.ensureLambdaIfNotNull(transformLambda);
 
 	if (items.length === 0)
@@ -577,13 +622,17 @@ Netricity.LinqJS.LinqHelper.prototype.selectMany = function (items, collectionSe
 	var result = [];
 	var e = this.getEnumerator(items);
 
+	var subElements;
+	var eSub;
+	var o;
+
 	while (e.MoveNext()) {
-		var subElements = collectionSelectorLambda(e.Current);
-		var eSub = this.getEnumerator(subElements);
+		subElements = collectionSelectorLambda(e.Current);
+		eSub = this.getEnumerator(subElements);
 
 		while (eSub.MoveNext()) {
 			if (transformLambda) {
-				var o = transformLambda(eSub.Current, e.CurrentIdx);
+				o = transformLambda(eSub.Current, e.CurrentIdx);
 				result.push(o);
 			} else {
 				result.push(eSub.Current);
@@ -592,11 +641,11 @@ Netricity.LinqJS.LinqHelper.prototype.selectMany = function (items, collectionSe
 	}
 
 	return result;
-}
+};
 
 /// zip
 Netricity.LinqJS.LinqHelper.prototype.zip = function (items1, items2, lambda) {
-	
+
 	this.ensureItems(items1);
 	this.ensureItems(items2);
 	this.ensureLambda(lambda);
@@ -604,18 +653,19 @@ Netricity.LinqJS.LinqHelper.prototype.zip = function (items1, items2, lambda) {
 	var result = [];
 	var e1 = this.getEnumerator(items1);
 	var e2 = this.getEnumerator(items2);
+	var item;
 
 	while (e1.MoveNext() && e2.MoveNext()) {
-		var item = lambda(e1.Current, e2.Current);
+		item = lambda(e1.Current, e2.Current);
 		result.push(item);
 	}
 
 	return result;
-}
+};
 
 /// union
 Netricity.LinqJS.LinqHelper.prototype.union = function (firstItems, secondItems, comparerLambda) {
-	
+
 	var results = [];
 
 	firstItems = this.distinct(firstItems, comparerLambda);
@@ -636,9 +686,9 @@ Netricity.LinqJS.LinqHelper.prototype.union = function (firstItems, secondItems,
 	}
 
 	delete results.enumerator;
-	
+
 	return results;
-}
+};
 
 /// groupBy
 Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, keySelectorLambda) {
@@ -650,11 +700,13 @@ Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, keySelectorLamb
 		return results;
 
 	var e = this.getEnumerator(items);
+	var currentKey;
+	var item;
 
 	while (e.MoveNext()) {
-		var currentKey = keySelectorLambda(e.Current);
+		currentKey = keySelectorLambda(e.Current);
 
-		var item = this.firstOrDefault(
+		item = this.firstOrDefault(
 			results,
 			function (o) { return o.Key == currentKey },
 			{ Key: currentKey, Count: 0 });
@@ -667,7 +719,7 @@ Netricity.LinqJS.LinqHelper.prototype.groupBy = function (items, keySelectorLamb
 	}
 
 	return results;
-}
+};
 
 /// take
 Netricity.LinqJS.LinqHelper.prototype.take = function (items, count) {
@@ -686,7 +738,7 @@ Netricity.LinqJS.LinqHelper.prototype.take = function (items, count) {
 	}
 
 	return results;
-}
+};
 
 /// takeWhile
 Netricity.LinqJS.LinqHelper.prototype.takeWhile = function (items, predicate) {
@@ -706,7 +758,7 @@ Netricity.LinqJS.LinqHelper.prototype.takeWhile = function (items, predicate) {
 	}
 
 	return results;
-}
+};
 
 /// skip
 Netricity.LinqJS.LinqHelper.prototype.skip = function (items, count) {
@@ -729,7 +781,7 @@ Netricity.LinqJS.LinqHelper.prototype.skip = function (items, count) {
 	}
 
 	return results;
-}
+};
 
 /// skipWhile
 Netricity.LinqJS.LinqHelper.prototype.skipWhile = function (items, predicate) {
@@ -751,4 +803,94 @@ Netricity.LinqJS.LinqHelper.prototype.skipWhile = function (items, predicate) {
 	}
 
 	return results;
-}
+};
+
+/// setValue
+Netricity.LinqJS.LinqHelper.prototype.setValue = function (arr, value, indices) {
+
+	this.ensureItems(arr, true);
+
+	if (typeof (indices) === "number") {
+		indices = [indices];
+	}
+
+	this.ensureItems(indices, false);
+
+	var e = this.getEnumerator(indices);
+
+	var currentDimensionArray = arr;
+
+	debugger;
+
+	var currentIndicee = -1;
+
+	for (var i = 0; i < indices.length; i++) {
+
+		currentIndicee = indices[i];
+
+		if (i < indices.length - 1)
+			currentDimensionArray = currentDimensionArray[indices[i]];
+	}
+
+	currentDimensionArray[currentIndicee] = value;
+};
+
+/* todo - use 'each' instead of Enumerator
+
+	each: function( obj, callback ) {
+		var length, i = 0;
+
+			if ( isArray ) {
+				for ( ; i < length; i++ ) {
+					value = callback.call( obj[ i ], i, obj[ i ] );
+
+					if ( value === false ) {
+						break;
+					}
+				}
+			} else {
+				for ( i in obj ) {
+					value = callback.call( obj[ i ], i, obj[ i ] );
+
+					if ( value === false ) {
+						break;
+					}
+				}
+			}
+
+		return obj;
+	}
+
+*/
+
+/// each
+Netricity.LinqJS.LinqHelper.prototype.each = function (items, lambda) {
+
+	// lambda should be function(indexInArray, valueOfElement) { .... }
+	this.ensureLambda(lambda);
+
+	var value;
+	var i = 0;
+	var length = items.length;
+	var isArr = this.isArray(items);
+
+	if (isArr) {
+		for (; i < length; i++) {
+			value = lambda.call(items[i], i, items[i]);
+
+			if (value === false) {
+				break;
+			}
+		}
+	} else {
+		for (i in items) {
+			value = lambda.call(items[i], i, items[i]);
+
+			if (value === false) {
+				break;
+			}
+		}
+	}
+
+	return items;
+};

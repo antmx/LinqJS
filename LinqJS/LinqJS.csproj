@@ -53,8 +53,10 @@
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
     <Content Include="Scripts\LinqJS\EnumerableSorter.js" />
+    <Content Include="Scripts\specs\each.js" />
     <Content Include="Scripts\specs\firstOrDefault.js" />
     <Content Include="Scripts\specs\skip.js" />
+    <Content Include="Scripts\specs\setValue.js" />
     <Content Include="Scripts\specs\skipWhile.js" />
     <Content Include="Scripts\specs\takeWhile.js" />
     <Content Include="Scripts\specs\take.js" />
@@ -105,7 +107,6 @@
     <Content Include="Scripts\specs\last.js" />
     <Content Include="Scripts\specs\first.js" />
     <Content Include="Scripts\specs\any.js" />
-    <None Include="Scripts\specs\_references.js" />
     <Content Include="Scripts\Utilities\Enumerator.js" />
     <Content Include="Scripts\specs\getEnumerator.js" />
     <Content Include="Scripts\specs\helloWorld.js" />
@@ -118,6 +119,7 @@
     <Content Include="Scripts\Utilities\Extend.js" />
     <Content Include="Scripts\Utilities\Logger.js" />
     <Content Include="Scripts\Utilities\Namespace.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

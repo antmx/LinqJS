@@ -31,3 +31,23 @@ describe("LinqHelper all", function () {
 	});
 
 });
+
+
+
+var Language;
+(function (language) {
+	language.enUS = "en-US";
+	//language[language["Amber"] = 2] = "Amber";
+	language[language["Green"] = "3"] = "Green";
+})(Language || (Language = {}));
+
+describe("enum", function () {
+	it("returns expected member", function () {
+		var u = Language.enUS;
+		expect(u).toEqual("en-US");
+
+		u = Language.Green;
+		expect(u).toEqual('3');
+	})
+});
+

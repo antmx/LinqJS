@@ -1,5 +1,6 @@
-﻿
-describe("LinqHelper forEach", function () {
+﻿/// <reference path="_references.js" />
+
+describe("LinqHelper each", function () {
 
 	var helper;
 	var items;
@@ -13,9 +14,9 @@ describe("LinqHelper forEach", function () {
 
 		var arrayToPopulate = [];
 
-		var result = helper.forEach(
+		var result = helper.each(
 			items,
-			function (indexInArray, valueOfElement) { arrayToPopulate.push(valueOfElement * 10) });
+			function (i) { arrayToPopulate.push(i * 10) });
 
 		expect(items.length).toEqual(arrayToPopulate.length);
 
