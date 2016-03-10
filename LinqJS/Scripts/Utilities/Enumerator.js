@@ -1,4 +1,10 @@
-﻿/// <reference path="Namespace.js" />
+﻿/*jslint
+    this: true, for: true, white: true
+*/
+
+"use strict";
+
+/// <reference path="Namespace.js" />
 
 Namespace.Define("Netricity.Utilities");
 
@@ -11,16 +17,16 @@ Netricity.Utilities.Enumerator = function (items) {
 	this.MoveNext = function () {
 
 		if (items.length > self.CurrentIdx + 1) {
-			self.CurrentIdx++;
+			self.CurrentIdx += 1;
 			self.Current = items[self.CurrentIdx];
 			return true;
 		}
 
 		return false;
-	}
+	};
 
 	this.reset = function () {
 		this.CurrentIdx = -1;
 		this.Current = null;
-	}
+	};
 };

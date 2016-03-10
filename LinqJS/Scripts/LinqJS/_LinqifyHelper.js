@@ -1,12 +1,18 @@
-﻿/// <reference path="~/Scripts/Utilities/Namespace.js" />
+﻿/*jslint
+    this: true, for: true, white: true
+*/
+
+"use strict";
+
+/// <reference path="~/Scripts/Utilities/Namespace.js" />
 
 Namespace.Define("Netricity.LinqJS");
 
 Netricity.LinqJS._LinqifyHelper = function () {
 
-}
+};
 
-Netricity.LinqJS._LinqifyHelper.prototype.helloWorld = function (lambda) {
+Netricity.LinqJS._LinqifyHelper.prototype.helloWorld = function () {
 	return Netricity.LinqJS.Helper.helloWorld();
 };
 
@@ -30,7 +36,7 @@ Netricity.LinqJS._LinqifyHelper.prototype.all = function (lambda) {
 	return Netricity.LinqJS.Helper.all(this, lambda);
 };
 
-Netricity.LinqJS._LinqifyHelper.prototype.forEach = function (lamda) {
+Netricity.LinqJS._LinqifyHelper.prototype.forEach = function (lambda) {
 	return Netricity.LinqJS.Helper.forEach(this, lambda);
 };
 

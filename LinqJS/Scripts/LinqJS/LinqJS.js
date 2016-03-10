@@ -1,4 +1,10 @@
-﻿/// <reference path="../Utilities/Extend.js" />
+﻿/*jslint
+    this: true, for: true, white: true
+*/
+
+"use strict";
+
+/// <reference path="../Utilities/Extend.js" />
 /// <reference path="../Utilities/Namespace.js" />
 /// <reference path="LinqHelper.js" />
 
@@ -15,11 +21,13 @@ Array.prototype.Linqify = function () {
 };
 
 Netricity.LinqJS.Linqify = function (list) {
-	if (!list || typeof list.length === 'undefined')
+	if (!list || typeof list.length === 'undefined') {
 		throw new Error('Linqify requires an array');
+	}
 
-	if (list._linqified)
+	if (list._linqified) {
 		return list;
+	}
 
 	list._linqified = true;
 
@@ -72,4 +80,4 @@ Netricity.LinqJS.Linqify = function (list) {
 	// ToLookup ?
 
 	return list;
-}
+};
