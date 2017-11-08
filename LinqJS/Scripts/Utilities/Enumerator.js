@@ -4,29 +4,29 @@
 
 "use strict";
 
-/// <reference path="Namespace.js" />
-
-Namespace.Define("Netricity.Utilities");
+var Utilities = Utilities || {};
 
 /// Enumerator 'class' - supports a simple iteration over an array.
-Netricity.Utilities.Enumerator = function (items) {
-	var self = this;
-	this.Current = null;
-	this.CurrentIdx = -1;
+Utilities.Enumerator = function (items) {
 
-	this.MoveNext = function () {
+    var self = this;
+    this.Current = null;
+    this.CurrentIdx = -1;
 
-		if (items.length > self.CurrentIdx + 1) {
-			self.CurrentIdx += 1;
-			self.Current = items[self.CurrentIdx];
-			return true;
-		}
+    this.MoveNext = function () {
 
-		return false;
-	};
+        if (items.length > self.CurrentIdx + 1) {
+            self.CurrentIdx += 1;
+            self.Current = items[self.CurrentIdx];
+            return true;
+        }
 
-	this.reset = function () {
-		this.CurrentIdx = -1;
-		this.Current = null;
-	};
+        return false;
+    };
+
+    this.reset = function () {
+
+        this.CurrentIdx = -1;
+        this.Current = null;
+    };
 };

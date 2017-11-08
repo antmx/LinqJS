@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper takeWhile", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper takeWhile", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 
 		items = ["apple", "banana", "mango", "orange", "passionfruit", "grape"];
 	});

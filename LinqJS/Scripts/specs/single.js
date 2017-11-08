@@ -1,11 +1,11 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper single", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 	});
 
 	it("Throws error when list is null", function () {
@@ -21,18 +21,18 @@ describe("LinqHelper single", function () {
 	it("Throws error when no match", function () {
 
 		expect(function () {
-			helper.single(
-				[1, 2, 3],
-				function (o) { return o > 4; })
+            helper.single(
+                [1, 2, 3],
+                function (o) { return o > 4; });
 		}).toThrow(new Error("No match found"));
 	});
 
 	it("Throws error when more than 1 match", function () {
 
 		expect(function () {
-			helper.single(
-				[1, 2, 3, 4, 5, 6],
-				function (o) { return o > 4; })
+            helper.single(
+                [1, 2, 3, 4, 5, 6],
+                function (o) { return o > 4; });
 		}).toThrow(new Error("More than 1 match found"));
 	});
 

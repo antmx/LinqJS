@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper select", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper select", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 
 		items = [
 			 { Name: "One", Number: 1 },
@@ -26,11 +26,16 @@ describe("LinqHelper select", function () {
 
 		expect(result.length).toEqual(4);
 
-		var e = helper.getEnumerator(result);
+		//var e = helper.getEnumerator(result);
 
-		while (e.MoveNext()) {
-			expect(e.Current).toEqual(expected[e.CurrentIdx]);
-		}
+		//while (e.MoveNext()) {
+		//	expect(e.Current).toEqual(expected[e.CurrentIdx]);
+		//}
+
+        helper.forEach(result, function (indexInArray, valueOfElement) {
+
+            expect(valueOfElement).toEqual(expected[indexInArray]);
+        });
 	});
 
 });

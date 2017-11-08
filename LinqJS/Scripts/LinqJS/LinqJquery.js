@@ -4,10 +4,18 @@
 
 "use strict";
 
-/// <reference path="LinqJS.js" />
+/// <reference path="Linqify.js" />
 
+/** jQuery plug-in
+*/
 (function ($) {
+
+    /** linqify Adds Linq methods to an array.
+    @param {array} list The array the add Linq methods to.
+    */
     $.fn.linqify = function (list) {
-        return Netricity.LinqJS.Linqify(list);
+
+        return Linqify(list);
     };
+
 }(jQuery));

@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper selectMany", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper selectMany", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 		items = [{ Name: "Higa, Sidney", Pets: ["Scruffy", "Sam"] },
 					{ Name: "Ashkenazi, Ronen", Pets: ["Walker", "Sugar"] },
 					{ Name: "Price, Vernette", Pets: ["Scratches", "Diesel"] }];

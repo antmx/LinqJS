@@ -1,11 +1,11 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper union", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 	});
 
 	it("Produces the set union of two lists, i.e. a list that contains the elements from both lists, excluding duplicates.", function () {

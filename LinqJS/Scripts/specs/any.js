@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper any", function () {
 
@@ -6,14 +6,14 @@ describe("LinqHelper any", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Returns true when there are matching items", function () {
 		var result = helper.any(
 			items,
-			function (i) { return i % 3 == 0 });
+            function (i) { return i % 3 == 0; });
 
 		expect(result).toBeTruthy();
 	});
@@ -28,7 +28,7 @@ describe("LinqHelper any", function () {
 	it("Returns false when there are no matching items", function () {
 		var result = helper.any(
 			items,
-			function (i) { return i > 100 });
+            function (i) { return i > 100; });
 
 		expect(result).toBeFalsy();
 	});

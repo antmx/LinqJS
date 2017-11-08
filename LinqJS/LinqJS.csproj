@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,8 +54,10 @@
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
     <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
     <Content Include="Scripts\LinqJS\EnumerableSorter.js" />
+    <Content Include="Scripts\LinqJS\LinqAll.js" />
     <Content Include="Scripts\specs\each.js" />
     <Content Include="Scripts\specs\firstOrDefault.js" />
+    <Content Include="Scripts\specs\Linqify.js" />
     <Content Include="Scripts\specs\skip.js" />
     <Content Include="Scripts\specs\setValue.js" />
     <Content Include="Scripts\specs\skipWhile.js" />
@@ -113,7 +116,7 @@
     <Content Include="Scripts\LinqJS\LinqHelper.js" />
     <Content Include="Scripts\LinqJS\LinqJquery.js" />
     <Content Include="Scripts\LinqJS\_LinqifyHelper.js" />
-    <Content Include="Scripts\LinqJS\LinqJS.js" />
+    <Content Include="Scripts\LinqJS\Linqify.js" />
     <Content Include="Scripts\LinqJS\Tests.js" />
     <Content Include="Scripts\specs\where.js" />
     <Content Include="Scripts\Utilities\Extend.js" />

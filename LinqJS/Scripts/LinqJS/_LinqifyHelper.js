@@ -4,68 +4,90 @@
 
 "use strict";
 
-/// <reference path="~/Scripts/Utilities/Namespace.js" />
+LinqJS = LinqJS || {};
 
-Namespace.Define("Netricity.LinqJS");
+LinqJS._LinqifyHelper = (function () {
 
-Netricity.LinqJS._LinqifyHelper = function () {
+    /**
+     
+     */
+    function _LinqifyHelper() {
 
-};
+        this.Helper = new LinqJS.LinqHelper();
+    }
 
-Netricity.LinqJS._LinqifyHelper.prototype.helloWorld = function () {
-	return Netricity.LinqJS.Helper.helloWorld();
-};
+    _LinqifyHelper.prototype.helloWorld = function () {
 
-Netricity.LinqJS._LinqifyHelper.prototype.where = function (lambda) {
-	return Netricity.LinqJS.Helper.where(this, lambda);
-};
+        return this.Helper.helloWorld();
+    };
 
-Netricity.LinqJS._LinqifyHelper.prototype.any = function (lambda) {
-	return Netricity.LinqJS.Helper.any(this, lambda);
-};
+    _LinqifyHelper.prototype.where = function (lambda) {
 
-Netricity.LinqJS._LinqifyHelper.prototype.first = function (lambda) {
-	return Netricity.LinqJS.Helper.first(this, lambda);
-};
+        return this.Helper.where(this, lambda);
+    };
 
-Netricity.LinqJS._LinqifyHelper.prototype.last = function (lambda) {
-	return Netricity.LinqJS.Helper.last(this, lambda);
-};
+    _LinqifyHelper.prototype.any = function (lambda) {
 
-Netricity.LinqJS._LinqifyHelper.prototype.all = function (lambda) {
-	return Netricity.LinqJS.Helper.all(this, lambda);
-};
+        return this.Helper.any(this, lambda);
+    };
 
-Netricity.LinqJS._LinqifyHelper.prototype.forEach = function (lambda) {
-	return Netricity.LinqJS.Helper.forEach(this, lambda);
-};
+    _LinqifyHelper.prototype.first = function (lambda) {
 
-/// Returns an enumerator that iterates over the array.
-Netricity.LinqJS._LinqifyHelper.prototype.getEnumerator = function () {
-	return Netricity.LinqJS.Helper.getEnumerator(this);
-};
+        return this.Helper.first(this, lambda);
+    };
 
-// Applies an accumulator function over an array.
-Netricity.LinqJS._LinqifyHelper.prototype.aggregate = function (lambda) {
-	return Netricity.LinqJS.Helper.aggregate(this, lambda);
-};
+    _LinqifyHelper.prototype.last = function (lambda) {
 
-Netricity.LinqJS._LinqifyHelper.prototype.aggregateWithSeed = function (lambda, seed) {
-	return Netricity.LinqJS.Helper.aggregateWithSeed(this, lambda, seed);
-};
+        return this.Helper.last(this, lambda);
+    };
 
-Netricity.LinqJS._LinqifyHelper.prototype.aggregateWithSeedAndResultSelector = function (lambda, seed, resultSelector) {
-	return Netricity.LinqJS.Helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector);
-};
+    _LinqifyHelper.prototype.all = function (lambda) {
 
-Netricity.LinqJS._LinqifyHelper.prototype.average = function () {
-	return Netricity.LinqJS.Helper.average(this);
-};
+        return this.Helper.all(this, lambda);
+    };
 
-Netricity.LinqJS._LinqifyHelper.prototype.averageWithTransform = function (transformerLambda) {
-	return Netricity.LinqJS.Helper.averageWithTransform(this, transformerLambda);
-};
+    _LinqifyHelper.prototype.forEach = function (lambda) {
 
-Netricity.LinqJS._LinqifyHelper.prototype.select = function (lambda) {
-	return Netricity.LinqJS.Helper.select(this, lambda);
-};
+        return this.Helper.forEach(this, lambda);
+    };
+
+    ///// Returns an enumerator that iterates over the array.
+    //_LinqifyHelper.prototype.getEnumerator = function () {
+
+    //    return this.Helper.getEnumerator(this);
+    //};
+
+    // Applies an accumulator function over an array.
+    _LinqifyHelper.prototype.aggregate = function (lambda) {
+
+        return this.Helper.aggregate(this, lambda);
+    };
+
+    _LinqifyHelper.prototype.aggregateWithSeed = function (lambda, seed) {
+
+        return this.Helper.aggregateWithSeed(this, lambda, seed);
+    };
+
+    _LinqifyHelper.prototype.aggregateWithSeedAndResultSelector = function (lambda, seed, resultSelector) {
+
+        return this.Helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector);
+    };
+
+    _LinqifyHelper.prototype.average = function () {
+
+        return this.Helper.average(this);
+    };
+
+    _LinqifyHelper.prototype.averageWithTransform = function (transformerLambda) {
+
+        return this.Helper.averageWithTransform(this, transformerLambda);
+    };
+
+    _LinqifyHelper.prototype.select = function (lambda) {
+
+        return this.Helper.select(this, lambda);
+    };
+
+
+    return _LinqifyHelper;
+})();

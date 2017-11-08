@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper orderByDescending", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper orderByDescending", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 
 		items = [
 			{ name: "foo", age: 2, number: "two" },

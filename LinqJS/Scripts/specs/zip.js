@@ -1,28 +1,30 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper zip", function () {
 
-	var helper;
-	var numbers;
-	var words;
+    var helper;
+    var numbers;
+    var words;
 
-	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+    beforeEach(function () {
 
-		numbers = [1, 2, 3, 4];
+        helper = new LinqJS.LinqHelper();
 
-		words = ["one", "two", "three"];
-	});
+        numbers = [1, 2, 3, 4];
 
-	it("Merges two lists by using the specified predicate function.", function () {
-		var result = helper.zip(
-			numbers,
-			words,
-			function (first, second) { return first + " " + second; });
+        words = ["one", "two", "three"];
+    });
 
-		var expected = ["1 one", "2 two", "3 three"];
+    it("Merges two lists by using the specified predicate function.", function () {
 
-		expect(result).toEqual(expected);
-	});
+        var result = helper.zip(
+            numbers,
+            words,
+            function (first, second) { return first + " " + second; });
+
+        var expected = ["1 one", "2 two", "3 three"];
+
+        expect(result).toEqual(expected);
+    });
 
 });

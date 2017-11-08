@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper min", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper min", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 
 		items = [1, 1, 2, 5, 4, 5, 5, 2, 2];
 	});

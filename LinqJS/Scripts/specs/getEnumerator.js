@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper getEnumerator", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper getEnumerator", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 		items = [1, 2, 3];
 	});
 	
@@ -14,7 +14,7 @@ describe("LinqHelper getEnumerator", function () {
 
 		var e = helper.getEnumerator(items);
 		
-		expect(e.Current).toBeNull()
+        expect(e.Current).toBeNull();
 	});
 
 	it("Enables enumerating", function () {

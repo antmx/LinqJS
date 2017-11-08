@@ -1,11 +1,11 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper setValue", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 	});
 
 	it("Sets the specified element in the current Array to the specified value - 1D", function () {

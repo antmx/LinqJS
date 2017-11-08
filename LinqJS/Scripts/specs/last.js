@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper last", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper last", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
@@ -20,9 +20,9 @@ describe("LinqHelper last", function () {
 	});
 
 	it("Returns last matching item", function () {
-		var result = helper.last(
-			items,
-			function (i) { return i < 7 });
+        var result = helper.last(
+            items,
+            function (i) { return i < 7; });
 
 		var expected = 6;
 

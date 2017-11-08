@@ -1,11 +1,11 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper singleOrDefault", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 	});
 
 	it("Throws error when list is null", function () {

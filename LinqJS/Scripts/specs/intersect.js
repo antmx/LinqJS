@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper intersect", function () {
 
@@ -7,7 +7,7 @@ describe("LinqHelper intersect", function () {
 	var secondItems;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 
 		firstItems = [1, 1, 2, 3, 4, 5];
 		secondItems = [1, 3, 5, 7];

@@ -1,4 +1,4 @@
-﻿/// <reference path="_references.js" />
+﻿/// <reference path="../_references.js" />
 
 describe("LinqHelper aggregateWithSeed", function () {
 
@@ -6,7 +6,7 @@ describe("LinqHelper aggregateWithSeed", function () {
 	var items;
 
 	beforeEach(function () {
-		helper = new Netricity.LinqJS.LinqHelper();
+		helper = new LinqJS.LinqHelper();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
