@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper groupBy", function () {
+describe("LinqCore groupBy", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 		items = [
 			{ Name: "Foo", Age: 6 },
 			{ Name: "Bar", Age: 5 },

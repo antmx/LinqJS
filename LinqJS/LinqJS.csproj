@@ -113,9 +113,8 @@
     <Content Include="Scripts\Utilities\Enumerator.js" />
     <Content Include="Scripts\specs\getEnumerator.js" />
     <Content Include="Scripts\specs\helloWorld.js" />
-    <Content Include="Scripts\LinqJS\LinqHelper.js" />
+    <Content Include="Scripts\LinqJS\LinqCore.js" />
     <Content Include="Scripts\LinqJS\LinqJquery.js" />
-    <Content Include="Scripts\LinqJS\_LinqifyHelper.js" />
     <Content Include="Scripts\LinqJS\Linqify.js" />
     <Content Include="Scripts\LinqJS\Tests.js" />
     <Content Include="Scripts\specs\where.js" />

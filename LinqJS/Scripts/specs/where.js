@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper where", function () {
+describe("LinqCore where", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
@@ -18,13 +18,7 @@ describe("LinqHelper where", function () {
 		var expected = [2, 4, 6, 8];
 
 		expect(result.length).toEqual(4);
-
-		//var e = helper.getEnumerator(result);
-
-		//while (e.MoveNext()) {
-		//	expect(e.Current).toEqual(expected[e.CurrentIdx]);
-		//}
-
+        
         helper.forEach(result, function (indexInArray, valueOfElement) {
 
             expect(valueOfElement).toEqual(expected[indexInArray]);

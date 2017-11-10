@@ -1,11 +1,11 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper helloWorld", function () {
+describe("LinqCore helloWorld", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 	});
 
 

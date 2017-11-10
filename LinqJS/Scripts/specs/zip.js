@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper zip", function () {
+describe("LinqCore zip", function () {
 
     var helper;
     var numbers;
@@ -8,7 +8,7 @@ describe("LinqHelper zip", function () {
 
     beforeEach(function () {
 
-        helper = new LinqJS.LinqHelper();
+        helper = new LinqJS.LinqCore();
 
         numbers = [1, 2, 3, 4];
 

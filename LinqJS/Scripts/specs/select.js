@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper select", function () {
+describe("LinqCore select", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 
 		items = [
 			 { Name: "One", Number: 1 },
@@ -25,13 +25,7 @@ describe("LinqHelper select", function () {
 		var expected = ["One", "Two", "Three", "Four"];
 
 		expect(result.length).toEqual(4);
-
-		//var e = helper.getEnumerator(result);
-
-		//while (e.MoveNext()) {
-		//	expect(e.Current).toEqual(expected[e.CurrentIdx]);
-		//}
-
+        
         helper.forEach(result, function (indexInArray, valueOfElement) {
 
             expect(valueOfElement).toEqual(expected[indexInArray]);

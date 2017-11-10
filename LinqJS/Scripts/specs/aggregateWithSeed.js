@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper aggregateWithSeed", function () {
+describe("LinqCore aggregateWithSeed", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 

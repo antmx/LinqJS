@@ -5,7 +5,7 @@
 "use strict";
 
 /// <reference path="../Utilities/Extend.js" />
-/// <reference path="LinqHelper.js" />
+/// <reference path="LinqCore.js" />
 
 var LinqJS = LinqJS || {};
 
@@ -35,7 +35,7 @@ function Linqify(list) {
 
     list._linqified = true;
 
-    var helper = new LinqJS.LinqHelper();
+    var helper = new LinqJS.LinqCore();
 
     // Add extra methods to the INSTANCE
 
@@ -48,7 +48,7 @@ function Linqify(list) {
 
     Utilities.extend(list, { Any: function (lambda) { return helper.any(this, lambda); } });
     Utilities.extend(list, { First: function (lambda) { return helper.first(this, lambda); } });
-    Utilities.extend(list, { FirstOrDefault: helper.firstOrDefault });
+    Utilities.extend(list, { FirstOrDefault: function (lambda, defaultValue) { return helper.firstOrDefault(this, lambda, defaultValue); } });
     Utilities.extend(list, { Last: function (lambda) { return helper.last(this, lambda); } });
     Utilities.extend(list, { All: function (lambda) { return helper.all(this, lambda); } });
     Utilities.extend(list, { ForEach: function () { helper.forEach(this); } });

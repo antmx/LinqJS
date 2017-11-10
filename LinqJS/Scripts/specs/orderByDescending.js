@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper orderByDescending", function () {
+describe("LinqCore orderByDescending", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 
 		items = [
 			{ name: "foo", age: 2, number: "two" },

@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper selectMany", function () {
+describe("LinqCore selectMany", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 		items = [{ Name: "Higa, Sidney", Pets: ["Scruffy", "Sam"] },
 					{ Name: "Ashkenazi, Ronen", Pets: ["Walker", "Sugar"] },
 					{ Name: "Price, Vernette", Pets: ["Scratches", "Diesel"] }];

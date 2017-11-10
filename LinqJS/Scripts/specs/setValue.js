@@ -1,11 +1,11 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper setValue", function () {
+describe("LinqCore setValue", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 	});
 
 	it("Sets the specified element in the current Array to the specified value - 1D", function () {

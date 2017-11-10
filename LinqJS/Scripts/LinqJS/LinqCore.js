@@ -2,6 +2,8 @@
     this: true, for: true, white: true
 */
 
+/// <reference path="EnumerableSorter.js" />
+
 "use strict";
 
 var LinqJS = LinqJS || {};
@@ -75,9 +77,9 @@ LinqJS.LinqCore = (function () {
     LinqCore.prototype.where = function (items, lambda) {
 
         this.ensureLambda(lambda);
-        
+
         var results = [];
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (lambda(valueOfElement)) {
@@ -265,7 +267,7 @@ LinqJS.LinqCore = (function () {
         this.ensureLambda(resultSelector);
 
         var result = seed;
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             result = lambda(result, valueOfElement);
@@ -280,7 +282,7 @@ LinqJS.LinqCore = (function () {
     LinqCore.prototype.average = function (items) {
 
         var total = 0;
-                
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             total += valueOfElement;
@@ -821,7 +823,6 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items, true);
 
         var results = [];
-        
         var yielding = false;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
@@ -930,307 +931,3 @@ LinqJS.LinqCore = (function () {
     return LinqCore;
 
 })();
-
-
-
-
-/** Linqify Makes all arrays Linq-able.
-*/
-Array.prototype.Linqify = function () {
-
-    Linqify(this);
-
-    return this;
-};
-
-/**
- * Linqify Adds Linq methods to an array.
- * @param {Array<any>} list The array to add the Linq methods to.
- * @returns {void}
- */
-function Linqify(list) {
-
-    if (!list || typeof list.length === 'undefined') {
-        throw new Error('Linqify requires an array');
-    }
-
-    if (list._linqified) {
-        return list;
-    }
-
-    list._linqified = true;
-
-    var helper = new LinqJS.LinqCore();
-
-    // Add extra methods to the INSTANCE
-
-    Utilities.extend(list, {
-        Where: function (lambda) {
-            var filtered = helper.where(this, lambda);
-            return Linqify(filtered);
-        }
-    });
-
-    Utilities.extend(list, { Any: function (lambda) { return helper.any(this, lambda); } });
-    Utilities.extend(list, { First: function (lambda) { return helper.first(this, lambda); } });
-    Utilities.extend(list, { FirstOrDefault: function (lambda, defaultValue) { return helper.firstOrDefault(this, lambda, defaultValue); } });
-    Utilities.extend(list, { Last: function (lambda) { return helper.last(this, lambda); } });
-    Utilities.extend(list, { All: function (lambda) { return helper.all(this, lambda); } });
-    Utilities.extend(list, { ForEach: function () { helper.forEach(this); } });
-    Utilities.extend(list, { Aggregate: function (lambda) { return helper.aggregate(this, lambda); } });
-    Utilities.extend(list, { AggregateWithSeed: function (lambda, seed) { return helper.aggregateWithSeed(this, lambda, seed); } });
-    Utilities.extend(list, { AggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });
-    Utilities.extend(list, { Average: function () { return helper.average(this); } });
-    Utilities.extend(list, { AverageWithTransform: function (transformerLambda) { return helper.averageWithTransform(this, transformerLambda); } });
-
-    Utilities.extend(list, {
-        Select: function (lambda) {
-            var selected = helper.select(this, lambda);
-            return Linqify(selected);
-        }
-    });
-
-    Utilities.extend(list, {
-        Concat: function (secondItems) {
-            var concated = helper.concat(this, secondItems);
-            return Linqify(concated);
-        }
-    });
-
-    Utilities.extend(list, { Contains: function (value, comparerLambda) { return helper.contains(this, value, comparerLambda); } });
-    Utilities.extend(list, { Count: function () { return helper.count(this); } });
-    Utilities.extend(list, { DefaultIfEmpty: function (defaultValue) { return helper.defaultIfEmpty(this, defaultValue); } });
-
-    Utilities.extend(list, {
-        Distinct: function (comparerLambda) {
-            var distincts = helper.distinct(this, comparerLambda);
-            return Linqify(distincts);
-        }
-    });
-
-    Utilities.extend(list, { ElementAt: function (index) { return helper.elementAt(this, index); } });
-
-    Utilities.extend(list, {
-        Except: function (secondItems, comparerLambda) {
-            var excepted = helper.except(this, secondItems, comparerLambda);
-            return Linqify(excepted);
-        }
-    });
-
-    Utilities.extend(list, {
-        Intersect: function (secondItems, comparerLambda) {
-            var intersected = helper.intersect(this, secondItems, comparerLambda);
-            return Linqify(intersected);
-        }
-    });
-
-    Utilities.extend(list, { Max: function (comparerLambda) { return helper.max(this, comparerLambda); } });
-    Utilities.extend(list, { Min: function (comparerLambda) { return helper.min(this, comparerLambda); } });
-
-    Utilities.extend(list, {
-        OrderBy: function (keySelectorLambda, comparerLambda) {
-            var ordered = helper.orderBy(this, keySelectorLambda, comparerLambda);
-            return Linqify(ordered);
-        }
-    });
-
-    Utilities.extend(list, {
-        OrderByDescending: function (keySelectorLambda, comparerLambda) {
-            var ordered = helper.orderByDescending(this, keySelectorLambda, comparerLambda);
-            return Linqify(ordered);
-        }
-    });
-
-    Utilities.extend(list, { Sum: function (valueSelectorLambda) { return helper.sum(this, valueSelectorLambda); } });
-    Utilities.extend(list, { Single: function (lambda) { return helper.single(this, lambda); } });
-    Utilities.extend(list, { SingleOrDefault: function (lambda, defaultValue) { return helper.singleOrDefault(this, lambda, defaultValue); } });
-
-    Utilities.extend(list, {
-        Reverse: function () {
-            var reversed = helper.reverse(this);
-            return Linqify(reversed);
-        }
-    });
-
-    Utilities.extend(list, {
-        SelectMany: function (collectionSelectorLambda, transformLambda) {
-            var many = helper.selectMany(this, collectionSelectorLambda, transformLambda);
-            return Linqify(many);
-        }
-    });
-
-    Utilities.extend(list, {
-        Zip: function (items2, lambda) {
-            var zipped = helper.zip(this, items2, lambda);
-            return Linqify(zipped);
-        }
-    });
-
-    Utilities.extend(list, {
-        Union: function (secondItems, comparerLambda) {
-            var unioned = helper.union(this, secondItems, comparerLambda);
-            return Linqify(unioned);
-        }
-    });
-
-    Utilities.extend(list, {
-        GroupBy: function (keySelectorLambda) {
-            var grouped = helper.groupBy(this, keySelectorLambda);
-            return Linqify(grouped);
-        }
-    });
-
-    Utilities.extend(list, {
-        Take: function (count) {
-            var taken = helper.take(this, count);
-            return Linqify(taken);
-        }
-    });
-
-    Utilities.extend(list, {
-        TakeWhile: function (predicate) {
-            var taken = helper.takeWhile(this, predicate);
-            return Linqify(taken);
-        }
-    });
-
-    Utilities.extend(list, {
-        Skip: function (count) {
-            var skipped = helper.skip(this, count);
-            return Linqify(skipped);
-        }
-    });
-
-    Utilities.extend(list, {
-        SkipWhile: function (predicate) {
-            var skipped = helper.skipWhile(this, predicate);
-            return Linqify(skipped);
-        }
-    });
-
-    // Also include these 'internal' methods
-    Utilities.extend(list, { ensureLambda: function (lambda) { return helper.ensureLambda(lambda); } });
-    Utilities.extend(list, { ensureItems: function (list, canBeEmpty) { return helper.ensureItems(list, canBeEmpty); } });
-
-    // todo
-    // GroupJoin
-    // Join
-    // LongCount
-    // SequenceEqual
-    // SetValue (not LINQ but useful)
-    // ToLookup ?
-
-    return list;
-}
-
-
-
-var Utilities = Utilities || {};
-
-Utilities.extend = function (dst) {
-
-    var h = dst.$$hashKey;
-
-    forEach(arguments, function (obj) {
-
-        if (obj !== dst) {
-            forEach(obj, function (value, key) {
-                dst[key] = value;
-            });
-        }
-    });
-
-    setHashKey(dst, h);
-    return dst;
-
-    function forEach(obj, iterator, context) {
-
-        var key;
-
-        if (obj) {
-            if (isFunction(obj)) {
-                for (key in obj) {
-                    if (key != 'prototype' && key != 'length' && key != 'name' && obj.hasOwnProperty(key)) {
-                        iterator.call(context, obj[key], key);
-                    }
-                }
-            } else if (obj.forEach && obj.forEach !== forEach) {
-                obj.forEach(iterator, context);
-            } else if (isArrayLike(obj)) {
-                for (key = 0; key < obj.length; key++)
-                    iterator.call(context, obj[key], key);
-            } else {
-                for (key in obj) {
-                    if (obj.hasOwnProperty(key)) {
-                        iterator.call(context, obj[key], key);
-                    }
-                }
-            }
-        }
-
-        return obj;
-    }
-
-    function isFunction(value) {
-
-        return typeof value === 'function';
-    }
-
-    function isArrayLike(obj) {
-
-        if (obj == null || isWindow(obj)) {
-            return false;
-        }
-
-        var length = obj.length;
-
-        if (obj.nodeType === 1 && length) {
-            return true;
-        }
-
-        return isString(obj) || isArray(obj) || length === 0 ||
-            typeof length === 'number' && length > 0 && (length - 1) in obj;
-    }
-
-    function isWindow(obj) {
-
-        return obj && obj.document && obj.location && obj.alert && obj.setInterval;
-    }
-
-    function isString(value) {
-
-        return typeof value === 'string';
-    }
-
-    function isArray(value) {
-
-        return toString.apply(value) === '[object Array]';
-    }
-
-    function setHashKey(obj, h) {
-
-        if (h) {
-            obj.$$hashKey = h;
-        }
-        else {
-            delete obj.$$hashKey;
-        }
-    }
-};
-
-
-
-
-/** jQuery plug-in
-*/
-(function ($) {
-
-    /** linqify Adds Linq methods to an array.
-    @param {array} list The array the add Linq methods to.
-    */
-    $.fn.linqify = function (list) {
-
-        return Linqify(list);
-    };
-
-}(jQuery));

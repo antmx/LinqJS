@@ -1,11 +1,11 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper singleOrDefault", function () {
+describe("LinqCore singleOrDefault", function () {
 
 	var helper;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 	});
 
 	it("Throws error when list is null", function () {

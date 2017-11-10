@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper takeWhile", function () {
+describe("LinqCore takeWhile", function () {
 
 	var helper;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 
 		items = ["apple", "banana", "mango", "orange", "passionfruit", "grape"];
 	});

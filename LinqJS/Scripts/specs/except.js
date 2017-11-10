@@ -1,13 +1,13 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper except", function () {
+describe("LinqCore except", function () {
 
 	var helper;
 	var firstItems;
 	var secondItems;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 
 		firstItems = [1, 2, 2, 3, 4, 5];
 		secondItems = [1, 3, 5, 7];

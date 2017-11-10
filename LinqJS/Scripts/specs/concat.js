@@ -1,13 +1,13 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqHelper concat", function () {
+describe("LinqCore concat", function () {
 
 	var helper;
 	var firstItems;
 	var secondItems;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqHelper();
+		helper = new LinqJS.LinqCore();
 
 		firstItems = [1, 2, 3];
 		secondItems = [4, 5, 6];
