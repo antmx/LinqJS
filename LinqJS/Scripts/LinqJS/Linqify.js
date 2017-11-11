@@ -184,6 +184,14 @@ function Linqify(list) {
         }
     });
 
+    // SetValue (not LINQ but useful)
+    Utilities.extend(list, {
+        SetValue: function (value, indices) {
+            helper.setValue(this, value, indices);
+            return this;
+        }
+    });
+
     // Also include these 'internal' methods
     Utilities.extend(list, { ensureLambda: function (lambda) { return helper.ensureLambda(lambda); } });
     Utilities.extend(list, { ensureItems: function (list, canBeEmpty) { return helper.ensureItems(list, canBeEmpty); } });
@@ -193,7 +201,6 @@ function Linqify(list) {
     // Join
     // LongCount
     // SequenceEqual
-    // SetValue (not LINQ but useful)
     // ToLookup ?
 
     return list;
