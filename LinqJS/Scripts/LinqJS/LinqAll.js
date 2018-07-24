@@ -7,12 +7,12 @@
 var LinqJS = LinqJS || {};
 
 /**
-*/
+ * .Net Linq-like functions for JavaScript arrays - by Anthony Chambers.
+ */
 LinqJS.LinqCore = (function () {
 
     /** LinqCore
      * @constructor : Initialises a new LinqCore instance
-     * @prop {function} helloWorld Returns 'Hello, World!'.
      */
     function LinqCore() {
 
@@ -494,7 +494,7 @@ LinqJS.LinqCore = (function () {
     /// orderBy
     LinqCore.prototype.orderBy = function (items, keySelectorLambda, comparerLambda) {
 
-        this.ensureItems(items);
+        this.ensureItems(items, true);
 
         items = items.slice(); // Clone the array so .sort doesn't re-order the original
 
@@ -509,7 +509,19 @@ LinqJS.LinqCore = (function () {
         var comparefn;
 
         if (comparerLambda == null) {
-            comparefn = function (a, b) { return keySelectorLambda(a) - keySelectorLambda(b); };
+            comparefn = function (a, b) {
+
+                if (keySelectorLambda(a) < keySelectorLambda(b)) {
+                    return -1;
+                }
+
+                if (keySelectorLambda(a) > keySelectorLambda(b)) {
+                    return 1;
+                }
+
+                return 0;
+
+            };
         } else {
             comparefn = function (a, b) {
                 a = keySelectorLambda(a);
@@ -934,8 +946,10 @@ LinqJS.LinqCore = (function () {
 
 
 
-/** Linqify Makes all arrays Linq-able.
-*/
+/**
+ * Makes all arrays Linq-able.
+ * @returns []
+ */
 Array.prototype.Linqify = function () {
 
     Linqify(this);
@@ -943,10 +957,65 @@ Array.prototype.Linqify = function () {
     return this;
 };
 
+/** Stops an array being Linq-able.
+*/
+Array.prototype.DeLinqify = function () {
+
+    DeLinqify(this);
+
+    return this;
+};
+
+function DeLinqify(list) {
+
+    delete list._linqified;
+    delete list.Where;
+    delete list.Any;
+    delete list.First;
+    delete list.FirstOrDefault;
+    delete list.Last;
+    delete list.All;
+    delete list.ForEach;
+    delete list.Aggregate;
+    delete list.AggregateWithSeed;
+    delete list.AggregateWithSeedAndResultSelector;
+    delete list.Average;
+    delete list.AverageWithTransform;
+    delete list.Select;
+    delete list.Concat;
+    delete list.Contains;
+    delete list.Count;
+    delete list.DefaultIfEmpty;
+    delete list.Distinct;
+    delete list.ElementAt;
+    delete list.Except;
+    delete list.Intersect;
+    delete list.Max;
+    delete list.Min;
+    delete list.OrderBy;
+    delete list.OrderByDescending;
+    delete list.Sum;
+    delete list.Single;
+    delete list.SingleOrDefault;
+    delete list.Reverse;
+    delete list.SelectMany;
+    delete list.Zip;
+    delete list.Union;
+    delete list.GroupBy;
+    delete list.Take;
+    delete list.TakeWhile;
+    delete list.Skip;
+    delete list.SkipWhile;
+    delete list.ensureLambda;
+    delete list.ensureItems;
+    delete list.Delinqify;
+
+};
+
 /**
- * Linqify Adds Linq methods to an array.
+ * Adds Linq methods to an array.
  * @param {Array<any>} list The array to add the Linq methods to.
- * @returns {void}
+ * @returns {[]} Returns an array with Linq methods attached.
  */
 function Linqify(list) {
 
@@ -976,7 +1045,7 @@ function Linqify(list) {
     Utilities.extend(list, { FirstOrDefault: function (lambda, defaultValue) { return helper.firstOrDefault(this, lambda, defaultValue); } });
     Utilities.extend(list, { Last: function (lambda) { return helper.last(this, lambda); } });
     Utilities.extend(list, { All: function (lambda) { return helper.all(this, lambda); } });
-    Utilities.extend(list, { ForEach: function () { helper.forEach(this); } });
+    Utilities.extend(list, { ForEach: function (lambda) { helper.forEach(this, lambda); } });
     Utilities.extend(list, { Aggregate: function (lambda) { return helper.aggregate(this, lambda); } });
     Utilities.extend(list, { AggregateWithSeed: function (lambda, seed) { return helper.aggregateWithSeed(this, lambda, seed); } });
     Utilities.extend(list, { AggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });
@@ -1112,6 +1181,13 @@ function Linqify(list) {
     Utilities.extend(list, { ensureLambda: function (lambda) { return helper.ensureLambda(lambda); } });
     Utilities.extend(list, { ensureItems: function (list, canBeEmpty) { return helper.ensureItems(list, canBeEmpty); } });
 
+    Utilities.extend(list, {
+        Delinqify: function (predicate) {
+            var skipped = helper.skipWhile(this, predicate);
+            return Linqify(skipped);
+        }
+    });
+
     // todo
     // GroupJoin
     // Join
@@ -1119,6 +1195,8 @@ function Linqify(list) {
     // SequenceEqual
     // SetValue (not LINQ but useful)
     // ToLookup ?
+    // Range
+    // Repeat
 
     return list;
 }
@@ -1204,7 +1282,7 @@ Utilities.extend = function (dst) {
 
     function isArray(value) {
 
-        return toString.apply(value) === '[object Array]';
+        return Object.prototype.toString.apply(value) === '[object Array]';
     }
 
     function setHashKey(obj, h) {
@@ -1221,13 +1299,20 @@ Utilities.extend = function (dst) {
 
 
 
-/** jQuery plug-in
-*/
+/**
+ * jQuery plug-in. Enables jQuery to make an array Linq-able.
+ * @param {JQueryStatic} $ A jQuery-like object.
+ * @example <caption>Example usage of $.linqify.</caption>
+ * // returns [2, 4]
+ * var numbers = [1, 2, 3, 4];
+ * $().linqify(numbers).Where(n => return n % 2 === 0)
+ */
 (function ($) {
 
-    /** linqify Adds Linq methods to an array.
-    @param {array} list The array the add Linq methods to.
-    */
+    /** 
+     * Adds Linq methods to an array.
+     * @param {array} list The array to add Linq methods to.
+     */
     $.fn.linqify = function (list) {
 
         return Linqify(list);

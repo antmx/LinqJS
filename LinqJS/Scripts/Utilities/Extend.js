@@ -2,6 +2,9 @@
 
 // Copied from angular.js - use this to add extra properties/functions to an INSTANCE of a type
 
+/**
+ * Utilities class
+ */
 var Utilities = Utilities || {};
 
 Utilities.extend = function (dst) {
@@ -18,6 +21,7 @@ Utilities.extend = function (dst) {
     });
 
     setHashKey(dst, h);
+
     return dst;
 
     function forEach(obj, iterator, context) {
@@ -81,7 +85,7 @@ Utilities.extend = function (dst) {
 
     function isArray(value) {
 
-        return toString.apply(value) === '[object Array]';
+        return Object.prototype.toString.apply(value) === '[object Array]';
     }
 
     function setHashKey(obj, h) {
