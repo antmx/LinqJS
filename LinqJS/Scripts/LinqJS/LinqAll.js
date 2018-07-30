@@ -1014,8 +1014,9 @@ function DeLinqify(list) {
 
 /**
  * Adds Linq methods to an array.
- * @param {Array<any>} list The array to add the Linq methods to.
- * @returns {[]} Returns an array with Linq methods attached.
+ * @template T The type of the items in @list.
+ * @param {Array<T>} list The array to add the Linq methods to.
+ * @returns {Array<T>} Returns an array with Linq methods attached.
  */
 function Linqify(list) {
 
