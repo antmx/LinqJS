@@ -82,7 +82,7 @@ LinqJS.LinqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (lambda(valueOfElement)) {
+            if (lambda(valueOfElement, indexInArray)) {
                 results.push(valueOfElement);
             }
         });
@@ -322,7 +322,7 @@ LinqJS.LinqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            item = lambda(valueOfElement);
+            item = lambda(valueOfElement, indexInArray);
             results.push(item);
         });
 
@@ -548,7 +548,7 @@ LinqJS.LinqCore = (function () {
 
     /** sum Calculates the sum total of the items
     * @param {array} items The array to sum up.
-    * @param {function} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
+    * @param {function(any, number):number} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
     * @returns {number} Returns a number representing the sum total.
     */
     LinqCore.prototype.sum = function (items, valueSelectorLambda) {
@@ -556,14 +556,20 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items, true);
 
         if (valueSelectorLambda == null) {
-            valueSelectorLambda = function (o) { return o; };
+
+            valueSelectorLambda = function (o) {
+
+                var parsed = parseFloat(o);
+
+                return isNaN(parsed) ? 0 : parsed;
+            };
         }
 
         var total = 0;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            total += valueSelectorLambda(valueOfElement);
+            total += valueSelectorLambda(valueOfElement, indexInArray);
         });
 
         return total;

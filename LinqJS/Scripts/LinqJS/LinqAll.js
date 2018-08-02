@@ -22,7 +22,7 @@ LinqJS.LinqCore = (function () {
 
         return "Hello, World!";
     };
-    
+
     /// Checks the specified object is a function
     LinqCore.prototype.ensureLambda = function (lambda) {
 
@@ -75,12 +75,12 @@ LinqJS.LinqCore = (function () {
     LinqCore.prototype.where = function (items, lambda) {
 
         this.ensureLambda(lambda);
-        
+
         var results = [];
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (lambda(valueOfElement)) {
+            if (lambda(valueOfElement, indexInArray)) {
                 results.push(valueOfElement);
             }
         });
@@ -249,7 +249,7 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items);
 
         var result = seed;
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             result = lambda(result, valueOfElement);
@@ -265,7 +265,7 @@ LinqJS.LinqCore = (function () {
         this.ensureLambda(resultSelector);
 
         var result = seed;
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             result = lambda(result, valueOfElement);
@@ -280,7 +280,7 @@ LinqJS.LinqCore = (function () {
     LinqCore.prototype.average = function (items) {
 
         var total = 0;
-                
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             total += valueOfElement;
@@ -320,7 +320,7 @@ LinqJS.LinqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            item = lambda(valueOfElement);
+            item = lambda(valueOfElement, indexInArray);
             results.push(item);
         });
 
@@ -331,7 +331,7 @@ LinqJS.LinqCore = (function () {
     LinqCore.prototype.concat = function (firstItems, secondItems) {
 
         var results = [];
-        
+
         results.push.apply(results, firstItems);
 
         results.push.apply(results, secondItems);
@@ -341,13 +341,13 @@ LinqJS.LinqCore = (function () {
 
     /// contains
     LinqCore.prototype.contains = function (items, value, comparerLambda) {
-    
+
         if (typeof comparerLambda !== "function") {
             comparerLambda = function (first, second) {
                 return first == second;
             };
         }
-        
+
         var result = false;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
@@ -357,7 +357,7 @@ LinqJS.LinqCore = (function () {
                 return false; // break out of forEach
             }
         });
-        
+
         return result;
     };
 
@@ -384,7 +384,7 @@ LinqJS.LinqCore = (function () {
 
         var self = this;
         var results = [];
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (!self.contains(results, valueOfElement, comparerLambda)) {
@@ -413,7 +413,7 @@ LinqJS.LinqCore = (function () {
 
         firstItems = this.distinct(firstItems, comparerLambda);
         secondItems = this.distinct(secondItems, comparerLambda);
-        
+
         this.forEach(firstItems, function (indexInArray, valueOfElement) {
 
             if (!self.contains(secondItems, valueOfElement, comparerLambda)) {
@@ -438,7 +438,7 @@ LinqJS.LinqCore = (function () {
         var results = [];
 
         firstItems = this.distinct(firstItems, comparerLambda);
-        
+
         this.forEach(firstItems, function (indexInArray, valueOfElement) {
 
             if (self.contains(secondItems, valueOfElement, comparerLambda)) {
@@ -459,7 +459,7 @@ LinqJS.LinqCore = (function () {
         }
 
         var result;
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (!result || comparerLambda(valueOfElement, result)) {
@@ -480,7 +480,7 @@ LinqJS.LinqCore = (function () {
         }
 
         var result;
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (!result || comparerLambda(valueOfElement, result)) {
@@ -546,7 +546,7 @@ LinqJS.LinqCore = (function () {
 
     /** sum Calculates the sum total of the items
     * @param {array} items The array to sum up.
-    * @param {function} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
+    * @param {function(any, number):number} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
     * @returns {number} Returns a number representing the sum total.
     */
     LinqCore.prototype.sum = function (items, valueSelectorLambda) {
@@ -554,14 +554,20 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items, true);
 
         if (valueSelectorLambda == null) {
-            valueSelectorLambda = function (o) { return o; };
+
+            valueSelectorLambda = function (o) {
+
+                var parsed = parseFloat(o);
+
+                return isNaN(parsed) ? 0 : parsed;
+            };
         }
 
         var total = 0;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            total += valueSelectorLambda(valueOfElement);
+            total += valueSelectorLambda(valueOfElement, indexInArray);
         });
 
         return total;
@@ -773,7 +779,7 @@ LinqJS.LinqCore = (function () {
         if (count <= 0) {
             return results;
         }
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (indexInArray < count) {
@@ -793,7 +799,7 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items, true);
 
         var results = [];
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (predicate(valueOfElement, indexInArray)) {
@@ -816,7 +822,7 @@ LinqJS.LinqCore = (function () {
         if (count <= 0) {
             return results;
         }
-        
+
         this.forEach(items, function (indexInArray, valueOfElement) {
 
             if (indexInArray + 1 > count) {
@@ -833,7 +839,7 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items, true);
 
         var results = [];
-        
+
         var yielding = false;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
@@ -937,13 +943,54 @@ LinqJS.LinqCore = (function () {
         return items;
     };
 
+    // join
+    LinqCore.prototype.join = function (items) {
+
+    };
+
+    /**
+     * IEnumerable<TResult>
+     * @param {array} outer
+     * @param {array} inner
+     * @param {function} outerKeySelector
+     * @param {function} innerKeySelector
+     * @param {function} resultSelector
+     * @param {any} comparer
+    */
+    function JoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer) {
+
+        var results = [];
+
+        //this.forEach(
+
+        //using(IEnumerator < TOuter > e = outer.GetEnumerator())
+        //{
+        //    if (e.MoveNext()) {
+        //        Lookup < TKey, TInner > lookup = Lookup<TKey, TInner>.CreateForJoin(inner, innerKeySelector, comparer);
+        //        if (lookup.Count != 0) {
+        //            do {
+        //                TOuter item = e.Current;
+        //                Grouping < TKey, TInner > g = lookup.GetGrouping(outerKeySelector(item), create: false);
+        //                if (g != null) {
+        //                    int count = g._count;
+        //                    TInner[] elements = g._elements;
+        //                    for (int i = 0; i != count; ++i)
+        //                    {
+        //                        yield return resultSelector(item, elements[i]);
+        //                    }
+        //                }
+        //            }
+        //            while (e.MoveNext());
+        //        }
+        //    }
+        //}
+    }
+
 
     // Return the constructor
     return LinqCore;
 
 })();
-
-
 
 
 /**
