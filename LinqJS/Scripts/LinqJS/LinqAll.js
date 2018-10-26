@@ -11,8 +11,9 @@ var LinqJS = LinqJS || {};
  */
 LinqJS.LinqCore = (function () {
 
-    /** LinqCore
-     * @constructor : Initialises a new LinqCore instance
+    /** 
+     * Initialises a new LinqCore instance
+     * @constructor
      */
     function LinqCore() {
 
@@ -214,6 +215,7 @@ LinqJS.LinqCore = (function () {
     */
     LinqCore.prototype.forEach = function (items, lambda) {
 
+        this.ensureItems(items, true);
         this.ensureLambda(lambda);
         var indexInArray;
         var valueOfElement;
@@ -385,7 +387,7 @@ LinqJS.LinqCore = (function () {
         var self = this;
         var results = [];
 
-        this.forEach(items, function (indexInArray, valueOfElement) {
+        self.forEach(items, function (indexInArray, valueOfElement) {
 
             if (!self.contains(results, valueOfElement, comparerLambda)) {
                 results.push(valueOfElement);
@@ -740,33 +742,38 @@ LinqJS.LinqCore = (function () {
 
         var self = this;
         this.ensureLambda(keySelectorLambda);
-        var results = [];
+        var groups = [];
 
         if (items == null || items.length === 0) {
-            return results;
+            return groups;
         }
 
-        var currentKey;
-        var item;
-        var firstOrDefaultLambda = function (o) { return o.Key == currentKey; };
+        var itemGroupKey;
+        /** @type {{ Key: any, Items: [] }} */
+        var group;
+        var firstOrDefaultLambda = function (o) { return o.Key == itemGroupKey; };
 
-        this.forEach(items, function (indexInArray, valueOfElement) {
+        self.forEach(items, function (indexInArray, valueOfElement) {
 
-            currentKey = keySelectorLambda(valueOfElement);
+            // Get item's key
+            itemGroupKey = keySelectorLambda(valueOfElement);
 
-            item = self.firstOrDefault(
-                results,
+            // Look for the item's expected group
+            group = self.firstOrDefault(
+                groups,
                 firstOrDefaultLambda,
-                { Key: currentKey, Count: 0 });
+                { Key: itemGroupKey, /*Count: 0*/ Items: [] });
 
-            if (item.Count === 0) {
-                results.push(item);
+            if (/*group.Count === 0*/ group.Items.length === 0) {
+                groups.push(group);
             }
 
-            item.Count += 1;
+            group.Items.push(valueOfElement);
+
+            //group.Count += 1;
         });
 
-        return results;
+        return groups;
     };
 
     /// take
@@ -839,7 +846,6 @@ LinqJS.LinqCore = (function () {
         this.ensureItems(items, true);
 
         var results = [];
-
         var yielding = false;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
@@ -950,12 +956,12 @@ LinqJS.LinqCore = (function () {
 
     /**
      * IEnumerable<TResult>
-     * @param {array} outer
-     * @param {array} inner
-     * @param {function} outerKeySelector
-     * @param {function} innerKeySelector
-     * @param {function} resultSelector
-     * @param {any} comparer
+     * @param {array} outer Outer array
+     * @param {array} inner Inner array
+     * @param {function} outerKeySelector Outer array key selector function
+     * @param {function} innerKeySelector Inner array key selector function
+     * @param {function} resultSelector Result selector function
+     * @param {any} comparer Comparer
     */
     function JoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer) {
 
@@ -995,7 +1001,7 @@ LinqJS.LinqCore = (function () {
 
 /**
  * Makes all arrays Linq-able.
- * @returns []
+ * @returns {[]} Returns an Linq-able array.
  */
 Array.prototype.Linqify = function () {
 
@@ -1005,7 +1011,8 @@ Array.prototype.Linqify = function () {
 };
 
 /** Stops an array being Linq-able.
-*/
+ * @returns {[]} Returns an non-Linq-able.
+ */
 Array.prototype.DeLinqify = function () {
 
     DeLinqify(this);
@@ -1094,6 +1101,7 @@ function Linqify(list) {
     Utilities.extend(list, { Last: function (lambda) { return helper.last(this, lambda); } });
     Utilities.extend(list, { All: function (lambda) { return helper.all(this, lambda); } });
     Utilities.extend(list, { ForEach: function (lambda) { helper.forEach(this, lambda); } });
+    //Utilities.extend(list, { GetEnumerator: helper.getEnumerator });
     Utilities.extend(list, { Aggregate: function (lambda) { return helper.aggregate(this, lambda); } });
     Utilities.extend(list, { AggregateWithSeed: function (lambda, seed) { return helper.aggregateWithSeed(this, lambda, seed); } });
     Utilities.extend(list, { AggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });
@@ -1225,6 +1233,13 @@ function Linqify(list) {
         }
     });
 
+    Utilities.extend(list, {
+        SetValue: function (value, indices) {
+            helper.setValue(this, value, indices);
+            return this;
+        }
+    });
+
     // Also include these 'internal' methods
     Utilities.extend(list, { ensureLambda: function (lambda) { return helper.ensureLambda(lambda); } });
     Utilities.extend(list, { ensureItems: function (list, canBeEmpty) { return helper.ensureItems(list, canBeEmpty); } });
@@ -1250,7 +1265,9 @@ function Linqify(list) {
 }
 
 
-
+/**
+ * Utilities class
+ */
 var Utilities = Utilities || {};
 
 Utilities.extend = function (dst) {
@@ -1267,6 +1284,7 @@ Utilities.extend = function (dst) {
     });
 
     setHashKey(dst, h);
+
     return dst;
 
     function forEach(obj, iterator, context) {
@@ -1345,8 +1363,6 @@ Utilities.extend = function (dst) {
 };
 
 
-
-
 /**
  * jQuery plug-in. Enables jQuery to make an array Linq-able.
  * @param {JQueryStatic} $ A jQuery-like object.
@@ -1358,8 +1374,9 @@ Utilities.extend = function (dst) {
 (function ($) {
 
     /** 
-     * Adds Linq methods to an array.
-     * @param {array} list The array to add Linq methods to.
+     *  linqify Adds Linq methods to an array.
+     *  @param {array} list The array the add Linq methods to.
+     *  @returns {[]} Returns a Linq-able array.
      */
     $.fn.linqify = function (list) {
 

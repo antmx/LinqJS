@@ -13,8 +13,9 @@ var LinqJS = LinqJS || {};
  */
 LinqJS.LinqCore = (function () {
 
-    /** LinqCore
-     * @constructor : Initialises a new LinqCore instance
+    /** 
+     * Initialises a new LinqCore instance
+     * @constructor
      */
     function LinqCore() {
 
@@ -216,6 +217,7 @@ LinqJS.LinqCore = (function () {
     */
     LinqCore.prototype.forEach = function (items, lambda) {
 
+        this.ensureItems(items, true);
         this.ensureLambda(lambda);
         var indexInArray;
         var valueOfElement;
@@ -387,7 +389,7 @@ LinqJS.LinqCore = (function () {
         var self = this;
         var results = [];
 
-        this.forEach(items, function (indexInArray, valueOfElement) {
+        self.forEach(items, function (indexInArray, valueOfElement) {
 
             if (!self.contains(results, valueOfElement, comparerLambda)) {
                 results.push(valueOfElement);
@@ -742,33 +744,38 @@ LinqJS.LinqCore = (function () {
 
         var self = this;
         this.ensureLambda(keySelectorLambda);
-        var results = [];
+        var groups = [];
 
         if (items == null || items.length === 0) {
-            return results;
+            return groups;
         }
 
-        var currentKey;
-        var item;
-        var firstOrDefaultLambda = function (o) { return o.Key == currentKey; };
+        var itemGroupKey;
+        /** @type {{ Key: any, Items: [] }} */
+        var group;
+        var firstOrDefaultLambda = function (o) { return o.Key == itemGroupKey; };
 
-        this.forEach(items, function (indexInArray, valueOfElement) {
+        self.forEach(items, function (indexInArray, valueOfElement) {
 
-            currentKey = keySelectorLambda(valueOfElement);
+            // Get item's key
+            itemGroupKey = keySelectorLambda(valueOfElement);
 
-            item = self.firstOrDefault(
-                results,
+            // Look for the item's expected group
+            group = self.firstOrDefault(
+                groups,
                 firstOrDefaultLambda,
-                { Key: currentKey, Count: 0 });
+                { Key: itemGroupKey, /*Count: 0*/ Items: [] });
 
-            if (item.Count === 0) {
-                results.push(item);
+            if (/*group.Count === 0*/ group.Items.length === 0) {
+                groups.push(group);
             }
 
-            item.Count += 1;
+            group.Items.push(valueOfElement);
+
+            //group.Count += 1;
         });
 
-        return results;
+        return groups;
     };
 
     /// take
@@ -951,12 +958,12 @@ LinqJS.LinqCore = (function () {
 
     /**
      * IEnumerable<TResult>
-     * @param {array} outer
-     * @param {array} inner
-     * @param {function} outerKeySelector
-     * @param {function} innerKeySelector
-     * @param {function} resultSelector
-     * @param {any} comparer
+     * @param {array} outer Outer array
+     * @param {array} inner Inner array
+     * @param {function} outerKeySelector Outer array key selector function
+     * @param {function} innerKeySelector Inner array key selector function
+     * @param {function} resultSelector Result selector function
+     * @param {any} comparer Comparer
     */
     function JoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer) {
 

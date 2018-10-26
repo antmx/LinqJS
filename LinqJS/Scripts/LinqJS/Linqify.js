@@ -11,7 +11,7 @@ var LinqJS = LinqJS || {};
 
 /**
  * Makes all arrays Linq-able.
- * @returns []
+ * @returns {[]} Returns an Linq-able array.
  */
 Array.prototype.Linqify = function () {
     
@@ -21,7 +21,8 @@ Array.prototype.Linqify = function () {
 };
 
 /** Stops an array being Linq-able.
-*/
+ * @returns {[]} Returns an non-Linq-able.
+ */
 Array.prototype.DeLinqify = function () {
 
     DeLinqify(this);

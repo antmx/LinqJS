@@ -16,9 +16,11 @@
  */
 (function ($) {
 
-    /** linqify Adds Linq methods to an array.
-    @param {array} list The array the add Linq methods to.
-    */
+    /** 
+     *  linqify Adds Linq methods to an array.
+     *  @param {array} list The array the add Linq methods to.
+     *  @returns {[]} Returns a Linq-able array.
+     */
     $.fn.linqify = function (list) {
 
         return Linqify(list);
