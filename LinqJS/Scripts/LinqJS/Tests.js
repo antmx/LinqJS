@@ -1,5 +1,16 @@
 ﻿
-/// <reference path="Linqify.js" />
+/// <reference path="linqify.js" />
+/// <reference path="typedefs.js" />
+
+/** @type {Linqable} */
+var la;
+
+
+
+var results = la.Where(function (item) {
+    return item.Age < 12;
+});
+
 
 var a = [1, 2, 3, 4];
 

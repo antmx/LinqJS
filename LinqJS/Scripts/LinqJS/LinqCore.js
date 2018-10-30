@@ -2,8 +2,6 @@
     this: true, for: true, white: true
 */
 
-/// <reference path="EnumerableSorter.js" />
-
 "use strict";
 
 var LinqJS = LinqJS || {};
@@ -611,7 +609,7 @@ LinqJS.LinqCore = (function () {
     /// singleOrDefault
     LinqCore.prototype.singleOrDefault = function (items, lambda, defaultValue) {
 
-        this.ensureItems(items);
+        this.ensureItems(items, true);
 
         if (defaultValue === undefined) {
             throw new Error("defaultValue must be provided");

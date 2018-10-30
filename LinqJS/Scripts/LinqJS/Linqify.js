@@ -11,7 +11,7 @@ var LinqJS = LinqJS || {};
 
 /**
  * Makes all arrays Linq-able.
- * @returns {[]} Returns an Linq-able array.
+ * @returns {LinqableArray} Returns an Linq-able array.
  */
 Array.prototype.Linqify = function () {
     
@@ -73,8 +73,7 @@ function DeLinqify(list) {
     delete list.ensureLambda;
     delete list.ensureItems;
     delete list.Delinqify;
-
-};
+}
 
 /**
  * Adds Linq methods to an array.

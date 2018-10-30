@@ -22,8 +22,9 @@ LinqJS.EnumerableSorter.prototype.ComputeKeys = function (/*TElement[]*/ element
 		this.keys[i] = this.keySelector(elements[i]);
 	}
 
-	if (this.next != null)
-		this.next.ComputeKeys(elements, count);
+    if (this.next != null) {
+        this.next.ComputeKeys(elements, count);
+    }
 };
 
 LinqJS.EnumerableSorter.prototype.CompareKeys = function (/*int*/ index1, /*int*/ index2) {

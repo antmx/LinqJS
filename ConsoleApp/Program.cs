@@ -24,7 +24,9 @@ namespace ConsoleApp
                 new Person { Name = "David", Dob = new DateTime(1949, 4, 1),Gender='M' }
             };
 
-            var byGender = items.GroupBy(p => p.Gender);
+            items.Select(i => i.Name);
+
+            IEnumerable<IGrouping<char, Person>> byGender = items.GroupBy(p => p.Gender);
 
         }
 
