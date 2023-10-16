@@ -1,14 +1,14 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore zip", function () {
+describe("linqCore zip", function () {
 
-    var helper;
+    var _linqCore;
     var numbers;
     var words;
 
     beforeEach(function () {
 
-        helper = new LinqJS.LinqCore();
+        _linqCore = new linqJs.linqCore();
 
         numbers = [1, 2, 3, 4];
 
@@ -17,7 +17,7 @@ describe("LinqCore zip", function () {
 
     it("Merges two lists by using the specified predicate function.", function () {
 
-        var result = helper.zip(
+        var result = _linqCore.zip(
             numbers,
             words,
             function (first, second) { return first + " " + second; });

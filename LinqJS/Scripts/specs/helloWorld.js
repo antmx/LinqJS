@@ -1,17 +1,17 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore helloWorld", function () {
+describe("linqCore helloWorld", function () {
 
-	var helper;
+	var _linqCore;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 	});
 
 
 	it("Displays hello world", function () {
 
-		var result = helper.helloWorld();
+		var result = _linqCore.helloWorld();
 
 		expect(result).toEqual("Hello, World!");
 	});

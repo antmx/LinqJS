@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore sum", function () {
+describe("linqCore sum", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 
 		items = [
 			{ name: "foo", age: 2, number: "two" },
@@ -19,7 +19,7 @@ describe("LinqCore sum", function () {
 
 		var items = [1, 3, 2, 4, 5, 0];
 
-		var result = helper.sum(
+		var result = _linqCore.sum(
 			items);
 
 		var expected = 15;
@@ -29,7 +29,7 @@ describe("LinqCore sum", function () {
 
 	it("Computes the sum of a list of values that are obtained by invoking a transform function on each element of a list.", function () {
 
-		var result = helper.sum(
+		var result = _linqCore.sum(
 			items,
 			function (o) { return o.age; });
 

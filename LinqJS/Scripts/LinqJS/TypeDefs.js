@@ -1,6 +1,6 @@
 ﻿
 /**
- * @typedef {object} Linqable Represents an array with LinqJS functions attached.
+ * @typedef {object} Linqable Represents an array with linqJs functions attached.
  * @property {function(WherePredicate) : Linqable} Where Finds items matching the given filter.
  * @property {function(TransformCallback) : Linqable} Select Projects each item into a new form.
  * @property {number} length Number of items in the array.
@@ -19,6 +19,14 @@
  * @param {any} item
  * @returns {object}
  */
+
+/**
+* Predicate function
+* @name predicateFunc
+* @function
+* @param {any} item Each item in the array that will be passed into this function
+* @returns {bool}
+*/
 
 /**
  * Performs a generic operation.

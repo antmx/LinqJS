@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore groupBy", function () {
+describe("linqCore groupBy", function () {
 
-    var helper;
+    var _linqCore;
     var items;
 
     beforeEach(function () {
-        helper = new LinqJS.LinqCore();
+        _linqCore = new linqJs.linqCore();
         items = [
             { Name: "Foo", Age: 6 },
             { Name: "Bar", Age: 5 },
@@ -19,7 +19,7 @@ describe("LinqCore groupBy", function () {
 
     it("Groups the elements of a list according to a specified key selector function.", function () {
 
-        var result = helper.groupBy(items, function (o) { return o.Age; });
+        var result = _linqCore.groupBy(items, function (o) { return o.Age; });
 
         var expected = [
             { Key: 6, Items: [{ Name: "Foo", Age: 6 }, { Name: "Baz", Age: 6 }] },

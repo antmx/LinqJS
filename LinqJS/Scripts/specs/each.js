@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore each", function () {
+describe("linqCore each", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
@@ -14,7 +14,7 @@ describe("LinqCore each", function () {
 
 		var arrayToPopulate = [];
 
-		var result = helper.each(
+		var result = _linqCore.each(
 			items,
             function (i) { arrayToPopulate.push(i * 10); });
 
@@ -26,7 +26,7 @@ describe("LinqCore each", function () {
 		//	expect(e.Current * 10).toEqual(arrayToPopulate[e.CurrentIdx]);
 		//}
         
-        helper.forEach(items, function (indexInArray, valueOfElement) {
+        _linqCore.forEach(items, function (indexInArray, valueOfElement) {
             
             expect(valueOfElement * 10).toEqual(arrayToPopulate[indexInArray]);
         });

@@ -1,19 +1,19 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore max", function () {
+describe("linqCore max", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 
 		items = [1, 1, 2, 5, 4, 5];
 	});
 
 	it("Returns the maximum value in a list", function () {
 
-		var result = helper.max(items);
+		var result = _linqCore.max(items);
 		var expected = 5;
 
 		expect(result).toEqual(expected);

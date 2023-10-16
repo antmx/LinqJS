@@ -1,19 +1,19 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore defaultIfEmpty", function () {
+describe("linqCore defaultIfEmpty", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 
 		items = [1, 2, 3];
 	});
 
 	it("Returns default value when list is empty", function () {
 
-		var result = helper.defaultIfEmpty([], 1);
+		var result = _linqCore.defaultIfEmpty([], 1);
 		var expected = [1];
 
 		expect(result.length).toEqual(1);
@@ -22,7 +22,7 @@ describe("LinqCore defaultIfEmpty", function () {
 
 	it("Returns list when list is not empty", function () {
 
-		var result = helper.defaultIfEmpty(items, 1);
+		var result = _linqCore.defaultIfEmpty(items, 1);
 		var expected = items;
 
 		expect(result.length).toEqual(3);

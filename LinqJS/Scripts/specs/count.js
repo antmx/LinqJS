@@ -1,19 +1,19 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore count", function () {
+describe("linqCore count", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 
 		items = [1, 2, 3];
 	});
 
 	it("Returns correct number of items in list", function () {
 
-		var result = helper.count(items);
+		var result = _linqCore.count(items);
 
 		expect(result).toEqual(3);
 	});

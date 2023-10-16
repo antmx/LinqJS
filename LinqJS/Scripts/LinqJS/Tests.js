@@ -1,8 +1,8 @@
 ﻿
 /// <reference path="linqify.js" />
-/// <reference path="typedefs.js" />
+/// <reference path="typeDefs.js" />
 
-/** @type {Linqable} */
+/** @type {linqable} */
 var la;
 
 
@@ -16,29 +16,29 @@ var a = [1, 2, 3, 4];
 
 // Where
 //debugger;
-console.log(a.Linqify().Where(function (i) { return i % 2 == 0; }));
+console.log(a.linqify().Where(function (i) { return i % 2 == 0; }));
 
 // Any
-console.log(a.Linqify().Any());
-console.log(a.Linqify().Any(function (i) { return i % 3 == 0; }));
+console.log(a.linqify().Any());
+console.log(a.linqify().Any(function (i) { return i % 3 == 0; }));
 
 // First
-console.log(a.Linqify().First());
-console.log(a.Linqify().First(function (i) { return i % 2 == 0; }));
+console.log(a.linqify().First());
+console.log(a.linqify().First(function (i) { return i % 2 == 0; }));
 
 // Last
-console.log(a.Linqify().Last());
-console.log(a.Linqify().Last(function (i) { return i % 2 == 0; }));
+console.log(a.linqify().Last());
+console.log(a.linqify().Last(function (i) { return i % 2 == 0; }));
 
 // All
-console.log(a.Linqify().All(function (i) { return i % 2 == 0; }));
-console.log(a.Linqify().All(function (i) { return i < 100; }));
+console.log(a.linqify().All(function (i) { return i % 2 == 0; }));
+console.log(a.linqify().All(function (i) { return i < 100; }));
 
 // 
 //function TestGetEnumerator() {
 //    window.Logger.LogFunction(arguments.callee);
 
-//    var items = [1, 2, 3, 4].Linqify();
+//    var items = [1, 2, 3, 4].linqify();
 //    var enumerator = items.GetEnumerator();
 
 //    while (enumerator.MoveNext()) {
@@ -55,7 +55,7 @@ function TestWhere() {
 
     window.Logger.LogFunction(arguments.callee);
 
-    var items = [1, 2, 3, 4].Linqify();
+    var items = [1, 2, 3, 4].linqify();
 
     var results = items
         .Where(function (i) { return i % 2 === 0; });
@@ -70,7 +70,7 @@ function TestAggregate() {
 
     window.Logger.LogFunction(arguments.callee);
 
-    var items = [1, 2, 3, 4].Linqify();
+    var items = [1, 2, 3, 4].linqify();
 
     var aggregateResult = items.Aggregate(function (result, current) {
 
@@ -86,7 +86,7 @@ TestAggregate();
 function TestAggregateWithSeed() {
     window.Logger.LogFunction(arguments.callee);
 
-    var items = [1, 2, 3, 4].Linqify();
+    var items = [1, 2, 3, 4].linqify();
 
     var aggregateResult = items
         .AggregateWithSeed(function (result, current) {
@@ -102,7 +102,7 @@ TestAggregateWithSeed();
 function TestAggregateWithSeedAndResultSelector() {
     window.Logger.LogFunction(arguments.callee);
 
-    var items = [1, 2, 3, 4].Linqify();
+    var items = [1, 2, 3, 4].linqify();
 
     var aggregateResult = items.AggregateWithSeedAndResultSelector(
         function (result, current) {
@@ -122,7 +122,7 @@ TestAggregateWithSeedAndResultSelector();
 function TestAverage() {
     window.Logger.LogFunction(arguments.callee);
 
-    var items = [2, 4, 6, 8].Linqify();
+    var items = [2, 4, 6, 8].linqify();
     var avg = items.Average();
 
     console.log(avg);
@@ -134,7 +134,7 @@ TestAverage();
 function TestAverageWithTransform() {
     window.Logger.LogFunction(arguments.callee);
 
-    var items = [2, 4, 6, 8].Linqify();
+    var items = [2, 4, 6, 8].linqify();
     var avg = items.AverageWithTransform(function (i) { return i * 10; });
 
     console.log(avg);
@@ -165,12 +165,12 @@ function TestSelect() {
         { Name: "Two", Number: 2 },
         { Name: "Three", Number: 3 },
         { Name: "Four", Number: 4 }
-    ].Linqify();
+    ].linqify();
 
     var result = items
-        .Where(function (o) { return o.Number % 2 === 0; })
-        .Linqify()
-        .Select(function (o) { return o.Name; });
+        .where(function (o) { return o.Number % 2 === 0; })
+        .linqify()
+        .select(function (o) { return o.Name; });
 
     window.Logger.LogArray(result);
 }

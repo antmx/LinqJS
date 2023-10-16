@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore orderBy", function () {
+describe("linqCore orderBy", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 
 		items = [
 			{ name: "foo", age: 2, number: "two" },
@@ -19,7 +19,7 @@ describe("LinqCore orderBy", function () {
 
 		var items = [1, 3, 2, 4, 5, 0];
 
-		var result = helper.orderBy(
+		var result = _linqCore.orderBy(
 			items);
 
 		var expected = [0, 1, 2, 3, 4, 5];
@@ -29,7 +29,7 @@ describe("LinqCore orderBy", function () {
 
 	it("Sorts the elements of a sequence in ascending order according to a key.", function () {
 
-		var result = helper.orderBy(
+		var result = _linqCore.orderBy(
 			items,
 			function (o) { return o.age; });
 
@@ -44,7 +44,7 @@ describe("LinqCore orderBy", function () {
 
 	it("Sorts the elements of a sequence in ascending order according to a key and string comparer function.", function () {
 
-		var result = helper.orderBy(
+		var result = _linqCore.orderBy(
 			items,
 			function (o) { return o.number; },
 			function (a, b) { return a.localeCompare(b); });
@@ -60,7 +60,7 @@ describe("LinqCore orderBy", function () {
 
 	it("Sorts the elements of a sequence in ascending order according to a key and int comparer function.", function () {
 
-		var result = helper.orderBy(
+		var result = _linqCore.orderBy(
 			items,
 			function (o) { return o.number; },
 			function (a, b) { return a.length - b.length; });

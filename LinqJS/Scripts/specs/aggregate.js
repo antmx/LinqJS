@@ -1,19 +1,19 @@
 ﻿
-describe("LinqCore aggregate", function () {
+describe("linqCore aggregate", function () {
 
-	var helper;
-	var items;
+	var _linqCore;
+	var _items;
 
     beforeEach(function () {
 
-		helper = new LinqJS.LinqCore();
-		items = [1, 2, 3, 4, 5, 6, 7, 8];
+		_linqCore = new linqJs.linqCore();
+		_items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Combines the result of applying the lambda to each item", function () {
 
-		var aggregateResult = helper.aggregate(
-			items,
+		var aggregateResult = _linqCore.aggregate(
+			_items,
 			function (result, current) {
 				if (current % 2 === 0)
 					return result + current;
@@ -30,7 +30,7 @@ describe("LinqCore aggregate", function () {
 
         var chars = ["a", "b", "c", "d"];
 
-        var aggregateResult = helper.aggregate(
+        var aggregateResult = _linqCore.aggregate(
             chars,
             function (result, current) {
                 //return result + ',' + current;

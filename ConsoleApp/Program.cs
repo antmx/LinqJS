@@ -26,11 +26,14 @@ namespace ConsoleApp
 
             items.Select(i => i.Name);
 
-            IEnumerable<IGrouping<char, Person>> byGender = items.GroupBy(p => p.Gender);
+            //IEnumerable<IGrouping<char, Person>> byGender = items.GroupBy(p => p.Gender);
+
+            //var item = items.FirstOrDefault()
 
         }
 
-        class Person {
+        class Person
+        {
 
             public string Name { get; set; }
 
@@ -38,7 +41,7 @@ namespace ConsoleApp
 
             public string Address { get; set; }
 
-            public char Gender{ get; set; }
+            public char Gender { get; set; }
         }
     }
 }

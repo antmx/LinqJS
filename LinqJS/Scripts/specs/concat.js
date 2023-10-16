@@ -1,13 +1,13 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore concat", function () {
+describe("linqCore concat", function () {
 
-	var helper;
+	var _linqCore;
 	var firstItems;
 	var secondItems;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 
 		firstItems = [1, 2, 3];
 		secondItems = [4, 5, 6];
@@ -15,7 +15,7 @@ describe("LinqCore concat", function () {
 
 	it("Combines 2 lists into 1", function () {
 
-		var result = helper.concat(
+		var result = _linqCore.concat(
 			firstItems,
 			secondItems);
 
@@ -29,7 +29,7 @@ describe("LinqCore concat", function () {
 		//	expect(e.Current).toEqual(expected[e.CurrentIdx]);
 		//}
 
-        helper.forEach(result, function (indexInArray, valueOfElement) {
+        _linqCore.forEach(result, function (indexInArray, valueOfElement) {
 
             expect(valueOfElement).toEqual(expected[indexInArray]);
         });

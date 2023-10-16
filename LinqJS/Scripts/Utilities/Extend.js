@@ -8,7 +8,7 @@ var Utilities = Utilities || {};
 
 Utilities.extend = function (dst) {
 
-    var h = dst.$$hashKey;
+    var hashKey = dst.$$hashKey;
 
     forEach(arguments, function (obj) {
 
@@ -19,7 +19,7 @@ Utilities.extend = function (dst) {
         }
     });
 
-    setHashKey(dst, h);
+    setHashKey(dst, hashKey);
 
     return dst;
 
@@ -34,12 +34,16 @@ Utilities.extend = function (dst) {
                         iterator.call(context, obj[key], key);
                     }
                 }
-            } else if (obj.forEach && obj.forEach !== forEach) {
+            }
+            else if (obj.forEach && obj.forEach !== forEach) {
                 obj.forEach(iterator, context);
-            } else if (isArrayLike(obj)) {
-                for (key = 0; key < obj.length; key++)
+            }
+            else if (isArrayLike(obj)) {
+                for (key = 0; key < obj.length; key++) {
                     iterator.call(context, obj[key], key);
-            } else {
+                }
+            }
+            else {
                 for (key in obj) {
                     if (obj.hasOwnProperty(key)) {
                         iterator.call(context, obj[key], key);
@@ -87,10 +91,10 @@ Utilities.extend = function (dst) {
         return Object.prototype.toString.apply(value) === '[object Array]';
     }
 
-    function setHashKey(obj, h) {
+    function setHashKey(obj, hashKey) {
 
-        if (h) {
-            obj.$$hashKey = h;
+        if (hashKey) {
+            obj.$$hashKey = hashKey;
         }
         else {
             delete obj.$$hashKey;

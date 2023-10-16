@@ -1,17 +1,17 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore last", function () {
+describe("linqCore last", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Returns last item", function () {
-		var result = helper.last(
+		var result = _linqCore.last(
 			items);
 
 		var expected = 8;
@@ -20,7 +20,7 @@ describe("LinqCore last", function () {
 	});
 
 	it("Returns last matching item", function () {
-        var result = helper.last(
+        var result = _linqCore.last(
             items,
             function (i) { return i < 7; });
 

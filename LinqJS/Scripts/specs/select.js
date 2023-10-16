@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore select", function () {
+describe("linqCore select", function () {
 
-    var helper;
+    var _linqCore;
     var items;
 
     beforeEach(function () {
-        helper = new LinqJS.LinqCore();
+        _linqCore = new linqJs.linqCore();
 
         items = [
             { Name: "One", Number: 1 },
@@ -18,7 +18,7 @@ describe("LinqCore select", function () {
 
     it("Projects each item into a new form", function () {
 
-        var result = helper.select(
+        var result = _linqCore.select(
             items,
             function (o) { return o.Name; });
 
@@ -26,7 +26,7 @@ describe("LinqCore select", function () {
 
         expect(result.length).toEqual(4);
 
-        helper.forEach(result, function (indexInArray, valueOfElement) {
+        _linqCore.forEach(result, function (indexInArray, valueOfElement) {
 
             expect(valueOfElement).toEqual(expected[indexInArray]);
         });

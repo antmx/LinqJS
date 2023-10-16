@@ -1,18 +1,18 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore firstOrDefault", function () {
+describe("linqCore firstOrDefault", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Returns first item", function () {
-		var result = helper.firstOrDefault(
-			items);
+
+		var result = _linqCore.firstOrDefault(items);
 
 		var expected = 1;
 
@@ -20,7 +20,7 @@ describe("LinqCore firstOrDefault", function () {
 	});
 
     it("Returns first matching item", function () {
-        var result = helper.firstOrDefault(
+        var result = _linqCore.firstOrDefault(
             items,
             function (i) { return i > 3; });
 
@@ -30,7 +30,7 @@ describe("LinqCore firstOrDefault", function () {
     });
 
 	it("Returns default item", function () {
-		var result = helper.firstOrDefault(
+		var result = _linqCore.firstOrDefault(
 			items,
             function (i) { return i > 10; },
 			-1);

@@ -1,25 +1,25 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore getEnumerator", function () {
+describe("linqCore getEnumerator", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [1, 2, 3];
 	});
 	
 	it("Returns an Enumerator", function () {
 
-		var e = helper.getEnumerator(items);
+		var e = _linqCore.getEnumerator(items);
 		
         expect(e.Current).toBeNull();
 	});
 
 	it("Enables enumerating", function () {
 
-		var e = helper.getEnumerator(items);
+		var e = _linqCore.getEnumerator(items);
 
 		while (e.MoveNext()) {
 			expect(e.Current !== null).toBeTruthy();
@@ -28,7 +28,7 @@ describe("LinqCore getEnumerator", function () {
 
 	it("Enables resetting", function () {
 
-		var e = helper.getEnumerator(items);
+		var e = _linqCore.getEnumerator(items);
 
 		expect(e.MoveNext()).toBeTruthy();
 

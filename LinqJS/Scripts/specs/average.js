@@ -1,18 +1,18 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore average", function () {
+describe("linqCore average", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [2, 4, 6, 8];
 	});
 
 	it("Calculates the average of the items", function () {
 
-		var result = helper.average(items);
+		var result = _linqCore.average(items);
 
 		var expected = 5;
 

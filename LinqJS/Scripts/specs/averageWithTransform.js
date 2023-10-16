@@ -1,18 +1,18 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore averageWithTransform", function () {
+describe("linqCore averageWithTransform", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [2, 4, 6, 8];
 	});
 
 	it("Calculates the average of the items after transforming each", function () {
 
-		var result = helper.averageWithTransform(
+		var result = _linqCore.averageWithTransform(
 			items,
 			function (i) { return i * 10; });
 

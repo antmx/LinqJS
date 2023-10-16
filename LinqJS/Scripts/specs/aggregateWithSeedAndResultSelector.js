@@ -1,21 +1,21 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore aggregateWithSeedAndResultSelector", function () {
+describe("linqCore aggregateWithSeedAndResultSelector", function () {
 
-	var helper;
-	var items;
+	var _linqCore;
+	var _items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
-		items = [1, 2, 3, 4, 5, 6, 7, 8];
+		_linqCore = new linqJs.linqCore();
+		_items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Combines the result of applying the lambda to each item then applying result selector", function () {
 
 		var seed = 10;
 
-		var aggregateResult = helper.aggregateWithSeedAndResultSelector(
-			items,
+		var aggregateResult = _linqCore.aggregateWithSeedAndResultSelector(
+			_items,
 			function (result, current) {
 				if (current % 2 == 0)
 					return result + current;

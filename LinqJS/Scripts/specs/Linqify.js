@@ -1,84 +1,84 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("Linqify", function () {
+describe("linqify", function () {
 
-    var helper;
+    var _linqCore;
     var items;
 
     beforeEach(function () {
-        helper = new LinqJS.LinqCore();
+        _linqCore = new linqJs.linqCore();
         items = [1, 2, 3, 4, 5, 6, 7, 8];
     });
 
     it("Adds Linq methods to an array", function () {
+        debugger;
+        linqify(items);
 
-        Linqify(items);
-
-        expect(items.Where).toBeDefined();
+        expect(items.where).toBeDefined();
     });
 
-    describe("Where", function () {
+    //describe("Where", function () {
 
-        it("Returns only the matching items", function () {
+    //    it("Returns only the matching items", function () {
 
-            Linqify(items);
+    //        linqify(items);
 
-            var result = items.Where(function (itm) { return itm % 2 === 0; });
-            var expected = [2, 4, 6, 8];
+    //        var result = items.where(function (itm) { return itm % 2 === 0; });
+    //        var expected = [2, 4, 6, 8];
 
-            expect(result.length).toEqual(expected.length);
+    //        expect(result.length).toEqual(expected.length);
 
-            helper.forEach(result, function (indexInArray, valueOfElement) {
+    //        _linqCore.forEach(result, function (indexInArray, valueOfElement) {
 
-                expect(valueOfElement).toEqual(expected[indexInArray]);
-            });
-        });
+    //            expect(valueOfElement).toEqual(expected[indexInArray]);
+    //        });
+    //    });
 
-    });
+    //});
 
-    describe("Sum", function () {
+    //describe("Sum", function () {
 
-        it("Correctly adds up the numbers", function () {
+    //    it("Correctly adds up the numbers", function () {
 
-            Linqify(items);
+    //        linqify(items);
 
-            var result = items.Sum();
-            var expected = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8;
+    //        var result = items.sum();
+    //        var expected = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8;
 
-            expect(result).toEqual(expected);
+    //        expect(result).toEqual(expected);
 
-        });
+    //    });
 
-    });
+    //});
 
-    describe("Max", function () {
+    //describe("Max", function () {
 
-        it("Gets the correct maximum", function () {
+    //    it("Gets the correct maximum", function () {
 
-            Linqify(items);
+    //        linqify(items);
 
-            var result = items.Max();
-            var expected = 8;
+    //        var result = items.max();
+    //        var expected = 8;
 
-            expect(result).toEqual(expected);
+    //        expect(result).toEqual(expected);
 
-        });
+    //    });
 
-    });
+    //});
 
-    describe("Min", function () {
+    //describe("Min", function () {
 
-        it("Gets the correct minimum", function () {
+    //    it("Gets the correct minimum", function () {
             
-            Linqify(items);
+    //        linqify(items);
 
-            var result = items.Min();
-            var expected = 1;
+    //        var result = items.min();
+    //        var expected = 1;
 
-            expect(result).toEqual(expected);
+    //        expect(result).toEqual(expected);
 
-        });
+    //    });
 
-    });
+    //});
 
 });

@@ -1,18 +1,18 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore all", function () {
+describe("linqCore all", function () {
 
-	var helper;
-	var items;
+	var _linqCore;
+	var _items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
-		items = [1, 2, 3, 4, 5, 6, 7, 8];
+		_linqCore = new linqJs.linqCore();
+		_items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Returns true when all match", function () {
-		var result = helper.all(
-			items,
+		var result = _linqCore.all(
+			_items,
             function (i) { return i <= 8; });
 
 		var expected = true;
@@ -21,8 +21,8 @@ describe("LinqCore all", function () {
 	});
 
 	it("Returns false when not all match", function () {
-		var result = helper.all(
-			items,
+		var result = _linqCore.all(
+			_items,
             function (i) { return i <= 7; });
 
 		var expected = false;

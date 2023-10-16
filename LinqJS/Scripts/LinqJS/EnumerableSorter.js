@@ -3,9 +3,9 @@
 
 "use strict";
 
-LinqJS = LinqJS || {};
+linqJs = linqJs || {};
 
-LinqJS.EnumerableSorter = function (
+linqJs.EnumerableSorter = function (
 	/*Func<TElement, TKey>*/ keySelector, /*IComparer<TKey>*/ comparer, /*bool*/ descending, /*EnumerableSorter<TElement>*/ next) {
 	this.keySelector = keySelector;
 	this.comparer = comparer;
@@ -14,7 +14,7 @@ LinqJS.EnumerableSorter = function (
 	/*TKey[]*/ this.keys = [];
 };
 
-LinqJS.EnumerableSorter.prototype.ComputeKeys = function (/*TElement[]*/ elements, /*int*/ count) {
+linqJs.EnumerableSorter.prototype.ComputeKeys = function (/*TElement[]*/ elements, /*int*/ count) {
 
 	this.keys = [count];
 
@@ -27,7 +27,7 @@ LinqJS.EnumerableSorter.prototype.ComputeKeys = function (/*TElement[]*/ element
     }
 };
 
-LinqJS.EnumerableSorter.prototype.CompareKeys = function (/*int*/ index1, /*int*/ index2) {
+linqJs.EnumerableSorter.prototype.CompareKeys = function (/*int*/ index1, /*int*/ index2) {
 
 	//var c = this.comparer.Compare(this.keys[index1], this.keys[index2]);
 	var c = this.comparer(this.keys[index1], this.keys[index2]);
@@ -42,7 +42,7 @@ LinqJS.EnumerableSorter.prototype.CompareKeys = function (/*int*/ index1, /*int*
 	return this.descending ? -c : c;
 };
 
-LinqJS.EnumerableSorter.prototype.Sort = function (/*TElement[]*/ elements, /*int*/ count) {
+linqJs.EnumerableSorter.prototype.Sort = function (/*TElement[]*/ elements, /*int*/ count) {
 
 	this.ComputeKeys(elements, count);
 
@@ -56,7 +56,7 @@ LinqJS.EnumerableSorter.prototype.Sort = function (/*TElement[]*/ elements, /*in
 	return map;
 }
 
-LinqJS.EnumerableSorter.prototype.QuickSort = function (/*int[]*/ map, /*int*/ left, /*int*/ right) {
+linqJs.EnumerableSorter.prototype.QuickSort = function (/*int[]*/ map, /*int*/ left, /*int*/ right) {
 
     do {
         var i = left;

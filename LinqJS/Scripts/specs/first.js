@@ -1,17 +1,17 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore first", function () {
+describe("linqCore first", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Returns first item", function () {
-		var result = helper.first(
+		var result = _linqCore.first(
 			items);
 
 		var expected = 1;
@@ -20,7 +20,7 @@ describe("LinqCore first", function () {
 	});
 
 	it("Returns first matching item", function () {
-		var result = helper.first(
+		var result = _linqCore.first(
 			items,
 			function (i) { return i > 3 });
 

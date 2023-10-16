@@ -1,19 +1,19 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("LinqCore selectMany", function () {
+describe("linqCore selectMany", function () {
 
-	var helper;
+	var _linqCore;
 	var items;
 
 	beforeEach(function () {
-		helper = new LinqJS.LinqCore();
+		_linqCore = new linqJs.linqCore();
 		items = [{ Name: "Higa, Sidney", Pets: ["Scruffy", "Sam"] },
 					{ Name: "Ashkenazi, Ronen", Pets: ["Walker", "Sugar"] },
 					{ Name: "Price, Vernette", Pets: ["Scratches", "Diesel"] }];
 	});
 
 	it("Projects each item to a new list and combines the resulting list into one list.", function () {
-		var result = helper.selectMany(
+		var result = _linqCore.selectMany(
 			items,
 			function (o) { return o.Pets; });
 
@@ -23,7 +23,7 @@ describe("LinqCore selectMany", function () {
 	});
 
 	it("Projects item to a new list and combines the resulting list into one list, applying a transformation function to each item in the new list.", function () {
-		var result = helper.selectMany(
+		var result = _linqCore.selectMany(
 			items,
 			function (o) { return o.Pets; },
 			function (p) { return p.toUpperCase(); });
@@ -34,7 +34,7 @@ describe("LinqCore selectMany", function () {
 	});
 
 	it("Projects each to a new list and combines the resulting list into one sequence, applying a function that accepts an index to each item in the new list.", function () {
-		var result = helper.selectMany(
+		var result = _linqCore.selectMany(
 			items,
 			function (o) { return o.Pets; },
 			function (p, index) { return index + " " + p; });

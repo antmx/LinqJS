@@ -16,8 +16,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LinqJS</RootNamespace>
     <AssemblyName>LinqJS</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -27,6 +27,7 @@
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,10 +49,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="jasmine.html" />
     <Content Include="packages.config" />
     <Content Include="lib\jasmine-2.3.4\boot.js" />
@@ -60,44 +71,42 @@
     <Content Include="lib\jasmine-2.3.4\jasmine.css" />
     <Content Include="lib\jasmine-2.3.4\jasmine.js" />
     <Content Include="lib\jasmine-2.3.4\jasmine_favicon.png" />
-    <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.map" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.bundle.js" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.bundle.min.js" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.js" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.min.js" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.min.js.map" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.js.map" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.bundle.min.js.map" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.bundle.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.bundle.js" />
+    <Content Include="lib\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="lib\bootstrap\bootstrap.esm.js" />
+    <Content Include="lib\bootstrap\bootstrap.esm.min.js" />
+    <Content Include="lib\bootstrap\bootstrap.js" />
+    <Content Include="lib\bootstrap\bootstrap.min.js" />
+    <Content Include="libman.json" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <None Include="lib\jquery-1.9.1\jquery-3.3.1.intellisense.js" />
-    <Content Include="lib\jquery-1.9.1\jquery-3.3.1.js" />
-    <Content Include="lib\jquery-1.9.1\jquery-3.3.1.min.js" />
-    <Content Include="lib\jquery-1.9.1\jquery-3.3.1.slim.js" />
-    <Content Include="lib\jquery-1.9.1\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\LinqJS\EnumerableSorter.js" />
-    <Content Include="Scripts\LinqJS\LinqAll.js" />
-    <Content Include="Scripts\LinqJS\TypeDefs.js" />
-    <Content Include="lib\popper-1.14.3\popper-utils.js" />
-    <Content Include="lib\popper-1.14.3\popper-utils.min.js" />
-    <Content Include="lib\popper-1.14.3\popper.js" />
-    <Content Include="lib\popper-1.14.3\popper.min.js" />
+    <None Include="lib\jquery\jquery-3.7.1.intellisense.js" />
+    <Content Include="lib\jquery\jquery-3.7.1.js" />
+    <Content Include="lib\jquery\jquery-3.7.1.min.js" />
+    <Content Include="lib\jquery\jquery-3.7.1.slim.js" />
+    <Content Include="lib\jquery\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\linqJs\EnumerableSorter.js" />
+    <Content Include="Scripts\linqJs\linq-all.js" />
+    <Content Include="Scripts\linqJs\linq-core.js" />
+    <Content Include="Scripts\linqJs\linqify-jquery.js" />
+    <Content Include="Scripts\linqJs\typeDefs.js" />
     <Content Include="Scripts\specs\each.js" />
     <Content Include="Scripts\specs\firstOrDefault.js" />
-    <Content Include="Scripts\specs\Linqify.js" />
+    <Content Include="Scripts\specs\linqify.js" />
     <Content Include="Scripts\specs\skip.js" />
     <Content Include="Scripts\specs\setValue.js" />
     <Content Include="Scripts\specs\skipWhile.js" />
@@ -127,21 +136,14 @@
     <Content Include="Scripts\specs\averageWithTransform.js" />
     <Content Include="Scripts\specs\average.js" />
     <Content Include="Scripts\specs\README.md" />
-    <Content Include="lib\jquery-1.9.1\jquery-3.3.1.slim.min.map" />
-    <Content Include="lib\jquery-1.9.1\jquery-3.3.1.min.map" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="lib\popper-1.14.3\README.md" />
-    <Content Include="lib\popper-1.14.3\popper.min.js.map" />
-    <Content Include="lib\popper-1.14.3\popper.js.map" />
-    <Content Include="lib\popper-1.14.3\popper-utils.min.js.map" />
-    <Content Include="lib\popper-1.14.3\popper-utils.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.min.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.esm.min.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.esm.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.bundle.min.js.map" />
+    <Content Include="lib\bootstrap\bootstrap.bundle.js.map" />
+    <Content Include="lib\jquery\jquery-3.7.1.slim.min.map" />
+    <Content Include="lib\jquery\jquery-3.7.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -150,13 +152,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.min.css" />
-    <Content Include="lib\bootstrap-3.3.5\favicon.ico" />
+    <Content Include="lib\bootstrap\favicon.ico" />
     <Content Include="Index.html" />
-    <Content Include="lib\bootstrap-3.3.5\bootstrap.css.map" />
-    <None Include="lib\jquery-1.9.1\jquery-1.9.1.intellisense.js" />
-    <Content Include="lib\jquery-1.9.1\jquery-1.9.1.js" />
-    <Content Include="lib\jquery-1.9.1\jquery-1.9.1.min.js" />
     <Content Include="Scripts\specs\aggregateWithSeedAndResultSelector.js" />
     <Content Include="Scripts\specs\aggregateWithSeed.js" />
     <Content Include="Scripts\specs\aggregate.js" />
@@ -168,10 +165,8 @@
     <Content Include="Scripts\Utilities\Enumerator.js" />
     <Content Include="Scripts\specs\getEnumerator.js" />
     <Content Include="Scripts\specs\helloWorld.js" />
-    <Content Include="Scripts\LinqJS\LinqCore.js" />
-    <Content Include="Scripts\LinqJS\LinqJquery.js" />
-    <Content Include="Scripts\LinqJS\Linqify.js" />
-    <Content Include="Scripts\LinqJS\Tests.js" />
+    <Content Include="Scripts\linqJs\linqify.js" />
+    <Content Include="Scripts\linqJs\Tests.js" />
     <Content Include="Scripts\specs\where.js" />
     <Content Include="Scripts\Utilities\Extend.js" />
     <Content Include="Scripts\Utilities\Logger.js" />
@@ -187,10 +182,15 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="lib\popper-1.14.3\index.d.ts" />
+    <InFiles Include="Scripts\Utilities\Extend.js;Scripts\linqJs\linq-core.js;Scripts\linqJs\linqify.js;Scripts\linqJs\linqify-jquery.js;" />
   </ItemGroup>
   <ItemGroup>
-    <InFiles Include="Scripts\Utilities\Extend.js;Scripts\LinqJS\LinqCore.js;Scripts\LinqJS\Linqify.js;Scripts\LinqJS\LinqJquery.js;" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -206,9 +206,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>61718</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/LinqJS</IISUrl>
+          <IISUrl>http://localhost:50973/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -233,6 +233,6 @@
     <ReadLinesFromFile File="%(InFiles.Identity)">
       <Output TaskParameter="Lines" ItemName="lines" />
     </ReadLinesFromFile>
-    <WriteLinesToFile File="Scripts\LinqJS\LinqAll.js" Lines="@(Lines)" Overwrite="true" />
+    <WriteLinesToFile File="Scripts\linqJS\linq-all.js" Lines="@(Lines)" Overwrite="true" />
   </Target>
 </Project>
