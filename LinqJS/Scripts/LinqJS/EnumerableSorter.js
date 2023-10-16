@@ -1,6 +1,4 @@
-﻿/// <reference path="../Utilities/Enumerator.js" />
-/// <reference path="../Utilities/Namespace.js" />
-
+﻿
 "use strict";
 
 linqJs = linqJs || {};

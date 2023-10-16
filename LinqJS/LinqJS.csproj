@@ -183,7 +183,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <InFiles Include="Scripts\Utilities\Extend.js;Scripts\linqJs\linq-core.js;Scripts\linqJs\linqify.js;Scripts\linqJs\linqify-jquery.js;" />
+    <InFiles Include="Scripts\linqJs\linq-core.js;Scripts\linqJs\linqify.js;Scripts\linqJs\linqify-jquery.js;" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />

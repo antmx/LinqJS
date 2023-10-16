@@ -1,79 +1,3 @@
-// Copied from angular.js - use this to add extra properties/functions to an INSTANCE of a type
-/**
-* Utilities class
-*/
-var Utilities = Utilities || {};
-Utilities.extend = function (dst) {
-var hashKey = dst.$$hashKey;
-forEach(arguments, function (obj) {
-if (obj !== dst) {
-forEach(obj, function (value, key) {
-dst[key] = value;
-});
-}
-});
-setHashKey(dst, hashKey);
-return dst;
-function forEach(obj, iterator, context) {
-var key;
-if (obj) {
-if (isFunction(obj)) {
-for (key in obj) {
-if (key != 'prototype' && key != 'length' && key != 'name' && obj.hasOwnProperty(key)) {
-iterator.call(context, obj[key], key);
-}
-}
-}
-else if (obj.forEach && obj.forEach !== forEach) {
-obj.forEach(iterator, context);
-}
-else if (isArrayLike(obj)) {
-for (key = 0; key < obj.length; key++) {
-iterator.call(context, obj[key], key);
-}
-}
-else {
-for (key in obj) {
-if (obj.hasOwnProperty(key)) {
-iterator.call(context, obj[key], key);
-}
-}
-}
-}
-return obj;
-}
-function isFunction(value) {
-return typeof value === 'function';
-}
-function isArrayLike(obj) {
-if (obj == null || isWindow(obj)) {
-return false;
-}
-var length = obj.length;
-if (obj.nodeType === 1 && length) {
-return true;
-}
-return isString(obj) || isArray(obj) || length === 0 ||
-typeof length === 'number' && length > 0 && (length - 1) in obj;
-}
-function isWindow(obj) {
-return obj && obj.document && obj.location && obj.alert && obj.setInterval;
-}
-function isString(value) {
-return typeof value === 'string';
-}
-function isArray(value) {
-return Object.prototype.toString.apply(value) === '[object Array]';
-}
-function setHashKey(obj, hashKey) {
-if (hashKey) {
-obj.$$hashKey = hashKey;
-}
-else {
-delete obj.$$hashKey;
-}
-}
-};
 /*jslint
 this: true, for: true, white: true
 */
@@ -92,7 +16,10 @@ function linqCore() {
 linqCore.prototype.helloWorld = function () {
 return "Hello, World!";
 };
-/// Checks the specified object is a function
+/**
+* Checks the specified object is a (lanbda) function
+* @param {any} lambda the object to test for being an function
+*/
 linqCore.prototype.ensureLambda = function (lambda) {
 if (typeof lambda !== "function") {
 throw new Error("lambda must be a function");
@@ -125,7 +52,11 @@ throw new Error("Array must contain at least one item");
 }
 return true;
 };
-/// Determines if the specified object is an array
+/**
+* Determines if the specified object is an array
+* @param {any} obj the object to test
+* @returns {boolean}
+*/
 linqCore.prototype.isArray = function (obj) {
 if (obj == null) {
 throw new Error("obj must not be null");
@@ -233,7 +164,7 @@ return false;
 return true;
 };
 /** forEach Performs an operation on each item in the array.
-@param {array} items The array to iterate over.
+@param {ArrayLike} items The array to iterate over.
 @param {function} lambda The function to run against each item.
 */
 linqCore.prototype.forEach = function (items, lambda) {
@@ -460,7 +391,7 @@ return this.orderBy(items, keySelectorLambda, comparerLambda).reverse();
 };
 /// sum
 /** sum Calculates the sum total of the items
-* @param {array} items The array to sum up.
+* @param {ArrayLike} items The array to sum up.
 * @param {function(any, number):number} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
 * @returns {number} Returns a number representing the sum total.
 */
@@ -756,8 +687,8 @@ linqCore.prototype.join = function (items) {
 };
 /**
 * IEnumerable<TResult>
-* @param {array} outer Outer array
-* @param {array} inner Inner array
+* @param {ArrayLike} outer Outer array
+* @param {ArrayLike} inner Inner array
 * @param {function} outerKeySelector Outer array key selector function
 * @param {function} innerKeySelector Inner array key selector function
 * @param {function} resultSelector Result selector function
@@ -815,46 +746,122 @@ return this;
 };
 function deLinqify(list) {
 delete list._linqified;
-delete list.Where;
-delete list.Any;
-delete list.First;
-delete list.FirstOrDefault;
-delete list.Last;
-delete list.All;
-delete list.ForEach;
-delete list.Aggregate;
-delete list.AggregateWithSeed;
-delete list.AggregateWithSeedAndResultSelector;
-delete list.Average;
-delete list.AverageWithTransform;
-delete list.Select;
-delete list.Concat;
-delete list.Contains;
-delete list.Count;
-delete list.DefaultIfEmpty;
-delete list.Distinct;
-delete list.ElementAt;
-delete list.Except;
-delete list.Intersect;
-delete list.Max;
-delete list.Min;
-delete list.OrderBy;
-delete list.OrderByDescending;
-delete list.Sum;
-delete list.Single;
-delete list.SingleOrDefault;
-delete list.Reverse;
-delete list.SelectMany;
-delete list.Zip;
-delete list.Union;
-delete list.GroupBy;
-delete list.Take;
-delete list.TakeWhile;
-delete list.Skip;
-delete list.SkipWhile;
+delete list.where;
+delete list.any;
+delete list.first;
+delete list.firstOrDefault;
+delete list.last;
+delete list.all;
+delete list.forEach;
+delete list.aggregate;
+delete list.aggregateWithSeed;
+delete list.aggregateWithSeedAndResultSelector;
+delete list.average;
+delete list.averageWithTransform;
+delete list.select;
+delete list.concat;
+delete list.contains;
+delete list.count;
+delete list.defaultIfEmpty;
+delete list.distinct;
+delete list.elementAt;
+delete list.except;
+delete list.intersect;
+delete list.max;
+delete list.min;
+delete list.orderBy;
+delete list.orderByDescending;
+delete list.sum;
+delete list.single;
+delete list.singleOrDefault;
+delete list.reverse;
+delete list.selectMany;
+delete list.zip;
+delete list.union;
+delete list.groupBy;
+delete list.take;
+delete list.takeWhile;
+delete list.skip;
+delete list.skipWhile;
 delete list.ensureLambda;
 delete list.ensureItems;
-delete list.Delinqify;
+delete list.delinqify;
+}
+/**
+* Adds extra properties/functions to an INSTANCE of a type.
+* @param {any} dst
+* @returns {any}
+*/
+function extend(dst) {
+var hashKey = dst.$$hashKey;
+_forEach(arguments, function (obj) {
+if (obj !== dst) {
+_forEach(obj, function (value, key) {
+dst[key] = value;
+});
+}
+});
+setHashKey(dst, hashKey);
+return dst;
+function _forEach(obj, iterator, context) {
+var key;
+if (obj) {
+if (isFunction(obj)) {
+for (key in obj) {
+if (key != 'prototype' && key != 'length' && key != 'name' && obj.hasOwnProperty(key)) {
+iterator.call(context, obj[key], key);
+}
+}
+}
+else if (obj._forEach && obj._forEach !== _forEach) {
+obj._forEach(iterator, context);
+}
+else if (isArrayLike(obj)) {
+for (key = 0; key < obj.length; key++) {
+iterator.call(context, obj[key], key);
+}
+}
+else {
+for (key in obj) {
+if (obj.hasOwnProperty(key)) {
+iterator.call(context, obj[key], key);
+}
+}
+}
+}
+return obj;
+}
+function isFunction(value) {
+return typeof value === 'function';
+}
+function isArrayLike(obj) {
+if (obj == null || isWindow(obj)) {
+return false;
+}
+var length = obj.length;
+if (obj.nodeType === 1 && length) {
+return true;
+}
+return isString(obj) || isArray(obj) || length === 0 ||
+typeof length === 'number' && length > 0 && (length - 1) in obj;
+}
+function isWindow(obj) {
+return obj && obj.document && obj.location && obj.alert && obj.setInterval;
+}
+function isString(value) {
+return typeof value === 'string';
+}
+function isArray(value) {
+return Object.prototype.toString.apply(value) === '[object Array]';
+}
+function setHashKey(obj, hashKey) {
+if (hashKey) {
+obj.$$hashKey = hashKey;
+}
+else {
+delete obj.$$hashKey;
+}
+}
 }
 /**
 * Adds Linq methods to an array.
@@ -870,155 +877,155 @@ if (list._linqified) {
 return list;
 }
 list._linqified = true;
-var helper = new linqJs.linqCore();
+var _linqCore = new linqJs.linqCore();
 // Add extra methods to the INSTANCE
-Utilities.extend(list, {
+extend(list, {
 where: function (lambda) {
-var filtered = helper.where(this, lambda);
+var filtered = _linqCore.where(this, lambda);
 return linqify(filtered);
 }
 });
-Utilities.extend(list, { any: function (lambda) { return helper.any(this, lambda); } });
-Utilities.extend(list, { first: function (lambda) { return helper.first(this, lambda); } });
-Utilities.extend(list, { firstOrDefault: function (lambda, defaultValue) { return helper.firstOrDefault(this, lambda, defaultValue); } });
-Utilities.extend(list, { last: function (lambda) { return helper.last(this, lambda); } });
-Utilities.extend(list, { all: function (lambda) { return helper.all(this, lambda); } });
-Utilities.extend(list, { forEach: function (lambda) { helper.forEach(this, lambda); } });
-//Utilities.extend(list, { GetEnumerator: helper.getEnumerator });
-Utilities.extend(list, { aggregate: function (lambda) { return helper.aggregate(this, lambda); } });
-Utilities.extend(list, { aggregateWithSeed: function (lambda, seed) { return helper.aggregateWithSeed(this, lambda, seed); } });
-Utilities.extend(list, { aggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return helper.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });
-Utilities.extend(list, { average: function () { return helper.average(this); } });
-Utilities.extend(list, { averageWithTransform: function (transformerLambda) { return helper.averageWithTransform(this, transformerLambda); } });
-Utilities.extend(list, {
+extend(list, { any: function (lambda) { return _linqCore.any(this, lambda); } });
+extend(list, { first: function (lambda) { return _linqCore.first(this, lambda); } });
+extend(list, { firstOrDefault: function (lambda, defaultValue) { return _linqCore.firstOrDefault(this, lambda, defaultValue); } });
+extend(list, { last: function (lambda) { return _linqCore.last(this, lambda); } });
+extend(list, { all: function (lambda) { return _linqCore.all(this, lambda); } });
+extend(list, { forEach: function (lambda) { _linqCore.forEach(this, lambda); } });
+//extend(list, { getEnumerator: _linqCore.getEnumerator });
+extend(list, { aggregate: function (lambda) { return _linqCore.aggregate(this, lambda); } });
+extend(list, { aggregateWithSeed: function (lambda, seed) { return _linqCore.aggregateWithSeed(this, lambda, seed); } });
+extend(list, { aggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return _linqCore.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });
+extend(list, { average: function () { return _linqCore.average(this); } });
+extend(list, { averageWithTransform: function (transformerLambda) { return _linqCore.averageWithTransform(this, transformerLambda); } });
+extend(list, {
 select: function (lambda) {
-var selected = helper.select(this, lambda);
+var selected = _linqCore.select(this, lambda);
 return linqify(selected);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 concat: function (secondItems) {
-var concated = helper.concat(this, secondItems);
+var concated = _linqCore.concat(this, secondItems);
 return linqify(concated);
 }
 });
-Utilities.extend(list, { contains: function (value, comparerLambda) { return helper.contains(this, value, comparerLambda); } });
-Utilities.extend(list, { count: function () { return helper.count(this); } });
-Utilities.extend(list, { defaultIfEmpty: function (defaultValue) { return helper.defaultIfEmpty(this, defaultValue); } });
-Utilities.extend(list, {
+extend(list, { contains: function (value, comparerLambda) { return _linqCore.contains(this, value, comparerLambda); } });
+extend(list, { count: function () { return _linqCore.count(this); } });
+extend(list, { defaultIfEmpty: function (defaultValue) { return _linqCore.defaultIfEmpty(this, defaultValue); } });
+extend(list, {
 distinct: function (comparerLambda) {
-var distincts = helper.distinct(this, comparerLambda);
+var distincts = _linqCore.distinct(this, comparerLambda);
 return linqify(distincts);
 }
 });
-Utilities.extend(list, { elementAt: function (index) { return helper.elementAt(this, index); } });
-Utilities.extend(list, {
+extend(list, { elementAt: function (index) { return _linqCore.elementAt(this, index); } });
+extend(list, {
 except: function (secondItems, comparerLambda) {
-var excepted = helper.except(this, secondItems, comparerLambda);
+var excepted = _linqCore.except(this, secondItems, comparerLambda);
 return linqify(excepted);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 intersect: function (secondItems, comparerLambda) {
-var intersected = helper.intersect(this, secondItems, comparerLambda);
+var intersected = _linqCore.intersect(this, secondItems, comparerLambda);
 return linqify(intersected);
 }
 });
-Utilities.extend(list, { max: function (comparerLambda) { return helper.max(this, comparerLambda); } });
-Utilities.extend(list, { min: function (comparerLambda) { return helper.min(this, comparerLambda); } });
-Utilities.extend(list, {
+extend(list, { max: function (comparerLambda) { return _linqCore.max(this, comparerLambda); } });
+extend(list, { min: function (comparerLambda) { return _linqCore.min(this, comparerLambda); } });
+extend(list, {
 orderBy: function (keySelectorLambda, comparerLambda) {
-var ordered = helper.orderBy(this, keySelectorLambda, comparerLambda);
+var ordered = _linqCore.orderBy(this, keySelectorLambda, comparerLambda);
 return linqify(ordered);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 orderByDescending: function (keySelectorLambda, comparerLambda) {
-var ordered = helper.orderByDescending(this, keySelectorLambda, comparerLambda);
+var ordered = _linqCore.orderByDescending(this, keySelectorLambda, comparerLambda);
 return linqify(ordered);
 }
 });
-Utilities.extend(list, { sum: function (valueSelectorLambda) { return helper.sum(this, valueSelectorLambda); } });
-Utilities.extend(list, { single: function (lambda) { return helper.single(this, lambda); } });
-Utilities.extend(list, { singleOrDefault: function (lambda, defaultValue) { return helper.singleOrDefault(this, lambda, defaultValue); } });
-Utilities.extend(list, {
+extend(list, { sum: function (valueSelectorLambda) { return _linqCore.sum(this, valueSelectorLambda); } });
+extend(list, { single: function (lambda) { return _linqCore.single(this, lambda); } });
+extend(list, { singleOrDefault: function (lambda, defaultValue) { return _linqCore.singleOrDefault(this, lambda, defaultValue); } });
+extend(list, {
 reverse: function () {
-var reversed = helper.reverse(this);
+var reversed = _linqCore.reverse(this);
 return linqify(reversed);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 selectMany: function (collectionSelectorLambda, transformLambda) {
-var many = helper.selectMany(this, collectionSelectorLambda, transformLambda);
+var many = _linqCore.selectMany(this, collectionSelectorLambda, transformLambda);
 return linqify(many);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 zip: function (items2, lambda) {
-var zipped = helper.zip(this, items2, lambda);
+var zipped = _linqCore.zip(this, items2, lambda);
 return linqify(zipped);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 union: function (secondItems, comparerLambda) {
-var unioned = helper.union(this, secondItems, comparerLambda);
+var unioned = _linqCore.union(this, secondItems, comparerLambda);
 return linqify(unioned);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 groupBy: function (keySelectorLambda) {
-var grouped = helper.groupBy(this, keySelectorLambda);
+var grouped = _linqCore.groupBy(this, keySelectorLambda);
 return linqify(grouped);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 take: function (count) {
-var taken = helper.take(this, count);
+var taken = _linqCore.take(this, count);
 return linqify(taken);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 takeWhile: function (predicate) {
-var taken = helper.takeWhile(this, predicate);
+var taken = _linqCore.takeWhile(this, predicate);
 return linqify(taken);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 skip: function (count) {
-var skipped = helper.skip(this, count);
+var skipped = _linqCore.skip(this, count);
 return linqify(skipped);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 skipWhile: function (predicate) {
-var skipped = helper.skipWhile(this, predicate);
+var skipped = _linqCore.skipWhile(this, predicate);
 return linqify(skipped);
 }
 });
-Utilities.extend(list, {
+extend(list, {
 setValue: function (value, indices) {
-helper.setValue(this, value, indices);
+_linqCore.setValue(this, value, indices);
 return this;
 }
 });
 // Also include these 'internal' methods
-Utilities.extend(list, { ensureLambda: function (lambda) { return helper.ensureLambda(lambda); } });
-Utilities.extend(list, { ensureItems: function (list, canBeEmpty) { return helper.ensureItems(list, canBeEmpty); } });
-Utilities.extend(list, {
+extend(list, { ensureLambda: function (lambda) { return _linqCore.ensureLambda(lambda); } });
+extend(list, { ensureItems: function (list, canBeEmpty) { return _linqCore.ensureItems(list, canBeEmpty); } });
+extend(list, {
 delinqify: function (predicate) {
-var skipped = helper.skipWhile(this, predicate);
+var skipped = _linqCore.skipWhile(this, predicate);
 return linqify(skipped);
 }
 });
-// todo
-// GroupJoin
-// Join
-// LongCount
-// SequenceEqual
-// SetValue (not LINQ but useful)
-// ToLookup ?
-// Range
-// Repeat
+// todo:
+//  GroupJoin
+//  Join
+//  LongCount
+//  SequenceEqual
+//  SetValue (not LINQ but useful)
+//  ToLookup ?
+//  Range
+//  Repeat
 return list;
 }
 /*jslint

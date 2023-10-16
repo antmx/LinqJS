@@ -24,7 +24,10 @@ linqJs.linqCore = (function () {
         return "Hello, World!";
     };
 
-    /// Checks the specified object is a function
+    /**
+     * Checks the specified object is a (lanbda) function
+     * @param {any} lambda the object to test for being an function
+     */
     linqCore.prototype.ensureLambda = function (lambda) {
 
         if (typeof lambda !== "function") {
@@ -66,7 +69,11 @@ linqJs.linqCore = (function () {
         return true;
     };
 
-    /// Determines if the specified object is an array
+    /**
+     * Determines if the specified object is an array
+     * @param {any} obj the object to test
+     * @returns {boolean}
+     */
     linqCore.prototype.isArray = function (obj) {
 
         if (obj == null) {
@@ -224,7 +231,7 @@ linqJs.linqCore = (function () {
     };
 
     /** forEach Performs an operation on each item in the array.
-    @param {array} items The array to iterate over.
+    @param {ArrayLike} items The array to iterate over.
     @param {function} lambda The function to run against each item.
     */
     linqCore.prototype.forEach = function (items, lambda) {
@@ -561,7 +568,7 @@ linqJs.linqCore = (function () {
     /// sum
 
     /** sum Calculates the sum total of the items
-    * @param {array} items The array to sum up.
+    * @param {ArrayLike} items The array to sum up.
     * @param {function(any, number):number} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
     * @returns {number} Returns a number representing the sum total.
     */
@@ -976,8 +983,8 @@ linqJs.linqCore = (function () {
 
     /**
      * IEnumerable<TResult>
-     * @param {array} outer Outer array
-     * @param {array} inner Inner array
+     * @param {ArrayLike} outer Outer array
+     * @param {ArrayLike} inner Inner array
      * @param {function} outerKeySelector Outer array key selector function
      * @param {function} innerKeySelector Inner array key selector function
      * @param {function} resultSelector Result selector function

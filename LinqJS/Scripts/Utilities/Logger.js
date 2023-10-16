@@ -1,4 +1,6 @@
-﻿/*jslint
+﻿/// <reference path="enumerator.js" />
+
+/*jslint
     this: true, for: true, white: true
 */
 
@@ -8,9 +10,9 @@ function Logger() { }
 
 Logger.prototype.LogArray = function (items) {
 
-	var enumerator = new Utilities.Enumerator(items);
+	var enumerator = new Enumerator(items);
 
-	while (enumerator.MoveNext()) {
+	while (enumerator.moveNext()) {
 		console.log(enumerator.Current);
 	}
 };
