@@ -8,7 +8,6 @@ describe("linqCore helloWorld", function () {
 		_linqCore = new linqJs.linqCore();
 	});
 
-
 	it("Displays hello world", function () {
 
 		var result = _linqCore.helloWorld();

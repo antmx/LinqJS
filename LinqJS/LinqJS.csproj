@@ -106,6 +106,7 @@
     <Content Include="Scripts\linqJs\typeDefs.js" />
     <Content Include="Scripts\specs\each.js" />
     <Content Include="Scripts\specs\firstOrDefault.js" />
+    <Content Include="Scripts\specs\isArray.js" />
     <Content Include="Scripts\specs\linqify.js" />
     <Content Include="Scripts\specs\skip.js" />
     <Content Include="Scripts\specs\setValue.js" />
