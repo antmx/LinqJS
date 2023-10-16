@@ -3,16 +3,16 @@
 describe("linqCore any", function () {
 
     var _linqCore;
-    var items;
+    var _items;
 
     beforeEach(function () {
         _linqCore = new linqJs.linqCore();
-        items = [1, 2, 3, 4, 5, 6, 7, 8];
+        _items = [1, 2, 3, 4, 5, 6, 7, 8];
     });
 
     it("Returns true when there are matching items", function () {
         var result = _linqCore.any(
-            items,
+            _items,
             function (i) { return i % 3 == 0; });
 
         expect(result).toBeTruthy();
@@ -20,14 +20,14 @@ describe("linqCore any", function () {
 
     it("Returns true when there are any items", function () {
         var result = _linqCore.any(
-            items);
+            _items);
 
         expect(result).toBeTruthy();
     });
 
     it("Returns false when there are no matching items", function () {
         var result = _linqCore.any(
-            items,
+            _items,
             function (i) { return i > 100; });
 
         expect(result).toBeFalsy();

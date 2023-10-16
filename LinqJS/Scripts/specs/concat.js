@@ -3,21 +3,21 @@
 describe("linqCore concat", function () {
 
 	var _linqCore;
-	var firstItems;
-	var secondItems;
+	var _firstItems;
+	var _secondItems;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
 
-		firstItems = [1, 2, 3];
-		secondItems = [4, 5, 6];
+		_firstItems = [1, 2, 3];
+		_secondItems = [4, 5, 6];
 	});
 
 	it("Combines 2 lists into 1", function () {
 
 		var result = _linqCore.concat(
-			firstItems,
-			secondItems);
+			_firstItems,
+			_secondItems);
 
 		var expected = [1, 2, 3, 4, 5, 6];
 

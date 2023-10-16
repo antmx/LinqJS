@@ -3,12 +3,12 @@
 describe("linqCore sum", function () {
 
 	var _linqCore;
-	var items;
+	var _items;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
 
-		items = [
+		_items = [
 			{ name: "foo", age: 2, number: "two" },
 			{ name: "bar", age: 4, number: "four" },
 			{ name: "baz", age: 1, number: "one" },
@@ -30,7 +30,7 @@ describe("linqCore sum", function () {
 	it("Computes the sum of a list of values that are obtained by invoking a transform function on each element of a list.", function () {
 
 		var result = _linqCore.sum(
-			items,
+			_items,
 			function (o) { return o.age; });
 
 		var expected = 10;

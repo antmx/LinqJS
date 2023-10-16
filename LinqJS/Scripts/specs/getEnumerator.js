@@ -3,23 +3,23 @@
 describe("linqCore getEnumerator", function () {
 
 	var _linqCore;
-	var items;
+	var _items;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
-		items = [1, 2, 3];
+		_items = [1, 2, 3];
 	});
 	
 	it("Returns an Enumerator", function () {
 
-		var e = _linqCore.getEnumerator(items);
+		var e = _linqCore.getEnumerator(_items);
 		
         expect(e.Current).toBeNull();
 	});
 
 	it("Enables enumerating", function () {
 
-		var e = _linqCore.getEnumerator(items);
+		var e = _linqCore.getEnumerator(_items);
 
 		while (e.MoveNext()) {
 			expect(e.Current !== null).toBeTruthy();
@@ -28,7 +28,7 @@ describe("linqCore getEnumerator", function () {
 
 	it("Enables resetting", function () {
 
-		var e = _linqCore.getEnumerator(items);
+		var e = _linqCore.getEnumerator(_items);
 
 		expect(e.MoveNext()).toBeTruthy();
 

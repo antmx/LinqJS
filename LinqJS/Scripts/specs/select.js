@@ -3,12 +3,12 @@
 describe("linqCore select", function () {
 
     var _linqCore;
-    var items;
+    var _items;
 
     beforeEach(function () {
         _linqCore = new linqJs.linqCore();
 
-        items = [
+        _items = [
             { Name: "One", Number: 1 },
             { Name: "Two", Number: 2 },
             { Name: "Three", Number: 3 },
@@ -19,7 +19,7 @@ describe("linqCore select", function () {
     it("Projects each item into a new form", function () {
 
         var result = _linqCore.select(
-            items,
+            _items,
             function (o) { return o.Name; });
 
         var expected = ["One", "Two", "Three", "Four"];

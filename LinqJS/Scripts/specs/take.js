@@ -3,17 +3,17 @@
 describe("linqCore take", function () {
 
 	var _linqCore;
-	var items;
+	var _items;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
 
-		items = ["Foo", "Bar", "Baz", "Qux", "Fiz", "Pop"];
+		_items = ["Foo", "Bar", "Baz", "Qux", "Fiz", "Pop"];
 	});
 
 	it("Returns a specified number of contiguous elements from the start of a list - count == -1.", function () {
 
-		var result = _linqCore.take(items, -1);
+		var result = _linqCore.take(_items, -1);
 		var expected = [];
 
 		expect(result).toEqual(expected);
@@ -21,7 +21,7 @@ describe("linqCore take", function () {
 
 	it("Returns a specified number of contiguous elements from the start of a list - count == 0.", function () {
 
-		var result = _linqCore.take(items, 0);
+		var result = _linqCore.take(_items, 0);
 		var expected = [];
 
 		expect(result).toEqual(expected);
@@ -29,7 +29,7 @@ describe("linqCore take", function () {
 
 	it("Returns a specified number of contiguous elements from the start of a list - count == 1.", function () {
 
-		var result = _linqCore.take(items, 1);
+		var result = _linqCore.take(_items, 1);
 		var expected = ["Foo"];
 
 		expect(result).toEqual(expected);
@@ -37,7 +37,7 @@ describe("linqCore take", function () {
 
 	it("Returns a specified number of contiguous elements from the start of a list - count > list length.", function () {
 
-		var result = _linqCore.take(items, 100);
+		var result = _linqCore.take(_items, 100);
 		var expected = ["Foo", "Bar", "Baz", "Qux", "Fiz", "Pop"];
 
 		expect(result).toEqual(expected);

@@ -3,24 +3,24 @@
 describe("linqCore contains", function () {
 
 	var _linqCore;
-	var items;
+	var _items;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
 
-		items = [1, 2, 3];
+		_items = [1, 2, 3];
 	});
 
 	it("Returns false when list does not contain value", function () {
 
-		var result = _linqCore.contains(items, 4);
+		var result = _linqCore.contains(_items, 4);
 
 		expect(result).toBeFalsy();
 	});
 
 	it("Returns true when list does contain value", function () {
 
-		var result = _linqCore.contains(items, 2);
+		var result = _linqCore.contains(_items, 2);
 
 		expect(result).toBeTruthy();
 	});

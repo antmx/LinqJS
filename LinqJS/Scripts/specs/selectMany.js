@@ -3,18 +3,18 @@
 describe("linqCore selectMany", function () {
 
 	var _linqCore;
-	var items;
+	var _items;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
-		items = [{ Name: "Higa, Sidney", Pets: ["Scruffy", "Sam"] },
+		_items = [{ Name: "Higa, Sidney", Pets: ["Scruffy", "Sam"] },
 					{ Name: "Ashkenazi, Ronen", Pets: ["Walker", "Sugar"] },
 					{ Name: "Price, Vernette", Pets: ["Scratches", "Diesel"] }];
 	});
 
 	it("Projects each item to a new list and combines the resulting list into one list.", function () {
 		var result = _linqCore.selectMany(
-			items,
+			_items,
 			function (o) { return o.Pets; });
 
 		var expected = ["Scruffy", "Sam", "Walker", "Sugar", "Scratches", "Diesel"];
@@ -24,7 +24,7 @@ describe("linqCore selectMany", function () {
 
 	it("Projects item to a new list and combines the resulting list into one list, applying a transformation function to each item in the new list.", function () {
 		var result = _linqCore.selectMany(
-			items,
+			_items,
 			function (o) { return o.Pets; },
 			function (p) { return p.toUpperCase(); });
 
@@ -35,7 +35,7 @@ describe("linqCore selectMany", function () {
 
 	it("Projects each to a new list and combines the resulting list into one sequence, applying a function that accepts an index to each item in the new list.", function () {
 		var result = _linqCore.selectMany(
-			items,
+			_items,
 			function (o) { return o.Pets; },
 			function (p, index) { return index + " " + p; });
 

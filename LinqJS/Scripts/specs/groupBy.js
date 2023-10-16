@@ -3,11 +3,11 @@
 describe("linqCore groupBy", function () {
 
     var _linqCore;
-    var items;
+    var _items;
 
     beforeEach(function () {
         _linqCore = new linqJs.linqCore();
-        items = [
+        _items = [
             { Name: "Foo", Age: 6 },
             { Name: "Bar", Age: 5 },
             { Name: "Baz", Age: 6 },
@@ -19,7 +19,7 @@ describe("linqCore groupBy", function () {
 
     it("Groups the elements of a list according to a specified key selector function.", function () {
 
-        var result = _linqCore.groupBy(items, function (o) { return o.Age; });
+        var result = _linqCore.groupBy(_items, function (o) { return o.Age; });
 
         var expected = [
             { Key: 6, Items: [{ Name: "Foo", Age: 6 }, { Name: "Baz", Age: 6 }] },

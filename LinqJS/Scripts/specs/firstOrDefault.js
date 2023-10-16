@@ -3,16 +3,16 @@
 describe("linqCore firstOrDefault", function () {
 
 	var _linqCore;
-	var items;
+	var _items;
 
 	beforeEach(function () {
 		_linqCore = new linqJs.linqCore();
-		items = [1, 2, 3, 4, 5, 6, 7, 8];
+		_items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
 	it("Returns first item", function () {
 
-		var result = _linqCore.firstOrDefault(items);
+		var result = _linqCore.firstOrDefault(_items);
 
 		var expected = 1;
 
@@ -21,7 +21,7 @@ describe("linqCore firstOrDefault", function () {
 
     it("Returns first matching item", function () {
         var result = _linqCore.firstOrDefault(
-            items,
+            _items,
             function (i) { return i > 3; });
 
         var expected = 4;
@@ -31,7 +31,7 @@ describe("linqCore firstOrDefault", function () {
 
 	it("Returns default item", function () {
 		var result = _linqCore.firstOrDefault(
-			items,
+			_items,
             function (i) { return i > 10; },
 			-1);
 
