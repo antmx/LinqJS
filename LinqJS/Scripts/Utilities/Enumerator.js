@@ -4,34 +4,16 @@
 
 "use strict";
 
+
+/**
+ * Utilities namespace
+ */
 var Utilities = Utilities || {};
 
-///// Enumerator 'class' - supports a simple iteration over an array.
-//Utilities.Enumerator = function (items) {
-
-//    var _self = this;
-//    this.Current = null;
-//    this.CurrentIdx = -1;
-
-//    this.MoveNext = function () {
-
-//        if (items.length > _self.CurrentIdx + 1) {
-//            _self.CurrentIdx += 1;
-//            _self.Current = items[_self.CurrentIdx];
-//            return true;
-//        }
-
-//        return false;
-//    };
-
-//    this.reset = function () {
-
-//        this.CurrentIdx = -1;
-//        this.Current = null;
-//    };
-//};
-
-var Enumerator = (function () {
+/**
+ * Enumerator 'class' - supports a simple iteration over an array.
+ */
+Utilities.Enumerator = (function () {
 
     /** 
      * Initialises a new Enumerator instance
@@ -41,9 +23,7 @@ var Enumerator = (function () {
         _items = items;
     }
 
-    //var _self = this;
     var _items = null;
-    //var _self = this;
     Enumerator.prototype.Current = null;
     Enumerator.prototype.CurrentIdx = -1;
 
@@ -64,7 +44,7 @@ var Enumerator = (function () {
         this.Current = null;
     };
 
-    // Return the constructor
+    // Return the instantiated 'class'
     return Enumerator;
 
-}());
+})();

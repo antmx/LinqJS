@@ -1,4 +1,4 @@
-﻿/// <reference path="enumerator.js" />
+﻿/// <reference path="Enumerator.js" />
 
 /*jslint
     this: true, for: true, white: true
@@ -6,24 +6,40 @@
 
 "use strict";
 
-function Logger() { }
 
-Logger.prototype.LogArray = function (items) {
+/**
+ * Utilities namespace
+ */
+var Utilities = Utilities || {};
 
-	var enumerator = new Enumerator(items);
+/**
+ * Logger 'class' - supports logging of arrays and functions.
+ */
+Utilities.Logger = (function () {
 
-	while (enumerator.moveNext()) {
-		console.log(enumerator.Current);
-	}
-};
+	function Logger() { }
 
-Logger.prototype.LogFunction = function (func) {
+	Logger.prototype.LogArray = function (items) {
 
-	var name = func.toString();
-	name = name.substr('function '.length);
-	name = name.substr(0, name.indexOf('('));
+		var enumerator = new Utilities.Enumerator(items);
 
-	console.log(name);
-};
+		while (enumerator.moveNext()) {
+			console.log(enumerator.Current);
+		}
+	};
 
-window.Logger = new Logger();
+	Logger.prototype.LogFunction = function (func) {
+
+		var name = func.toString();
+		name = name.substr('function '.length);
+		name = name.substr(0, name.indexOf('('));
+
+		console.log(name);
+	};
+
+	window.Logger = new Logger();
+
+	// Return the instantiated 'class'
+	return Logger;
+
+})();

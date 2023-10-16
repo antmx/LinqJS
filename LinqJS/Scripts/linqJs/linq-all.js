@@ -892,6 +892,7 @@ extend(list, { last: function (lambda) { return _linqCore.last(this, lambda); } 
 extend(list, { all: function (lambda) { return _linqCore.all(this, lambda); } });
 extend(list, { forEach: function (lambda) { _linqCore.forEach(this, lambda); } });
 //extend(list, { getEnumerator: _linqCore.getEnumerator });
+//extend(list, { getEnumerator: function () { return new Utilities.Enumerator(this); } });
 extend(list, { aggregate: function (lambda) { return _linqCore.aggregate(this, lambda); } });
 extend(list, { aggregateWithSeed: function (lambda, seed) { return _linqCore.aggregateWithSeed(this, lambda, seed); } });
 extend(list, { aggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return _linqCore.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });

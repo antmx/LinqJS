@@ -171,7 +171,6 @@
     <Content Include="Scripts\specs\where.js" />
     <Content Include="Scripts\Utilities\Extend.js" />
     <Content Include="Scripts\Utilities\Logger.js" />
-    <Content Include="Scripts\Utilities\Namespace.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
   </ItemGroup>
