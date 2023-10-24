@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="../linqjs/linq-all.js" />
+
 describe("linqCore aggregate", function () {
 
 	var _linqCore;
