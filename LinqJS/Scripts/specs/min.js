@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.min", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -11,12 +11,10 @@ describe("linqCore.min", function () {
 		_items = [1, 1, 2, 5, 4, 5, 5, 2, 2];
 	});
 
-	it("Returns the minimum value in a list", function () {
+	test("Returns the minimum value in a list", function () {
 
 		var result = _linqCore.min(_items);
 		var expected = 1;
 
 		expect(result).toEqual(expected);
 	});
-
-});

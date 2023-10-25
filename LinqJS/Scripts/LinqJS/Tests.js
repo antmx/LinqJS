@@ -29,7 +29,6 @@ console.log(a.linqify().all(function (i) { return i < 100; }));
 var logger = new Utilities.Logger();
  
 //function TestGetEnumerator() {
-//    debugger;
 //    logger.LogFunction(arguments.callee);
 
 //    var items = [1, 2, 3, 4].linqify();

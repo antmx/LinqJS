@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.skip", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -11,7 +11,7 @@ describe("linqCore.skip", function () {
 		_items = [59, 82, 70, 56, 92, 98, 85];
 	});
 
-	it("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count == -1", function () {
+	test("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count == -1", function () {
 
 		var result = _linqCore.skip(_items, -1);
 		var expected = [];
@@ -19,7 +19,7 @@ describe("linqCore.skip", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count == 0.", function () {
+	test("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count == 0.", function () {
 
 		var result = _linqCore.skip(_items, 0);
 		var expected = [];
@@ -27,7 +27,7 @@ describe("linqCore.skip", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count == 1.", function () {
+	test("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count == 1.", function () {
 
 		var result = _linqCore.skip(_items, 1);
 		var expected = [82, 70, 56, 92, 98, 85];
@@ -35,12 +35,10 @@ describe("linqCore.skip", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count > list length.", function () {
+	test("Bypasses a specified number of elements in a sequence and then returns the remaining elements - count > list length.", function () {
 
 		var result = _linqCore.skip(_items, 100);
 		var expected = [];
 
 		expect(result).toEqual(expected);
 	});
-
-});

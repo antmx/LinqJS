@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.union", function () {
+
 
 	var _linqCore;
 
@@ -8,7 +8,7 @@ describe("linqCore.union", function () {
 		_linqCore = new linqJs.linqCore();
 	});
 
-	it("Produces the set union of two lists, i.e. a list that contains the elements from both lists, excluding duplicates.", function () {
+	test("Produces the set union of two lists, i.e. a list that contains the elements from both lists, excluding duplicates.", function () {
 
 		var firstItems = [1, 1, 2, 3, 4, 5, 5, 5];
 		var secondItems = [1, 3, 5, 7, 9, 5, 5, 5, 11, 11, 11, 11, 11];
@@ -18,7 +18,7 @@ describe("linqCore.union", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Produces the set union of two lists, i.e. a list that contains the elements from both lists, excluding duplicates, using the specified equality comparer function.", function () {
+	test("Produces the set union of two lists, i.e. a list that contains the elements from both lists, excluding duplicates, using the specified equality comparer function.", function () {
 
 		var firstItems = ["One", "one", "Two", "Three", "Four", "Five", "five", "five"];
 		var secondItems = ["one", "three", "five", "Seven", "Nine", "five", "Five", "five", "Eleven", "eleven", "eleven", "eleven"];
@@ -28,5 +28,3 @@ describe("linqCore.union", function () {
 
 		expect(result).toEqual(expected);
 	});
-
-});

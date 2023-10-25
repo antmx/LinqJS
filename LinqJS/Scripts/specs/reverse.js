@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.reverse", function () {
+
 
 	var _linqCore;
 
@@ -8,12 +8,12 @@ describe("linqCore.reverse", function () {
 		_linqCore = new linqJs.linqCore();
 	});
 
-	it("Throws error when list is null", function () {
+	test("Throws error when list is null", function () {
 
         expect(function () { _linqCore.reverse(null); }).toThrow(new Error("Array must not be null"));
 	});
 
-	it("Returns empty list when when list is empty", function () {
+	test("Returns empty list when when list is empty", function () {
 
 		var result = _linqCore.reverse([]);
 
@@ -22,7 +22,7 @@ describe("linqCore.reverse", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Returns list reversed", function () {
+	test("Returns list reversed", function () {
 
 		var result = _linqCore.reverse(['a', 1, 'b', 2, 'c', 3]);
 
@@ -30,5 +30,3 @@ describe("linqCore.reverse", function () {
 
 		expect(result).toEqual(expected);
 	});
-
-});

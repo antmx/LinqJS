@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.orderBy", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -15,7 +15,7 @@ describe("linqCore.orderBy", function () {
 			{ name: "qux", age: 3, number: "three" }];
 	});
 
-	it("Sorts the elements of a sequence in ascending order.", function () {
+	test("Sorts the elements of a sequence in ascending order.", function () {
 
 		var items = [1, 3, 2, 4, 5, 0];
 
@@ -27,7 +27,7 @@ describe("linqCore.orderBy", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Sorts the elements of a sequence in ascending order according to a key.", function () {
+	test("Sorts the elements of a sequence in ascending order according to a key.", function () {
 
 		var result = _linqCore.orderBy(
 			_items,
@@ -42,7 +42,7 @@ describe("linqCore.orderBy", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Sorts the elements of a sequence in ascending order according to a key and string comparer function.", function () {
+	test("Sorts the elements of a sequence in ascending order according to a key and string comparer function.", function () {
 
 		var result = _linqCore.orderBy(
 			_items,
@@ -58,7 +58,7 @@ describe("linqCore.orderBy", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Sorts the elements of a sequence in ascending order according to a key and int comparer function.", function () {
+	test("Sorts the elements of a sequence in ascending order according to a key and int comparer function.", function () {
 
 		var result = _linqCore.orderBy(
 			_items,
@@ -73,5 +73,3 @@ describe("linqCore.orderBy", function () {
 
 		expect(result).toEqual(expected);
 	});
-
-});

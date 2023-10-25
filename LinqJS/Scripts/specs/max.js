@@ -1,6 +1,5 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.max", function () {
 
 	var _linqCore;
 	var _items;
@@ -11,12 +10,10 @@ describe("linqCore.max", function () {
 		_items = [1, 1, 2, 5, 4, 5];
 	});
 
-	it("Returns the maximum value in a list", function () {
+	test("Returns the maximum value in a list", function () {
 
 		var result = _linqCore.max(_items);
 		var expected = 5;
 
 		expect(result).toEqual(expected);
 	});
-
-});

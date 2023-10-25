@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.sum", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -15,7 +15,7 @@ describe("linqCore.sum", function () {
 			{ name: "qux", age: 3, number: "three" }];
 	});
 
-	it("Computes the sum of a list of values.", function () {
+	test("Computes the sum of a list of values.", function () {
 
 		var items = [1, 3, 2, 4, 5, 0];
 
@@ -27,7 +27,7 @@ describe("linqCore.sum", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Computes the sum of a list of values that are obtained by invoking a transform function on each element of a list.", function () {
+	test("Computes the sum of a list of values that are obtained by invoking a transform function on each element of a list.", function () {
 
 		var result = _linqCore.sum(
 			_items,
@@ -37,5 +37,3 @@ describe("linqCore.sum", function () {
 
 		expect(result).toEqual(expected);
 	});
-
-});

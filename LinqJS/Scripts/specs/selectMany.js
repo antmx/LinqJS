@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.selectMany", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -12,7 +12,7 @@ describe("linqCore.selectMany", function () {
 					{ Name: "Price, Vernette", Pets: ["Scratches", "Diesel"] }];
 	});
 
-	it("Projects each item to a new list and combines the resulting list into one list.", function () {
+	test("Projects each item to a new list and combines the resulting list into one list.", function () {
 		var result = _linqCore.selectMany(
 			_items,
 			function (o) { return o.Pets; });
@@ -22,7 +22,7 @@ describe("linqCore.selectMany", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Projects item to a new list and combines the resulting list into one list, applying a transformation function to each item in the new list.", function () {
+	test("Projects item to a new list and combines the resulting list into one list, applying a transformation function to each item in the new list.", function () {
 		var result = _linqCore.selectMany(
 			_items,
 			function (o) { return o.Pets; },
@@ -33,7 +33,7 @@ describe("linqCore.selectMany", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Projects each to a new list and combines the resulting list into one sequence, applying a function that accepts an index to each item in the new list.", function () {
+	test("Projects each to a new list and combines the resulting list into one sequence, applying a function that accepts an index to each item in the new list.", function () {
 		var result = _linqCore.selectMany(
 			_items,
 			function (o) { return o.Pets; },
@@ -43,5 +43,3 @@ describe("linqCore.selectMany", function () {
 
 		expect(result).toEqual(expected);
 	});
-
-});

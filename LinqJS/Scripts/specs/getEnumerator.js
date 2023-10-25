@@ -1,42 +1,41 @@
-﻿/// <reference path="../_references.js" />
+﻿/// <reference path="../linqJs/linq-core.js" />
 
-describe("linqCore.getEnumerator", function () {
+const linqCoreModule = require('../linqJs/linq-core');
 
-	var _linqCore;
-	var _items;
+let _linqCore;
+let _items;
 
-	beforeEach(function () {
-		_linqCore = new linqJs.linqCore();
-		_items = [1, 2, 3];
-	});
-	
-	it("Returns an Enumerator", function () {
+beforeEach(function () {
+	_linqCore = new linqCoreModule();
+	_items = [1, 2, 3];
+});
 
-		var e = _linqCore.getEnumerator(_items);
-		
-        expect(e.Current).toBeNull();
-	});
+test("Returns an Enumerator", function () {
 
-	it("Enables enumerating", function () {
+	let e = _linqCore.getEnumerator(_items);
 
-		var e = _linqCore.getEnumerator(_items);
+	expect(e.Current).toBeNull();
+});
 
-		while (e.MoveNext()) {
-			expect(e.Current !== null).toBeTruthy();
-		}
-	});
+test("Enables enumerating", function () {
 
-	it("Enables resetting", function () {
+	let e = _linqCore.getEnumerator(_items);
 
-		var e = _linqCore.getEnumerator(_items);
-
-		expect(e.MoveNext()).toBeTruthy();
-
+	while (e.MoveNext()) {
 		expect(e.Current !== null).toBeTruthy();
+	}
+});
 
-		e.reset();
+test("Enables resetting", function () {
 
-		expect(e.CurrentIdx).toEqual(-1);
-		expect(e.Current).toBeNull();
-	});
+	let e = _linqCore.getEnumerator(_items);
+
+	expect(e.MoveNext()).toBeTruthy();
+
+	expect(e.Current !== null).toBeTruthy();
+
+	e.reset();
+
+	expect(e.CurrentIdx).toEqual(-1);
+	expect(e.Current).toBeNull();
 });

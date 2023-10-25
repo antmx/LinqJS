@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.zip", function () {
+
 
     var _linqCore;
     var _numbers;
@@ -26,5 +26,3 @@ describe("linqCore.zip", function () {
 
         expect(result).toEqual(expected);
     });
-
-});

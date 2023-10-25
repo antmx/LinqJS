@@ -9,14 +9,14 @@ let _secondItems;
 beforeEach(function () {
 	_linqCore = new linqCoreModule();
 
-	_firstItems = [1, 2, 2, 3, 4, 5];
+	_firstItems = [1, 1, 2, 3, 4, 5];
 	_secondItems = [1, 3, 5, 7];
 });
 
-test("Produces the set difference of two lists", function () {
+test("Produces the set intersection of two lists", function () {
 
-	let result = _linqCore.except(_firstItems, _secondItems);
-	let expected = [2, 4, 7];
+	let result = _linqCore.intersect(_firstItems, _secondItems);
+	let expected = [1, 3, 5];
 
 	expect(result).toEqual(expected);
 });

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.select", function () {
+
 
     var _linqCore;
     var _items;
@@ -31,5 +31,3 @@ describe("linqCore.select", function () {
             expect(valueOfElement).toEqual(expected[indexInArray]);
         });
     });
-
-});

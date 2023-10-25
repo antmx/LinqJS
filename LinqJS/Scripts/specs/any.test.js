@@ -1,4 +1,4 @@
-﻿/// <reference path="../_references.js" />
+﻿/// <reference path="../linqJs/linq-core.js" />
 
 const linqCoreModule = require('../linqJs/linq-core');
 
@@ -10,9 +10,8 @@ beforeEach(() => {
     _items = [1, 2, 3, 4, 5, 6, 7, 8];
 });
 
-
 test('returns true when there are any items', () => {
-    debugger;
+    
     let result = _linqCore.any(
         _items);
 

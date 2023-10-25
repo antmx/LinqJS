@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.where", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -10,7 +10,7 @@ describe("linqCore.where", function () {
 		_items = [1, 2, 3, 4, 5, 6, 7, 8];
 	});
 
-	it("Finds matching items", function () {
+	test("Finds matching items", function () {
 		var result = _linqCore.where(
 			_items,
 			function (i) { return i % 2 == 0; });
@@ -24,5 +24,3 @@ describe("linqCore.where", function () {
             expect(valueOfElement).toEqual(expected[indexInArray]);
         });
 	});
-
-});

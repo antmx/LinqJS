@@ -4,32 +4,15 @@
 
 "use strict";
 
-/// <reference path="../Utilities/Extend.js" />
-/// <reference path="linq-core.js" />
+/// <reference path="./linq-core.js" />
 
-var linqJs = linqJs || {};
+const linqCoreModule = require('./linq-core');
 
 /**
- * Makes all arrays Linq-able.
- * @returns {LinqableArray} Returns an array with Linq functions attached.
+ * Removes Linq functions from a previously linqified array.
+ * @param {ArrayLike} list 
  */
-Array.prototype.linqify = function () {
-
-    linqify(this);
-
-    return this;
-};
-
-/** Stops an array being Linq-able.
- * @returns {[]} Returns an non-Linq-able.
- */
-Array.prototype.deLinqify = function () {
-
-    deLinqify(this);
-
-    return this;
-};
-
+/*export*/ 
 function deLinqify(list) {
 
     delete list._linqified;
@@ -194,7 +177,7 @@ function linqify(list) {
 
     list._linqified = true;
 
-    var _linqCore = new linqJs.linqCore();
+    var _linqCore = new linqCoreModule();
 
     // Add extra methods to the INSTANCE
 
@@ -374,3 +357,28 @@ function linqify(list) {
 
     return list;
 }
+
+
+/**
+ * Makes all arrays Linq-able.
+ * @returns {LinqableArray} Returns an array with Linq functions attached.
+ */
+Array.prototype.linqify = function () {
+
+    linqify(this);
+
+    return this;
+};
+
+/** Stops an array being Linq-able.
+ * @returns {[]} Returns an non-Linq-able.
+ */
+Array.prototype.deLinqify = function () {
+
+    deLinqify(this);
+
+    return this;
+};
+
+module.exports.linqify = linqify
+module.exports.deLinqify = deLinqify

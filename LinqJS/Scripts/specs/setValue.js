@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.setValue", function () {
+
 
 	var _linqCore;
 
@@ -8,7 +8,7 @@ describe("linqCore.setValue", function () {
 		_linqCore = new linqJs.linqCore();
 	});
 
-	it("Sets the specified element in the current Array to the specified value - 1D", function () {
+	test("Sets the specified element in the current Array to the specified value - 1D", function () {
 
 		var items = [];
 		_linqCore.setValue(items, "three", 3);
@@ -19,7 +19,7 @@ describe("linqCore.setValue", function () {
 		expect(result).toEqual(expected);
 	});
 
-	it("Sets the specified element in the current Array to the specified value - 2D", function () {
+	test("Sets the specified element in the current Array to the specified value - 2D", function () {
 
 		var items = [["a", "b"], ["c", "d"], ["e", "f"], ["g", "h"]]; // 2D array
 		_linqCore.setValue(items, "three,one", [3,1]);
@@ -29,5 +29,3 @@ describe("linqCore.setValue", function () {
 
 		expect(result).toEqual(expected);
 	});
-
-});

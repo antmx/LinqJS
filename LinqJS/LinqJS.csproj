@@ -94,6 +94,10 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\specs\aggregate.test.js" />
+    <Content Include="Scripts\specs\aggregateWithSeed.test.js" />
+    <Content Include="Scripts\specs\aggregateWithSeedAndResultSelector.test.js" />
+    <Content Include="Scripts\specs\any.test.js" />
     <Content Include="Scripts\specs\chutzpah.json" />
     <None Include="lib\jquery\jquery-3.7.1.intellisense.js" />
     <Content Include="lib\jquery\jquery-3.7.1.js" />

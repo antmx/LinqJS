@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore.averageWithTransform", function () {
+
 
 	var _linqCore;
 	var _items;
@@ -10,7 +10,7 @@ describe("linqCore.averageWithTransform", function () {
 		_items = [2, 4, 6, 8];
 	});
 
-	it("Calculates the average of the items after transforming each", function () {
+	test("Calculates the average of the items after transforming each", function () {
 
 		var result = _linqCore.averageWithTransform(
 			_items,
@@ -20,5 +20,3 @@ describe("linqCore.averageWithTransform", function () {
 
 		expect(expected).toEqual(result);
 	});
-
-});
