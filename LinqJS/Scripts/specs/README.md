@@ -1,1 +1,1 @@
-﻿# linqJs Jasmine tests
+﻿# linqJs Jest tests
