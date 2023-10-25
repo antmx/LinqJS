@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore intersect", function () {
+describe("linqCore.intersect", function () {
 
 	var _linqCore;
 	var _firstItems;

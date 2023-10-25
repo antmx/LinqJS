@@ -1,6 +1,6 @@
 /// <reference path="../_references.js" />
 
-describe("linqCore isArray", function () {
+describe("linqCore.isArray", function () {
 
 	var _linqCore;
 
@@ -52,15 +52,15 @@ describe("linqCore isArray", function () {
 
 	it("Confirms null is not an array", function () {
 
-		expect(function () {
-			_linqCore.isArray(null);
-		}).toThrowError("obj must not be null");
+		var result = _linqCore.isArray(null);
+
+		expect(result).toEqual(false);
 	});
 
 	it("Confirms undefined is not an array", function () {
 
-		expect(function () {
-			_linqCore.isArray(undefined);
-		}).toThrowError("obj must not be null");
+		var result = _linqCore.isArray(undefined);
+
+		expect(result).toEqual(false);
 	});
 });

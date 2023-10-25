@@ -105,7 +105,6 @@
     <Content Include="Scripts\linqJs\linq-core.js" />
     <Content Include="Scripts\linqJs\linqify-jquery.js" />
     <Content Include="Scripts\linqJs\typeDefs.js" />
-    <Content Include="Scripts\specs\each.js" />
     <Content Include="Scripts\specs\firstOrDefault.js" />
     <Content Include="Scripts\specs\isArray.js" />
     <Content Include="Scripts\specs\linqify.js" />

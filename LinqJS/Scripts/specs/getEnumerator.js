@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore getEnumerator", function () {
+describe("linqCore.getEnumerator", function () {
 
 	var _linqCore;
 	var _items;

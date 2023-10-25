@@ -76,9 +76,9 @@ linqJs.linqCore = (function () {
      */
     linqCore.prototype.isArray = function (obj) {
 
-        if (obj == null) {
-            throw new Error("obj must not be null");
-        }
+        //if (obj == null) {
+        //    throw new Error("obj must not be null");
+        //}
 
         if (Object.prototype.toString.call(obj) !== '[object Array]') {
             return false;
@@ -230,22 +230,39 @@ linqJs.linqCore = (function () {
         return true;
     };
 
-    /** forEach Performs an operation on each item in the array.
-    @param {ArrayLike} items The array to iterate over.
-    @param {function} lambda The function to run against each item.
+    /** Performs an operation on each item in an array, or each property in an object
+    @param {ArrayLike|object} itemsOrObject The array to iterate over, or an object whose properties (methods are ignored) to iterate over.
+    @param {function} lambda The function to run against each array item, or object property. To break out of forEch, return false from this lambda. Should be function(indexInArray, valueOfElement) { .... }
     */
-    linqCore.prototype.forEach = function (items, lambda) {
+    linqCore.prototype.forEach = function (itemsOrObject, lambda) {
 
-        this.ensureItems(items, true);
         this.ensureLambda(lambda);
-        var indexInArray;
-        var valueOfElement;
 
-        for (indexInArray = 0; indexInArray < items.length; indexInArray += 1) {
-            valueOfElement = items[indexInArray];
+        if (this.isArray(itemsOrObject)) {
 
-            if (lambda(indexInArray, valueOfElement) === false) {
-                break;
+            this.ensureItems(itemsOrObject, true);
+
+            var indexInArray;
+            var valueOfElement;
+
+            for (indexInArray = 0; indexInArray < itemsOrObject.length; indexInArray += 1) {
+                valueOfElement = itemsOrObject[indexInArray];
+
+                if (lambda(indexInArray, valueOfElement) === false) {
+                    break;
+                }
+            }
+        }
+        else {
+            if (itemsOrObject == null) {
+                throw new Error("itemsOrObject must be an array or an object instance")
+            }
+
+            for (const property in itemsOrObject) {
+
+                if (lambda(property, itemsOrObject[property]) === false) {
+                    break;
+                }
             }
         }
     };
@@ -916,69 +933,9 @@ linqJs.linqCore = (function () {
         currentDimensionArray[currentIndicee] = value;
     };
 
-    /* todo - use 'each' instead of Enumerator
-    
-        each: function( obj, callback ) {
-            var length, i = 0;
-    
-                if ( isArray ) {
-                    for ( ; i < length; i++ ) {
-                        value = callback.call( obj[ i ], i, obj[ i ] );
-    
-                        if ( value === false ) {
-                            break;
-                        }
-                    }
-                } else {
-                    for ( i in obj ) {
-                        value = callback.call( obj[ i ], i, obj[ i ] );
-    
-                        if ( value === false ) {
-                            break;
-                        }
-                    }
-                }
-    
-            return obj;
-        }
-    
-    */
-
-    /// each
-    linqCore.prototype.each = function (items, lambda) {
-
-        // lambda should be function(indexInArray, valueOfElement) { .... }
-        this.ensureLambda(lambda);
-
-        var value;
-        var i;
-        var length = items.length;
-        var isArr = this.isArray(items);
-
-        if (isArr) {
-            for (i = 0; i < length; i += 1) {
-                value = lambda.call(items[i], i, items[i]);
-
-                if (value === false) {
-                    break;
-                }
-            }
-        } else {
-            for (i in items) {
-                value = lambda.call(items[i], i, items[i]);
-
-                if (value === false) {
-                    break;
-                }
-            }
-        }
-
-        return items;
-    };
-
     // join
     linqCore.prototype.join = function (items) {
-
+        throw 'todo';
     };
 
     /**
@@ -1024,3 +981,5 @@ linqJs.linqCore = (function () {
     return linqCore;
 
 })();
+
+module.exports = linqJs.linqCore;

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore firstOrDefault", function () {
+describe("linqCore.firstOrDefault", function () {
 
 	var _linqCore;
 	var _items;

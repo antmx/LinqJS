@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore setValue", function () {
+describe("linqCore.setValue", function () {
 
 	var _linqCore;
 

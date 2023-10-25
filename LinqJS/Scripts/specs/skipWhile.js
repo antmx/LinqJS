@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore skipWhile", function () {
+describe("linqCore.skipWhile", function () {
 
 	var _linqCore;
 	var _items;

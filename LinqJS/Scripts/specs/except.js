@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore except", function () {
+describe("linqCore.except", function () {
 
 	var _linqCore;
 	var _firstItems;

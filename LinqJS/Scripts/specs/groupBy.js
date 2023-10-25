@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore groupBy", function () {
+describe("linqCore.groupBy", function () {
 
     var _linqCore;
     var _items;

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore union", function () {
+describe("linqCore.union", function () {
 
 	var _linqCore;
 

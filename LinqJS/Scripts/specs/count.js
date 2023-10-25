@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore count", function () {
+describe("linqCore.count", function () {
 
 	var _linqCore;
 	var _items;

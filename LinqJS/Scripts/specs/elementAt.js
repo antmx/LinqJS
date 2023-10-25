@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore elementAt", function () {
+describe("linqCore.elementAt", function () {
 
 	var _linqCore;
 	var _items;

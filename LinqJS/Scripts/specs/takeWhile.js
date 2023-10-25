@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore takeWhile", function () {
+describe("linqCore.takeWhile", function () {
 
 	var _linqCore;
 	var _items;

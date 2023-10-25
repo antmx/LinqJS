@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore orderBy", function () {
+describe("linqCore.orderBy", function () {
 
 	var _linqCore;
 	var _items;

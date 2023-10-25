@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore selectMany", function () {
+describe("linqCore.selectMany", function () {
 
 	var _linqCore;
 	var _items;

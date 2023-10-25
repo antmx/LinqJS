@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore concat", function () {
+describe("linqCore.concat", function () {
 
 	var _linqCore;
 	var _firstItems;

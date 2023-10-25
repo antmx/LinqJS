@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore where", function () {
+describe("linqCore.where", function () {
 
 	var _linqCore;
 	var _items;

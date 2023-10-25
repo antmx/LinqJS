@@ -42,6 +42,17 @@ namespace ConsoleApp
             public string Address { get; set; }
 
             public char Gender { get; set; }
+
+
+            void TestGroupBy()
+            {
+                var items = new Person[] { };
+
+                foreach(var item in items)
+                {
+
+                }
+            }
         }
     }
 }

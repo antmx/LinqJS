@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore zip", function () {
+describe("linqCore.zip", function () {
 
     var _linqCore;
     var _numbers;

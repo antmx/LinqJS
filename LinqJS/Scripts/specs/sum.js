@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore sum", function () {
+describe("linqCore.sum", function () {
 
 	var _linqCore;
 	var _items;

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore distinct", function () {
+describe("linqCore.distinct", function () {
 
 	var _linqCore;
 	var _items;

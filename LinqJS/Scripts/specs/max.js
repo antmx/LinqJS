@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore max", function () {
+describe("linqCore.max", function () {
 
 	var _linqCore;
 	var _items;

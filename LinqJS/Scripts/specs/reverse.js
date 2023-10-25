@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore reverse", function () {
+describe("linqCore.reverse", function () {
 
 	var _linqCore;
 

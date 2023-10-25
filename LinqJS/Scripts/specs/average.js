@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.js" />
 
-describe("linqCore average", function () {
+describe("linqCore.average", function () {
 
 	var _linqCore;
 	var _items;
