@@ -28,7 +28,7 @@ test("Applies lambda to each array item", function () {
         mockLambda
     );
 
-    expect(mockLambda.mock.calls).toHaveLength(_items.length );
+    expect(mockLambda.mock.calls).toHaveLength(_items.length);
 
     expect(arrayToPopulate.length).toEqual(_items.length);
 
@@ -41,12 +41,16 @@ test("Applies lambda to each array item", function () {
 test("Applies lambda to each object property", function () {
 
     let objToPopulate = {};
+    let mockLambda = jest.fn((property, valueOfProperty) => {
+        objToPopulate[property] = valueOfProperty * 10;
+    });
 
     _linqCore.forEach(
         _obj,
-        function (property, valueOfProperty) {
-            objToPopulate[property] = valueOfProperty * 10;
-        });
+        // function (property, valueOfProperty) {
+        //     objToPopulate[property] = valueOfProperty * 10;
+        // }
+        mockLambda);
 
     for (const property in _obj) {
         expect(_obj[property] * 10).toEqual(objToPopulate[property]);
