@@ -1,4 +1,4 @@
-﻿
+
 /// <reference path="linqify.js" />
 /// <reference path="typeDefs.js" />
 /// <reference path="../utilities/logger.js" />

@@ -1,4 +1,4 @@
-﻿/// <reference path="Enumerator.js" />
+/// <reference path="Enumerator.js" />
 
 /*jslint
     this: true, for: true, white: true

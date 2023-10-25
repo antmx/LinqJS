@@ -1,4 +1,4 @@
-﻿/// <reference path="../linqJs/linq-core.js" />
+/// <reference path="../linqJs/linq-core.js" />
 
 const linqCoreModule = require('../linqJs/linq-core');
 

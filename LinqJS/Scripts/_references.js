@@ -1,4 +1,4 @@
-﻿/// <autosync enabled="true" />
+/// <autosync enabled="true" />
 /// <reference path="../lib/jquery/jquery-3.7.1.js" />
 /// <reference path="linqJs/linqify.js" />
 /// <reference path="linqJs/linq-core.js" />

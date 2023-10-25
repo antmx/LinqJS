@@ -1,4 +1,4 @@
-﻿/*jslint
+/*jslint
     this: true, for: true, white: true
 */
 

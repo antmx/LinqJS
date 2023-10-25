@@ -1,7 +1,8 @@
-﻿/// <reference path="../linqJs/linq-core.js" />
+/// <reference path="../linqJs/linq-core.js" />
 
 const linqCoreModule = require('../linqJs/linq-core');
 
+/** @type {linqJs.} */
 let _linqCore;
 let _items;
 let _obj = {
@@ -24,7 +25,6 @@ test("Applies lambda to each array item", function () {
 
     _linqCore.forEach(
         _items,
-        //function (indexInArray, valueOfElement) { arrayToPopulate.push(valueOfElement * 10); }
         mockLambda
     );
 

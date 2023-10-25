@@ -1,1 +1,1 @@
-﻿# linqJs Jest tests
+# linqJs Jest tests

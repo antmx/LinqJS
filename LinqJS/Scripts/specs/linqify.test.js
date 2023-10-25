@@ -1,4 +1,4 @@
-﻿/// <reference path="../linqJs/linqify.js" />
+/// <reference path="../linqJs/linqify.js" />
 
 const linqify = require('../linqJs/linqify');
 

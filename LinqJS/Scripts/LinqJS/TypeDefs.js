@@ -1,4 +1,4 @@
-﻿
+
 /**
  * @typedef {object} Linqable Represents an array with linqJs functions attached.
  * @property {function(WherePredicate) : Linqable} Where Finds items matching the given filter.
