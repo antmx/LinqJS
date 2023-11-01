@@ -228,11 +228,11 @@ linqJs.linqCore = (function () {
 
     /** Performs an operation on each item in an array, or each property in an object
     @param {ArrayLike|object} itemsOrObject The array to iterate over, or an object whose properties (methods are ignored) to iterate over.
-    @param {function} predicate The function to run against each array item, or object property. To break out of forEch, return false from this predicate. Should be function(indexInArray, valueOfElement) { .... }
+    @param {function} runFunc The function to run against each array item, or object property. To break out of forEach, return false from this predicate. Should be function(indexInArray, valueOfElement) { .... }
     */
-    linqCore.prototype.forEach = function (itemsOrObject, predicate) {
+    linqCore.prototype.forEach = function (itemsOrObject, runFunc) {
 
-        this.ensureFunc(predicate);
+        this.ensureFunc(runFunc);
 
         if (this.isArray(itemsOrObject)) {
 
@@ -244,7 +244,7 @@ linqJs.linqCore = (function () {
             for (indexInArray = 0; indexInArray < itemsOrObject.length; indexInArray += 1) {
                 valueOfElement = itemsOrObject[indexInArray];
 
-                if (predicate(indexInArray, valueOfElement) === false) {
+                if (runFunc(indexInArray, valueOfElement) === false) {
                     break;
                 }
             }
@@ -254,9 +254,14 @@ linqJs.linqCore = (function () {
                 throw new Error("itemsOrObject must be an array or an object instance")
             }
 
-            for (const property in itemsOrObject) {
+            for (const memberName in itemsOrObject) {
 
-                if (predicate(property, itemsOrObject[property]) === false) {
+                // Ignore methods
+                if (typeof itemsOrObject[memberName] === "function") {
+                    continue;
+                }
+
+                if (runFunc(memberName, itemsOrObject[memberName]) === false) {
                     break;
                 }
             }

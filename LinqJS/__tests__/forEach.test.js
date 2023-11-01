@@ -21,14 +21,32 @@ beforeEach(function () {
 test("Applies function to each array item", function () {
 
     let arrayToPopulate = [];
-    let mockFunc = jest.fn((indexInArray, valueOfElement) => { arrayToPopulate.push(valueOfElement * 10); });
+    let runFunc = function (indexInArray, valueOfElement) { arrayToPopulate.push(valueOfElement * 10); };
 
     _linqCore.forEach(
         _items,
-        mockFunc
+        runFunc
     );
 
-    expect(mockFunc.mock.calls).toHaveLength(_items.length);
+    expect(arrayToPopulate.length).toEqual(_items.length);
+
+    for (let idx = 0; idx < _items.length; idx++) {
+
+        expect(_items[idx] * 10).toEqual(arrayToPopulate[idx]);
+    }
+});
+
+test("Applies mock function to each array item", function () {
+
+    let arrayToPopulate = [];
+    let mockRunFunc = jest.fn((indexInArray, valueOfElement) => { arrayToPopulate.push(valueOfElement * 10); });
+
+    _linqCore.forEach(
+        _items,
+        mockRunFunc
+    );
+
+    expect(mockRunFunc.mock.calls).toHaveLength(_items.length);
 
     expect(arrayToPopulate.length).toEqual(_items.length);
 
@@ -41,19 +59,43 @@ test("Applies function to each array item", function () {
 test("Applies function to each object property", function () {
 
     let objToPopulate = {};
-    let mockFunc = jest.fn((property, valueOfProperty) => {
+    let mockRunFunc = jest.fn((property, valueOfProperty) => {
         objToPopulate[property] = valueOfProperty * 10;
     });
 
     _linqCore.forEach(
         _obj,
-        // function (property, valueOfProperty) {
-        //     objToPopulate[property] = valueOfProperty * 10;
-        // }
-        mockFunc);
+        mockRunFunc);
+
+    expect(mockRunFunc.mock.calls).toHaveLength(3); // .a, .b & .c, but not .d()
 
     for (const property in _obj) {
+
+        if (typeof _obj[property] === "function") {
+            continue;
+        }
+
         expect(_obj[property] * 10).toEqual(objToPopulate[property]);
+    }
+});
+
+test("Applies function to each string character", function () {
+
+    let str = "abc";
+    let strToPopulate = [];
+    let mockRunFunc = jest.fn((property, valueOfProperty) => {
+        strToPopulate[property] = valueOfProperty.toUpperCase();
+    });
+
+    _linqCore.forEach(
+        str,
+        mockRunFunc);
+
+    expect(mockRunFunc.mock.calls).toHaveLength(str.length);
+
+    for (const property in str) {
+
+        expect(str[property].toUpperCase()).toEqual(strToPopulate[property]);
     }
 });
 

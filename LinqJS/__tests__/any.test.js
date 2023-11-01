@@ -2,41 +2,53 @@
 
 const linqCoreModule = require('../Scripts/linqJs/linq-core');
 
-let _linqCore;
-let _items;
+describe('linq-core', () => {
 
-beforeEach(() => {
-    _linqCore = new linqCoreModule();
-    _items = [1, 2, 3, 4, 5, 6, 7, 8];
-});
+    describe('any', () => {
 
-test('returns true when there are any items', () => {
-    
-    let result = _linqCore.any(
-        _items);
+        let _linqCore;
+        let _items;
 
-    expect(result).toBeTruthy();
-});
+        beforeEach(() => {
+            _linqCore = new linqCoreModule();
+            _items = [1, 2, 3, 4, 5, 6, 7, 8];
+        });
 
-test("Returns true when there are matching items", function () {
-    let result = _linqCore.any(
-        _items,
-        function (i) { return i % 3 == 0; });
+        // beforeAll
+        // afterAll
+        // afterEach
 
-    expect(result).toBeTruthy();
-});
+        test('Returns true when there are any items', () => {
 
-test("Returns false when there are no matching items", function () {
-    let result = _linqCore.any(
-        _items,
-        function (i) { return i > 100; });
+            let result = _linqCore.any(
+                _items);
 
-    expect(result).toBeFalsy();
-});
+            expect(result).toBeTruthy();
+        });
 
-test("Returns false when there are no items", function () {
-    let result = _linqCore.any(
-        []);
+        test("Returns true when there are matching items", function () {
+            let result = _linqCore.any(
+                _items,
+                function (i) { return i % 3 == 0; });
 
-    expect(result).toBeFalsy();
+            expect(result).toBeTruthy();
+        });
+
+        test("Returns false when there are no matching items", function () {
+            let result = _linqCore.any(
+                _items,
+                function (i) { return i > 100; });
+
+            expect(result).toBeFalsy();
+        });
+
+        test("Returns false when there are no items", function () {
+            let result = _linqCore.any(
+                []);
+
+            expect(result).toBeFalsy();
+        });
+
+    });
+
 });
