@@ -25,24 +25,24 @@ linqJs.linqCore = (function () {
     };
 
     /**
-     * Checks the specified object is a (lanbda) function
-     * @param {any} lambda the object to test for being an function
+     * Checks the specified object is a function
+     * @param {any} predicate the object to test for being an function
      */
-    linqCore.prototype.ensureLambda = function (lambda) {
+    linqCore.prototype.ensureFunc = function (predicate) {
 
-        if (typeof lambda !== "function") {
-            throw new Error("lambda must be a function");
+        if (typeof predicate !== "function") {
+            throw new Error("predicate must be a function");
         }
     };
 
     /**
      * Checks the specified object is a function, if it isn't null
-     * @param {Function} lambda
+     * @param {Function} predicate
      */
-    linqCore.prototype.ensureLambdaIfNotNull = function (lambda) {
+    linqCore.prototype.ensureFuncIfNotNull = function (predicate) {
 
-        if (lambda != null) {
-            this.ensureLambda(lambda);
+        if (predicate != null) {
+            this.ensureFunc(predicate);
         }
     };
 
@@ -76,10 +76,6 @@ linqJs.linqCore = (function () {
      */
     linqCore.prototype.isArray = function (obj) {
 
-        //if (obj == null) {
-        //    throw new Error("obj must not be null");
-        //}
-
         if (Object.prototype.toString.call(obj) !== '[object Array]') {
             return false;
         }
@@ -88,15 +84,15 @@ linqJs.linqCore = (function () {
     };
 
     /// where
-    linqCore.prototype.where = function (items, lambda) {
+    linqCore.prototype.where = function (items, predicate) {
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         var results = [];
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (lambda(valueOfElement, indexInArray)) {
+            if (predicate(valueOfElement, indexInArray)) {
                 results.push(valueOfElement);
             }
         });
@@ -105,13 +101,13 @@ linqJs.linqCore = (function () {
     };
 
     /// any
-    linqCore.prototype.any = function (items, lambda) {
+    linqCore.prototype.any = function (items, predicate) {
 
-        if (lambda == null) {
+        if (predicate == null) {
             return items.length > 0;
         }
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         var item;
         var idx;
@@ -119,7 +115,7 @@ linqJs.linqCore = (function () {
         for (idx = 0; idx < items.length; idx += 1) {
             item = items[idx];
 
-            if (lambda(item)) {
+            if (predicate(item)) {
                 return true;
             }
         }
@@ -128,16 +124,16 @@ linqJs.linqCore = (function () {
     };
 
     /// first
-    linqCore.prototype.first = function (items, lambda) {
+    linqCore.prototype.first = function (items, predicate) {
 
-        if (lambda == null) {
+        if (predicate == null) {
 
             this.ensureItems(items);
 
             return items[0];
         }
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         var item;
         var idx;
@@ -145,7 +141,7 @@ linqJs.linqCore = (function () {
         for (idx = 0; idx < items.length; idx += 1) {
             item = items[idx];
 
-            if (lambda(item)) {
+            if (predicate(item)) {
                 return item;
             }
         }
@@ -162,7 +158,7 @@ linqJs.linqCore = (function () {
      */
     linqCore.prototype.firstOrDefault = function (items, predicate, defaultValue) {
 
-        this.ensureLambdaIfNotNull(predicate);
+        this.ensureFuncIfNotNull(predicate);
 
         if (predicate == null) {
 
@@ -186,16 +182,16 @@ linqJs.linqCore = (function () {
     };
 
     /// last
-    linqCore.prototype.last = function (items, lambda) {
+    linqCore.prototype.last = function (items, predicate) {
 
-        if (lambda == null) {
+        if (predicate == null) {
 
             this.ensureItems(items);
 
             return items[items.length - 1];
         }
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         var item;
         var idx;
@@ -203,7 +199,7 @@ linqJs.linqCore = (function () {
         for (idx = items.length - 1; idx >= 0; idx -= 1) {
             item = items[idx];
 
-            if (lambda(item)) {
+            if (predicate(item)) {
                 return item;
             }
         }
@@ -212,9 +208,9 @@ linqJs.linqCore = (function () {
     };
 
     /// all
-    linqCore.prototype.all = function (items, lambda) {
+    linqCore.prototype.all = function (items, predicate) {
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         var item;
         var idx;
@@ -222,7 +218,7 @@ linqJs.linqCore = (function () {
         for (idx = 0; idx < items.length; idx += 1) {
             item = items[idx];
 
-            if (!lambda(item)) {
+            if (!predicate(item)) {
                 return false;
             }
         }
@@ -232,11 +228,11 @@ linqJs.linqCore = (function () {
 
     /** Performs an operation on each item in an array, or each property in an object
     @param {ArrayLike|object} itemsOrObject The array to iterate over, or an object whose properties (methods are ignored) to iterate over.
-    @param {function} lambda The function to run against each array item, or object property. To break out of forEch, return false from this lambda. Should be function(indexInArray, valueOfElement) { .... }
+    @param {function} predicate The function to run against each array item, or object property. To break out of forEch, return false from this predicate. Should be function(indexInArray, valueOfElement) { .... }
     */
-    linqCore.prototype.forEach = function (itemsOrObject, lambda) {
+    linqCore.prototype.forEach = function (itemsOrObject, predicate) {
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         if (this.isArray(itemsOrObject)) {
 
@@ -248,7 +244,7 @@ linqJs.linqCore = (function () {
             for (indexInArray = 0; indexInArray < itemsOrObject.length; indexInArray += 1) {
                 valueOfElement = itemsOrObject[indexInArray];
 
-                if (lambda(indexInArray, valueOfElement) === false) {
+                if (predicate(indexInArray, valueOfElement) === false) {
                     break;
                 }
             }
@@ -260,7 +256,7 @@ linqJs.linqCore = (function () {
 
             for (const property in itemsOrObject) {
 
-                if (lambda(property, itemsOrObject[property]) === false) {
+                if (predicate(property, itemsOrObject[property]) === false) {
                     break;
                 }
             }
@@ -268,47 +264,47 @@ linqJs.linqCore = (function () {
     };
 
     /// aggregate
-    linqCore.prototype.aggregate = function (items, lambda) {
+    linqCore.prototype.aggregate = function (items, predicate) {
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
         this.ensureItems(items);
         var result = null;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            result = lambda(result, valueOfElement);
+            result = predicate(result, valueOfElement);
         });
 
         return result;
     };
 
     /// aggregateWithSeed
-    linqCore.prototype.aggregateWithSeed = function (items, lambda, seed) {
+    linqCore.prototype.aggregateWithSeed = function (items, predicate, seed) {
 
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
         this.ensureItems(items);
 
         var result = seed;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            result = lambda(result, valueOfElement);
+            result = predicate(result, valueOfElement);
         });
 
         return result;
     };
 
     /// aggregateWithSeedAndResultSelector
-    linqCore.prototype.aggregateWithSeedAndResultSelector = function (items, lambda, seed, resultSelector) {
+    linqCore.prototype.aggregateWithSeedAndResultSelector = function (items, predicate, seed, resultSelector) {
 
-        this.ensureLambda(lambda);
-        this.ensureLambda(resultSelector);
+        this.ensureFunc(predicate);
+        this.ensureFunc(resultSelector);
 
         var result = seed;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            result = lambda(result, valueOfElement);
+            result = predicate(result, valueOfElement);
         });
 
         result = resultSelector(result);
@@ -332,16 +328,16 @@ linqJs.linqCore = (function () {
     };
 
     /// averageWithTransform
-    linqCore.prototype.averageWithTransform = function (items, transformerLambda) {
+    linqCore.prototype.averageWithTransform = function (items, transformerFunc) {
 
-        this.ensureLambda(transformerLambda);
+        this.ensureFunc(transformerFunc);
 
         var total = 0;
         var value;
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            value = transformerLambda(valueOfElement);
+            value = transformerFunc(valueOfElement);
             total += value;
         });
 
@@ -351,7 +347,7 @@ linqJs.linqCore = (function () {
     };
 
     /// select
-    linqCore.prototype.select = function (items, lambda) {
+    linqCore.prototype.select = function (items, transformFunc) {
 
         this.ensureItems(items, true);
 
@@ -360,7 +356,7 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            item = lambda(valueOfElement, indexInArray);
+            item = transformFunc(valueOfElement, indexInArray);
             results.push(item);
         });
 
@@ -380,10 +376,10 @@ linqJs.linqCore = (function () {
     };
 
     /// contains
-    linqCore.prototype.contains = function (items, value, comparerLambda) {
+    linqCore.prototype.contains = function (items, value, comparerPredicate) {
 
-        if (typeof comparerLambda !== "function") {
-            comparerLambda = function (first, second) {
+        if (typeof comparerPredicate !== "function") {
+            comparerPredicate = function (first, second) {
                 return first == second;
             };
         }
@@ -392,7 +388,7 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (comparerLambda(valueOfElement, value)) {
+            if (comparerPredicate(valueOfElement, value)) {
                 result = true;
                 return false; // break out of forEach
             }
@@ -420,14 +416,14 @@ linqJs.linqCore = (function () {
     };
 
     /// distinct
-    linqCore.prototype.distinct = function (items, comparerLambda) {
+    linqCore.prototype.distinct = function (items, comparerPredicate) {
 
         var self = this;
         var results = [];
 
         self.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (!self.contains(results, valueOfElement, comparerLambda)) {
+            if (!self.contains(results, valueOfElement, comparerPredicate)) {
                 results.push(valueOfElement);
             }
         });
@@ -446,24 +442,24 @@ linqJs.linqCore = (function () {
     };
 
     /// except
-    linqCore.prototype.except = function (firstItems, secondItems, comparerLambda) {
+    linqCore.prototype.except = function (firstItems, secondItems, comparerPredicate) {
 
         var self = this;
         var results = [];
 
-        firstItems = this.distinct(firstItems, comparerLambda);
-        secondItems = this.distinct(secondItems, comparerLambda);
+        firstItems = this.distinct(firstItems, comparerPredicate);
+        secondItems = this.distinct(secondItems, comparerPredicate);
 
         this.forEach(firstItems, function (indexInArray, valueOfElement) {
 
-            if (!self.contains(secondItems, valueOfElement, comparerLambda)) {
+            if (!self.contains(secondItems, valueOfElement, comparerPredicate)) {
                 results.push(valueOfElement);
             }
         });
 
         this.forEach(secondItems, function (indexInArray, valueOfElement) {
 
-            if (!self.contains(firstItems, valueOfElement, comparerLambda)) {
+            if (!self.contains(firstItems, valueOfElement, comparerPredicate)) {
                 results.push(valueOfElement);
             }
         });
@@ -472,16 +468,16 @@ linqJs.linqCore = (function () {
     };
 
     /// intersect
-    linqCore.prototype.intersect = function (firstItems, secondItems, comparerLambda) {
+    linqCore.prototype.intersect = function (firstItems, secondItems, comparerPredicate) {
 
         var self = this;
         var results = [];
 
-        firstItems = this.distinct(firstItems, comparerLambda);
+        firstItems = this.distinct(firstItems, comparerPredicate);
 
         this.forEach(firstItems, function (indexInArray, valueOfElement) {
 
-            if (self.contains(secondItems, valueOfElement, comparerLambda)) {
+            if (self.contains(secondItems, valueOfElement, comparerPredicate)) {
                 results.push(valueOfElement);
             }
         });
@@ -490,10 +486,10 @@ linqJs.linqCore = (function () {
     };
 
     /// max
-    linqCore.prototype.max = function (items, comparerLambda) {
+    linqCore.prototype.max = function (items, comparerPredicate) {
 
-        if (typeof comparerLambda !== "function") {
-            comparerLambda = function (first, second) {
+        if (typeof comparerPredicate !== "function") {
+            comparerPredicate = function (first, second) {
                 return first > second;
             };
         }
@@ -502,7 +498,7 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (!result || comparerLambda(valueOfElement, result)) {
+            if (!result || comparerPredicate(valueOfElement, result)) {
                 result = valueOfElement;
             }
         });
@@ -511,10 +507,10 @@ linqJs.linqCore = (function () {
     };
 
     /// min
-    linqCore.prototype.min = function (items, comparerLambda) {
+    linqCore.prototype.min = function (items, comparerPredicate) {
 
-        if (typeof comparerLambda !== "function") {
-            comparerLambda = function (first, second) {
+        if (typeof comparerPredicate !== "function") {
+            comparerPredicate = function (first, second) {
                 return first < second;
             };
         }
@@ -523,7 +519,7 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (!result || comparerLambda(valueOfElement, result)) {
+            if (!result || comparerPredicate(valueOfElement, result)) {
                 result = valueOfElement;
             }
         });
@@ -532,30 +528,30 @@ linqJs.linqCore = (function () {
     };
 
     /// orderBy
-    linqCore.prototype.orderBy = function (items, keySelectorLambda, comparerLambda) {
+    linqCore.prototype.orderBy = function (items, keySelectorFunc, comparerPredicate) {
 
         this.ensureItems(items, true);
 
         items = items.slice(); // Clone the array so .sort doesn't re-order the original
 
-        this.ensureLambdaIfNotNull(keySelectorLambda);
+        this.ensureFuncIfNotNull(keySelectorFunc);
 
-        this.ensureLambdaIfNotNull(comparerLambda);
+        this.ensureFuncIfNotNull(comparerPredicate);
 
-        if (keySelectorLambda == null) {
-            keySelectorLambda = function (o) { return o; };
+        if (keySelectorFunc == null) {
+            keySelectorFunc = function (o) { return o; };
         }
 
         var comparefn;
 
-        if (comparerLambda == null) {
+        if (comparerPredicate == null) {
             comparefn = function (a, b) {
 
-                if (keySelectorLambda(a) < keySelectorLambda(b)) {
+                if (keySelectorFunc(a) < keySelectorFunc(b)) {
                     return -1;
                 }
 
-                if (keySelectorLambda(a) > keySelectorLambda(b)) {
+                if (keySelectorFunc(a) > keySelectorFunc(b)) {
                     return 1;
                 }
 
@@ -564,10 +560,10 @@ linqJs.linqCore = (function () {
             };
         } else {
             comparefn = function (a, b) {
-                a = keySelectorLambda(a);
-                b = keySelectorLambda(b);
+                a = keySelectorFunc(a);
+                b = keySelectorFunc(b);
 
-                return comparerLambda(a, b);
+                return comparerPredicate(a, b);
             };
         }
 
@@ -577,25 +573,25 @@ linqJs.linqCore = (function () {
     };
 
     /// orderByDescending
-    linqCore.prototype.orderByDescending = function (items, keySelectorLambda, comparerLambda) {
+    linqCore.prototype.orderByDescending = function (items, keySelectorFunc, comparerPredicate) {
 
-        return this.orderBy(items, keySelectorLambda, comparerLambda).reverse();
+        return this.orderBy(items, keySelectorFunc, comparerPredicate).reverse();
     };
 
     /// sum
 
     /** sum Calculates the sum total of the items
     * @param {ArrayLike} items The array to sum up.
-    * @param {function(any, number):number} [valueSelectorLambda] Optional function that transforms, or selects a property of, the items before summing them.
+    * @param {function(any, number):number} [valueSelectorFunc] Optional function that transforms, or selects a property of, the items before summing them.
     * @returns {number} Returns a number representing the sum total.
     */
-    linqCore.prototype.sum = function (items, valueSelectorLambda) {
+    linqCore.prototype.sum = function (items, valueSelectorFunc) {
 
         this.ensureItems(items, true);
 
-        if (valueSelectorLambda == null) {
+        if (valueSelectorFunc == null) {
 
-            valueSelectorLambda = function (o) {
+            valueSelectorFunc = function (o) {
 
                 var parsed = parseFloat(o);
 
@@ -607,21 +603,21 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            total += valueSelectorLambda(valueOfElement, indexInArray);
+            total += valueSelectorFunc(valueOfElement, indexInArray);
         });
 
         return total;
     };
 
     /// single
-    linqCore.prototype.single = function (items, lambda) {
+    linqCore.prototype.single = function (items, predicate) {
 
         this.ensureItems(items);
 
         var count = 0;
 
-        if (typeof lambda !== "function") {
-            lambda = function () {
+        if (typeof predicate !== "function") {
+            predicate = function () {
                 return true;
             };
         }
@@ -630,7 +626,7 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (lambda(valueOfElement)) {
+            if (predicate(valueOfElement)) {
                 result = valueOfElement;
                 count += 1;
             }
@@ -647,11 +643,11 @@ linqJs.linqCore = (function () {
     /**
      * singleOrDefault
      * @param {ArrayLike} items
-     * @param {predicateFunc} lambda
+     * @param {predicateFunc} predicate
      * @param {any} defaultValue
      * @returns {any}
      */
-    linqCore.prototype.singleOrDefault = function (items, lambda, defaultValue) {
+    linqCore.prototype.singleOrDefault = function (items, predicate, defaultValue) {
 
         this.ensureItems(items, true);
 
@@ -661,8 +657,8 @@ linqJs.linqCore = (function () {
 
         var count = 0;
 
-        if (typeof lambda !== "function") {
-            lambda = function () {
+        if (typeof predicate !== "function") {
+            predicate = function () {
                 return true;
             };
         }
@@ -671,7 +667,7 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            if (lambda(valueOfElement)) {
+            if (predicate(valueOfElement)) {
                 result = valueOfElement;
                 count += 1;
             }
@@ -702,12 +698,12 @@ linqJs.linqCore = (function () {
     };
 
     /// selectMany
-    linqCore.prototype.selectMany = function (items, collectionSelectorLambda, transformLambda) {
+    linqCore.prototype.selectMany = function (items, collectionSelectorFunc, transformFunc) {
 
         var self = this;
         this.ensureItems(items, true);
-        this.ensureLambda(collectionSelectorLambda);
-        this.ensureLambdaIfNotNull(transformLambda);
+        this.ensureFunc(collectionSelectorFunc);
+        this.ensureFuncIfNotNull(transformFunc);
 
         if (items.length === 0) {
             return items;
@@ -719,12 +715,12 @@ linqJs.linqCore = (function () {
 
         this.forEach(items, function (indexInArray, valueOfElement) {
 
-            subElements = collectionSelectorLambda(valueOfElement);
+            subElements = collectionSelectorFunc(valueOfElement);
 
             self.forEach(subElements, function (subIndexInArray, subValueOfElement) {
 
-                if (transformLambda) {
-                    o = transformLambda(subValueOfElement, indexInArray);
+                if (transformFunc) {
+                    o = transformFunc(subValueOfElement, indexInArray);
                     result.push(o);
                 } else {
                     result.push(subValueOfElement);
@@ -736,11 +732,11 @@ linqJs.linqCore = (function () {
     };
 
     /// zip
-    linqCore.prototype.zip = function (items1, items2, lambda) {
+    linqCore.prototype.zip = function (items1, items2, predicate) {
 
         this.ensureItems(items1);
         this.ensureItems(items2);
-        this.ensureLambda(lambda);
+        this.ensureFunc(predicate);
 
         var result = [];
         var item;
@@ -748,7 +744,7 @@ linqJs.linqCore = (function () {
         this.forEach(items1, function (indexInArray, valueOfElement) {
 
             if (items2.length >= indexInArray + 1) {
-                item = lambda(valueOfElement, items2[indexInArray]);
+                item = predicate(valueOfElement, items2[indexInArray]);
                 result.push(item);
             }
             else {
@@ -760,18 +756,18 @@ linqJs.linqCore = (function () {
     };
 
     /// union
-    linqCore.prototype.union = function (firstItems, secondItems, comparerLambda) {
+    linqCore.prototype.union = function (firstItems, secondItems, comparerPredicate) {
 
         var self = this;
         var results = [];
 
-        firstItems = this.distinct(firstItems, comparerLambda);
-        secondItems = this.distinct(secondItems, comparerLambda);
+        firstItems = this.distinct(firstItems, comparerPredicate);
+        secondItems = this.distinct(secondItems, comparerPredicate);
         results.push.apply(results, firstItems);
 
         this.forEach(secondItems, function (indexInArray, valueOfElement) {
 
-            if (!self.contains(results, valueOfElement, comparerLambda)) {
+            if (!self.contains(results, valueOfElement, comparerPredicate)) {
                 results.push(valueOfElement);
             }
         });
@@ -782,10 +778,10 @@ linqJs.linqCore = (function () {
     };
 
     /// groupBy
-    linqCore.prototype.groupBy = function (items, keySelectorLambda) {
+    linqCore.prototype.groupBy = function (items, keySelectorFunc) {
 
         var self = this;
-        this.ensureLambda(keySelectorLambda);
+        this.ensureFunc(keySelectorFunc);
         var groups = [];
 
         if (items == null || items.length === 0) {
@@ -795,17 +791,17 @@ linqJs.linqCore = (function () {
         var itemGroupKey;
         /** @type {{ Key: any, Items: [] }} */
         var group;
-        var firstOrDefaultLambda = function (o) { return o.Key == itemGroupKey; };
+        var firstOrDefaultPredicate = function (o) { return o.Key == itemGroupKey; };
 
         self.forEach(items, function (indexInArray, valueOfElement) {
 
             // Get item's key
-            itemGroupKey = keySelectorLambda(valueOfElement);
+            itemGroupKey = keySelectorFunc(valueOfElement);
 
             // Look for the item's expected group
             group = self.firstOrDefault(
                 groups,
-                firstOrDefaultLambda,
+                firstOrDefaultPredicate,
                 { Key: itemGroupKey, /*Count: 0*/ Items: [] });
 
             if (/*group.Count === 0*/ group.Items.length === 0) {
@@ -935,7 +931,7 @@ linqJs.linqCore = (function () {
 
     // join
     linqCore.prototype.join = function (items) {
-        throw 'todo';
+        throw Error('todo');
     };
 
     /**

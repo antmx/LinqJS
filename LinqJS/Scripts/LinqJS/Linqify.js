@@ -12,7 +12,7 @@ const linqCoreModule = require('./linq-core');
  * Removes Linq functions from a previously linqified array.
  * @param {ArrayLike} list 
  */
-/*export*/ 
+/*export*/
 function deLinqify(list) {
 
     delete list._linqified;
@@ -53,7 +53,7 @@ function deLinqify(list) {
     delete list.takeWhile;
     delete list.skip;
     delete list.skipWhile;
-    delete list.ensureLambda;
+    delete list.ensureFunc;
     delete list.ensureItems;
     delete list.delinqify;
 }
@@ -182,29 +182,29 @@ function linqify(list) {
     // Add extra methods to the INSTANCE
 
     extend(list, {
-        where: function (lambda) {
-            var filtered = _linqCore.where(this, lambda);
+        where: function (predicate) {
+            var filtered = _linqCore.where(this, predicate);
             return linqify(filtered);
         }
     });
 
-    extend(list, { any: function (lambda) { return _linqCore.any(this, lambda); } });
-    extend(list, { first: function (lambda) { return _linqCore.first(this, lambda); } });
-    extend(list, { firstOrDefault: function (lambda, defaultValue) { return _linqCore.firstOrDefault(this, lambda, defaultValue); } });
-    extend(list, { last: function (lambda) { return _linqCore.last(this, lambda); } });
-    extend(list, { all: function (lambda) { return _linqCore.all(this, lambda); } });
-    extend(list, { forEach: function (lambda) { _linqCore.forEach(this, lambda); } });
+    extend(list, { any: function (predicate) { return _linqCore.any(this, predicate); } });
+    extend(list, { first: function (predicate) { return _linqCore.first(this, predicate); } });
+    extend(list, { firstOrDefault: function (predicate, defaultValue) { return _linqCore.firstOrDefault(this, predicate, defaultValue); } });
+    extend(list, { last: function (predicate) { return _linqCore.last(this, predicate); } });
+    extend(list, { all: function (predicate) { return _linqCore.all(this, predicate); } });
+    extend(list, { forEach: function (predicate) { _linqCore.forEach(this, predicate); } });
     //extend(list, { getEnumerator: _linqCore.getEnumerator });
     //extend(list, { getEnumerator: function () { return new Utilities.Enumerator(this); } });
-    extend(list, { aggregate: function (lambda) { return _linqCore.aggregate(this, lambda); } });
-    extend(list, { aggregateWithSeed: function (lambda, seed) { return _linqCore.aggregateWithSeed(this, lambda, seed); } });
-    extend(list, { aggregateWithSeedAndResultSelector: function (lambda, seed, resultSelector) { return _linqCore.aggregateWithSeedAndResultSelector(this, lambda, seed, resultSelector); } });
+    extend(list, { aggregate: function (predicate) { return _linqCore.aggregate(this, predicate); } });
+    extend(list, { aggregateWithSeed: function (predicate, seed) { return _linqCore.aggregateWithSeed(this, predicate, seed); } });
+    extend(list, { aggregateWithSeedAndResultSelector: function (predicate, seed, resultSelector) { return _linqCore.aggregateWithSeedAndResultSelector(this, predicate, seed, resultSelector); } });
     extend(list, { average: function () { return _linqCore.average(this); } });
-    extend(list, { averageWithTransform: function (transformerLambda) { return _linqCore.averageWithTransform(this, transformerLambda); } });
+    extend(list, { averageWithTransform: function (transformerFunc) { return _linqCore.averageWithTransform(this, transformerFunc); } });
 
     extend(list, {
-        select: function (lambda) {
-            var selected = _linqCore.select(this, lambda);
+        select: function (transformFunc) {
+            var selected = _linqCore.select(this, transformFunc);
             return linqify(selected);
         }
     });
@@ -216,13 +216,13 @@ function linqify(list) {
         }
     });
 
-    extend(list, { contains: function (value, comparerLambda) { return _linqCore.contains(this, value, comparerLambda); } });
+    extend(list, { contains: function (value, comparerPredicate) { return _linqCore.contains(this, value, comparerPredicate); } });
     extend(list, { count: function () { return _linqCore.count(this); } });
     extend(list, { defaultIfEmpty: function (defaultValue) { return _linqCore.defaultIfEmpty(this, defaultValue); } });
 
     extend(list, {
-        distinct: function (comparerLambda) {
-            var distincts = _linqCore.distinct(this, comparerLambda);
+        distinct: function (comparerPredicate) {
+            var distincts = _linqCore.distinct(this, comparerPredicate);
             return linqify(distincts);
         }
     });
@@ -230,39 +230,39 @@ function linqify(list) {
     extend(list, { elementAt: function (index) { return _linqCore.elementAt(this, index); } });
 
     extend(list, {
-        except: function (secondItems, comparerLambda) {
-            var excepted = _linqCore.except(this, secondItems, comparerLambda);
+        except: function (secondItems, comparerPredicate) {
+            var excepted = _linqCore.except(this, secondItems, comparerPredicate);
             return linqify(excepted);
         }
     });
 
     extend(list, {
-        intersect: function (secondItems, comparerLambda) {
-            var intersected = _linqCore.intersect(this, secondItems, comparerLambda);
+        intersect: function (secondItems, comparerPredicate) {
+            var intersected = _linqCore.intersect(this, secondItems, comparerPredicate);
             return linqify(intersected);
         }
     });
 
-    extend(list, { max: function (comparerLambda) { return _linqCore.max(this, comparerLambda); } });
-    extend(list, { min: function (comparerLambda) { return _linqCore.min(this, comparerLambda); } });
+    extend(list, { max: function (comparerPredicate) { return _linqCore.max(this, comparerPredicate); } });
+    extend(list, { min: function (comparerPredicate) { return _linqCore.min(this, comparerPredicate); } });
 
     extend(list, {
-        orderBy: function (keySelectorLambda, comparerLambda) {
-            var ordered = _linqCore.orderBy(this, keySelectorLambda, comparerLambda);
+        orderBy: function (keySelectorFunc, comparerPredicate) {
+            var ordered = _linqCore.orderBy(this, keySelectorFunc, comparerPredicate);
             return linqify(ordered);
         }
     });
 
     extend(list, {
-        orderByDescending: function (keySelectorLambda, comparerLambda) {
-            var ordered = _linqCore.orderByDescending(this, keySelectorLambda, comparerLambda);
+        orderByDescending: function (keySelectorFunc, comparerPredicate) {
+            var ordered = _linqCore.orderByDescending(this, keySelectorFunc, comparerPredicate);
             return linqify(ordered);
         }
     });
 
-    extend(list, { sum: function (valueSelectorLambda) { return _linqCore.sum(this, valueSelectorLambda); } });
-    extend(list, { single: function (lambda) { return _linqCore.single(this, lambda); } });
-    extend(list, { singleOrDefault: function (lambda, defaultValue) { return _linqCore.singleOrDefault(this, lambda, defaultValue); } });
+    extend(list, { sum: function (valueSelectorFunc) { return _linqCore.sum(this, valueSelectorFunc); } });
+    extend(list, { single: function (predicate) { return _linqCore.single(this, predicate); } });
+    extend(list, { singleOrDefault: function (predicate, defaultValue) { return _linqCore.singleOrDefault(this, predicate, defaultValue); } });
 
     extend(list, {
         reverse: function () {
@@ -272,29 +272,29 @@ function linqify(list) {
     });
 
     extend(list, {
-        selectMany: function (collectionSelectorLambda, transformLambda) {
-            var many = _linqCore.selectMany(this, collectionSelectorLambda, transformLambda);
+        selectMany: function (collectionSelectorFunc, transformFunc) {
+            var many = _linqCore.selectMany(this, collectionSelectorFunc, transformFunc);
             return linqify(many);
         }
     });
 
     extend(list, {
-        zip: function (items2, lambda) {
-            var zipped = _linqCore.zip(this, items2, lambda);
+        zip: function (items2, predicate) {
+            var zipped = _linqCore.zip(this, items2, predicate);
             return linqify(zipped);
         }
     });
 
     extend(list, {
-        union: function (secondItems, comparerLambda) {
-            var unioned = _linqCore.union(this, secondItems, comparerLambda);
+        union: function (secondItems, comparerPredicate) {
+            var unioned = _linqCore.union(this, secondItems, comparerPredicate);
             return linqify(unioned);
         }
     });
 
     extend(list, {
-        groupBy: function (keySelectorLambda) {
-            var grouped = _linqCore.groupBy(this, keySelectorLambda);
+        groupBy: function (keySelectorFunc) {
+            var grouped = _linqCore.groupBy(this, keySelectorFunc);
             return linqify(grouped);
         }
     });
@@ -335,13 +335,13 @@ function linqify(list) {
     });
 
     // Also include these 'internal' methods
-    extend(list, { ensureLambda: function (lambda) { return _linqCore.ensureLambda(lambda); } });
+    extend(list, { ensureFunc: function (func) { return _linqCore.ensureFunc(func); } });
+    extend(list, { ensureFuncIfNotNull: function (func) { return _linqCore.ensureFuncIfNotNull(func); } });
     extend(list, { ensureItems: function (list, canBeEmpty) { return _linqCore.ensureItems(list, canBeEmpty); } });
 
     extend(list, {
-        delinqify: function (predicate) {
-            var skipped = _linqCore.skipWhile(this, predicate);
-            return linqify(skipped);
+        delinqify: function () {
+            deLinqify(this);
         }
     });
 
