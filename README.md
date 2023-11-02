@@ -11,4 +11,6 @@ let firstOver4times10 = _items
     .where(function (i) { return i > 4 })
     .select((i) => i * 10)
     .first();
+
+// firstOver4times10 = 50
 ```
