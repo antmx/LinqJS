@@ -3,7 +3,11 @@
 
 Code example
 ```js
+/// <reference path="./linqify.js" />
+
 let _items = [1, 2, 3, 4, 5, 6, 7, 8];
+
+// linqify.js automatically adds .linqify() and .deLinqify() methods to arrays
 
 _items.linqify();
 
