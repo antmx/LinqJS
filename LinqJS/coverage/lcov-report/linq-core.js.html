@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.23% </span>
+                <span class="strong">95.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>939/986</span>
+                <span class='fraction'>944/991</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.23% </span>
+                <span class="strong">95.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>939/986</span>
+                <span class='fraction'>944/991</span>
             </div>
         
             
@@ -1048,7 +1048,12 @@
 <a name='L983'></a><a href='#L983'>983</a>
 <a name='L984'></a><a href='#L984'>984</a>
 <a name='L985'></a><a href='#L985'>985</a>
-<a name='L986'></a><a href='#L986'>986</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L986'></a><a href='#L986'>986</a>
+<a name='L987'></a><a href='#L987'>987</a>
+<a name='L988'></a><a href='#L988'>988</a>
+<a name='L989'></a><a href='#L989'>989</a>
+<a name='L990'></a><a href='#L990'>990</a>
+<a name='L991'></a><a href='#L991'>991</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1066,8 +1071,8 @@
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">102x</span>
-<span class="cline-any cline-yes">102x</span>
+<span class="cline-any cline-yes">103x</span>
+<span class="cline-any cline-yes">103x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1079,8 +1084,8 @@
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">201x</span>
-<span class="cline-any cline-yes">201x</span>
+<span class="cline-any cline-yes">202x</span>
+<span class="cline-any cline-yes">202x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">42x</span>
@@ -1259,21 +1264,26 @@
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">42x</span>
@@ -1307,7 +1317,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -2242,7 +2252,12 @@ linqJs.linqCore = (function () {
 <span class="cstat-no" title="statement not covered" >        throw new Error("Array contains no matching items");</span>
     };
 &nbsp;
-    /// all
+    /**
+     * Determines whether all elements of an array satisfy a condition
+     * @param {ArrayLike} items an array that contains the elements to apply the predicate to
+     * @param {function} predicate a function to test each item for a condition
+     * @returns {boolean} true if every element of the array passes the test in the specified predicate, or if the array is empty; otherwise, false
+     */
     linqCore.prototype.all = function (items, predicate) {
 &nbsp;
         this.ensureFunc(predicate);
@@ -2261,7 +2276,7 @@ linqJs.linqCore = (function () {
         return true;
     };
 &nbsp;
-    /** Performs an operation on each item in an array, or each property in an object
+    /** Performs an operation on each item in an array, or on each property in an object
     @param {ArrayLike|object} itemsOrObject The array to iterate over, or an object whose properties (methods are ignored) to iterate over.
     @param {function} runFunc The function to run against each array item, or object property. To break out of forEach, return false from this predicate. Should be function(indexInArray, valueOfElement) { .... }
     */
@@ -2291,8 +2306,8 @@ linqJs.linqCore = (function () {
 &nbsp;
             for (const memberName in itemsOrObject) {
 &nbsp;
-                // Ignore methods
                 if (typeof itemsOrObject[memberName] === "function") {
+                    // Ignore methods
                     continue;
                 }
 &nbsp;
@@ -3025,7 +3040,7 @@ module.exports = linqJs.linqCore;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-02T00:55:42.354Z
+                at 2023-11-02T10:32:31.881Z
             </div>
         <script src="prettify.js"></script>
         <script>

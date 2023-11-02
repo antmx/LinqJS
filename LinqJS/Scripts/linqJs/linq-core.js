@@ -100,7 +100,12 @@ linqJs.linqCore = (function () {
         return results;
     };
 
-    /// any
+    /**
+     * Determines whether any elements of an array satisfy a condition
+     * @param {ArrayLike} items an array that contains the elements to apply the predicate to
+     * @param {function?} predicate optional function to test each element for a condition
+     * @returns {boolean} true if any element of the array passes the test in the specified predicate; otherwise, false
+     */
     linqCore.prototype.any = function (items, predicate) {
 
         if (predicate == null) {
