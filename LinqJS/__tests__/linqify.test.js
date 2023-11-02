@@ -13,6 +13,7 @@ it("adds linqJs methods to an array", function () {
     linqifyModule.linqify(_items);
 
     expect(_items.where).toBeDefined();
+    expect(typeof _items.where).toEqual("function");
 });
 
 it("can be called directly on an array", function () {
@@ -20,6 +21,7 @@ it("can be called directly on an array", function () {
     _items.linqify();
 
     expect(_items.where).toBeDefined();
+    expect(typeof _items.where).toEqual("function");
 
     let results = _items.where(function (i) { return i < 4 });
 

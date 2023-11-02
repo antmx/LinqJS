@@ -83,8 +83,8 @@ test("Applies function to each string character", function () {
 
     let str = "abc";
     let strToPopulate = [];
-    let mockRunFunc = jest.fn((property, valueOfProperty) => {
-        strToPopulate[property] = valueOfProperty.toUpperCase();
+    let mockRunFunc = jest.fn((idx, valueAtIdx) => {
+        strToPopulate[idx] = valueAtIdx.toUpperCase();
     });
 
     _linqCore.forEach(

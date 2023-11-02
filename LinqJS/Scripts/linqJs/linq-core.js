@@ -25,24 +25,24 @@ linqJs.linqCore = (function () {
     };
 
     /**
-     * Checks the specified object is a function
-     * @param {any} predicate the object to test for being an function
+     * Checks the specified object is a function and throws an error if not
+     * @param {any} possibleFunc the object to test for being a function
      */
-    linqCore.prototype.ensureFunc = function (predicate) {
+    linqCore.prototype.ensureFunc = function (possibleFunc) {
 
-        if (typeof predicate !== "function") {
-            throw new Error("predicate must be a function");
+        if (typeof possibleFunc !== "function") {
+            throw new Error("possibleFunc must be a function");
         }
     };
 
     /**
-     * Checks the specified object is a function, if it isn't null
-     * @param {Function} predicate
+     * Checks the specified object is a function. If it isn't null and isn't a function, throws an error
+     * @param {Function} possibleFunc the object to test for being a function
      */
-    linqCore.prototype.ensureFuncIfNotNull = function (predicate) {
+    linqCore.prototype.ensureFuncIfNotNull = function (possibleFunc) {
 
-        if (predicate != null) {
-            this.ensureFunc(predicate);
+        if (possibleFunc != null) {
+            this.ensureFunc(possibleFunc);
         }
     };
 

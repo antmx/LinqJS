@@ -9,14 +9,13 @@ describe('linq-core', () => {
         let _linqCore;
         let _items;
 
+        // beforeAll
         beforeEach(() => {
             _linqCore = new linqCoreModule();
             _items = [1, 2, 3, 4, 5, 6, 7, 8];
         });
-
-        // beforeAll
-        // afterAll
         // afterEach
+        // afterAll
 
         test('Returns true when there are any items', () => {
 
@@ -31,6 +30,7 @@ describe('linq-core', () => {
                 _items,
                 function (i) { return i % 3 == 0; });
 
+            expect(result).toEqual(true);
             expect(result).toBeTruthy();
         });
 
@@ -39,6 +39,7 @@ describe('linq-core', () => {
                 _items,
                 function (i) { return i > 100; });
 
+            expect(result).toEqual(false);
             expect(result).toBeFalsy();
         });
 
