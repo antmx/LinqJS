@@ -1,5 +1,5 @@
 # linqJs
-## Language Integrated Query for JavaScript
+## Language Integrated Query (LINQ) for JavaScript
 
 Code example
 ```js
