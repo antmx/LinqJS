@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1698883948560" clover="3.2.0">
-  <project timestamp="1698883948560" name="All files">
+<coverage generated="1698886542465" clover="3.2.0">
+  <project timestamp="1698886542465" name="All files">
     <metrics statements="1370" coveredstatements="1255" conditionals="215" coveredconditionals="192" methods="110" coveredmethods="69" elements="1695" coveredelements="1516" complexity="0" loc="1370" ncloc="1370" packages="1" files="2" classes="2"/>
     <file name="linq-core.js" path="C:\Users\AnthonyChambers\OneDrive\code\LinqJS\LinqJS\Scripts\linqJs\linq-core.js">
       <metrics statements="986" coveredstatements="939" conditionals="181" coveredconditionals="170" methods="56" coveredmethods="54"/>
