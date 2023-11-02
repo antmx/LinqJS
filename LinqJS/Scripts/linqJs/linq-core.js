@@ -207,7 +207,12 @@ linqJs.linqCore = (function () {
         throw new Error("Array contains no matching items");
     };
 
-    /// all
+    /**
+     * Determines whether all elements of an array satisfy a condition
+     * @param {ArrayLike} items an array that contains the elements to apply the predicate to
+     * @param {function} predicate a function to test each item for a condition
+     * @returns {boolean} true if every element of the array passes the test in the specified predicate, or if the array is empty; otherwise, false
+     */
     linqCore.prototype.all = function (items, predicate) {
 
         this.ensureFunc(predicate);
@@ -226,7 +231,7 @@ linqJs.linqCore = (function () {
         return true;
     };
 
-    /** Performs an operation on each item in an array, or each property in an object
+    /** Performs an operation on each item in an array, or on each property in an object
     @param {ArrayLike|object} itemsOrObject The array to iterate over, or an object whose properties (methods are ignored) to iterate over.
     @param {function} runFunc The function to run against each array item, or object property. To break out of forEach, return false from this predicate. Should be function(indexInArray, valueOfElement) { .... }
     */
@@ -256,8 +261,8 @@ linqJs.linqCore = (function () {
 
             for (const memberName in itemsOrObject) {
 
-                // Ignore methods
                 if (typeof itemsOrObject[memberName] === "function") {
+                    // Ignore methods
                     continue;
                 }
 

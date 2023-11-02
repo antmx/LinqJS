@@ -20,6 +20,16 @@ test("Returns true when all match", function () {
 	expect(result).toEqual(expected);
 });
 
+test("Returns true when array is empty", function () {
+	let result = _linqCore.all(
+		[],
+		function (i) { return i <= 8; });
+
+	const expected = true;
+
+	expect(result).toEqual(expected);
+});
+
 test("Returns false when not all match", function () {
 	
 	let result = _linqCore.all(
