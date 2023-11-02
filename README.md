@@ -8,7 +8,7 @@ Code example
 
 let items = [1, 2, 3, 4, 5, 6, 7, 8];
 
-items.linqify(); // Adds Linq methods to the array
+items.linqify(); // Adds LINQ methods to the array instance
 
 let firstOver4times10 = items
     .where((i) => i > 4)
