@@ -9,157 +9,6 @@
 const linqCoreModule = require('./linq-core');
 
 /**
- * Removes Linq functions from a previously linqified array.
- * @param {ArrayLike} list 
- */
-/*export*/
-function deLinqify(list) {
-
-    delete list._linqified;
-    delete list.where;
-    delete list.any;
-    delete list.first;
-    delete list.firstOrDefault;
-    delete list.last;
-    delete list.all;
-    delete list.forEach;
-    delete list.aggregate;
-    delete list.aggregateWithSeed;
-    delete list.aggregateWithSeedAndResultSelector;
-    delete list.average;
-    delete list.averageWithTransform;
-    delete list.select;
-    delete list.concat;
-    delete list.contains;
-    delete list.count;
-    delete list.defaultIfEmpty;
-    delete list.distinct;
-    delete list.elementAt;
-    delete list.except;
-    delete list.intersect;
-    delete list.max;
-    delete list.min;
-    delete list.orderBy;
-    delete list.orderByDescending;
-    delete list.sum;
-    delete list.single;
-    delete list.singleOrDefault;
-    delete list.reverse;
-    delete list.selectMany;
-    delete list.zip;
-    delete list.union;
-    delete list.groupBy;
-    delete list.take;
-    delete list.takeWhile;
-    delete list.skip;
-    delete list.skipWhile;
-    delete list.ensureFunc;
-    delete list.ensureItems;
-    delete list.delinqify;
-}
-
-/**
- * Adds extra properties/functions to an INSTANCE of a type.
- * @param {any} dst
- * @returns {any}
- */
-function extend(dst) {
-
-    var hashKey = dst.$$hashKey;
-
-    _forEach(arguments, function (obj) {
-
-        if (obj !== dst) {
-            _forEach(obj, function (value, key) {
-                dst[key] = value;
-            });
-        }
-    });
-
-    setHashKey(dst, hashKey);
-
-    return dst;
-
-    function _forEach(obj, iterator, context) {
-
-        var key;
-
-        if (obj) {
-            if (isFunction(obj)) {
-                for (key in obj) {
-                    if (key != 'prototype' && key != 'length' && key != 'name' && obj.hasOwnProperty(key)) {
-                        iterator.call(context, obj[key], key);
-                    }
-                }
-            }
-            else if (obj._forEach && obj._forEach !== _forEach) {
-                obj._forEach(iterator, context);
-            }
-            else if (isArrayLike(obj)) {
-                for (key = 0; key < obj.length; key++) {
-                    iterator.call(context, obj[key], key);
-                }
-            }
-            else {
-                for (key in obj) {
-                    if (obj.hasOwnProperty(key)) {
-                        iterator.call(context, obj[key], key);
-                    }
-                }
-            }
-        }
-
-        return obj;
-    }
-
-    function isFunction(value) {
-
-        return typeof value === 'function';
-    }
-
-    function isArrayLike(obj) {
-
-        if (obj == null || isWindow(obj)) {
-            return false;
-        }
-
-        var length = obj.length;
-
-        if (obj.nodeType === 1 && length) {
-            return true;
-        }
-
-        return isString(obj) || isArray(obj) || length === 0 ||
-            typeof length === 'number' && length > 0 && (length - 1) in obj;
-    }
-
-    function isWindow(obj) {
-
-        return obj && obj.document && obj.location && obj.alert && obj.setInterval;
-    }
-
-    function isString(value) {
-
-        return typeof value === 'string';
-    }
-
-    function isArray(value) {
-
-        return Object.prototype.toString.apply(value) === '[object Array]';
-    }
-
-    function setHashKey(obj, hashKey) {
-
-        if (hashKey) {
-            obj.$$hashKey = hashKey;
-        }
-        else {
-            delete obj.$$hashKey;
-        }
-    }
-}
-
-/**
  * Adds Linq methods to an array.
  * @template T The type of the items in @list.
  * @param {Array<T>} list The array to add the Linq methods to.
@@ -356,8 +205,159 @@ function linqify(list) {
     //  Repeat
 
     return list;
+
+
+    /**
+     * Adds extra properties/functions to an INSTANCE of a type.
+     * @param {any} dst
+     * @returns {any}
+     */
+    function extend(dst) {
+
+        var hashKey = dst.$$hashKey;
+
+        _forEach(arguments, function (obj) {
+
+            if (obj !== dst) {
+                _forEach(obj, function (value, key) {
+                    dst[key] = value;
+                });
+            }
+        });
+
+        setHashKey(dst, hashKey);
+
+        return dst;
+
+        function _forEach(obj, iterator, context) {
+
+            var key;
+
+            if (obj) {
+                if (isFunction(obj)) {
+                    for (key in obj) {
+                        if (key != 'prototype' && key != 'length' && key != 'name' && obj.hasOwnProperty(key)) {
+                            iterator.call(context, obj[key], key);
+                        }
+                    }
+                }
+                else if (obj._forEach && obj._forEach !== _forEach) {
+                    obj._forEach(iterator, context);
+                }
+                else if (isArrayLike(obj)) {
+                    for (key = 0; key < obj.length; key++) {
+                        iterator.call(context, obj[key], key);
+                    }
+                }
+                else {
+                    for (key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            iterator.call(context, obj[key], key);
+                        }
+                    }
+                }
+            }
+
+            return obj;
+        }
+
+        function isFunction(value) {
+
+            return typeof value === 'function';
+        }
+
+        function isArrayLike(obj) {
+
+            if (obj == null || isWindow(obj)) {
+                return false;
+            }
+
+            var length = obj.length;
+
+            if (obj.nodeType === 1 && length) {
+                return true;
+            }
+
+            return isString(obj) || isArray(obj) || length === 0 ||
+                typeof length === 'number' && length > 0 && (length - 1) in obj;
+        }
+
+        function isWindow(obj) {
+
+            return obj && obj.document && obj.location && obj.alert && obj.setInterval;
+        }
+
+        function isString(value) {
+
+            return typeof value === 'string';
+        }
+
+        function isArray(value) {
+
+            return Object.prototype.toString.apply(value) === '[object Array]';
+        }
+
+        function setHashKey(obj, hashKey) {
+
+            if (hashKey) {
+                obj.$$hashKey = hashKey;
+            }
+            else {
+                delete obj.$$hashKey;
+            }
+        }
+    }
 }
 
+/**
+ * Removes Linq functions from a previously linqified array.
+ * @param {ArrayLike} list 
+ */
+/*export*/
+function deLinqify(list) {
+
+    delete list._linqified;
+    delete list.where;
+    delete list.any;
+    delete list.first;
+    delete list.firstOrDefault;
+    delete list.last;
+    delete list.all;
+    delete list.forEach;
+    delete list.aggregate;
+    delete list.aggregateWithSeed;
+    delete list.aggregateWithSeedAndResultSelector;
+    delete list.average;
+    delete list.averageWithTransform;
+    delete list.select;
+    delete list.concat;
+    delete list.contains;
+    delete list.count;
+    delete list.defaultIfEmpty;
+    delete list.distinct;
+    delete list.elementAt;
+    delete list.except;
+    delete list.intersect;
+    delete list.max;
+    delete list.min;
+    delete list.orderBy;
+    delete list.orderByDescending;
+    delete list.sum;
+    delete list.single;
+    delete list.singleOrDefault;
+    delete list.reverse;
+    delete list.selectMany;
+    delete list.zip;
+    delete list.union;
+    delete list.groupBy;
+    delete list.take;
+    delete list.takeWhile;
+    delete list.skip;
+    delete list.skipWhile;
+    delete list.ensureFunc;
+    delete list.ensureItems;
+    delete list.delinqify;
+}
 
 /**
  * Makes all arrays Linq-able.
