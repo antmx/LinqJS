@@ -7,7 +7,7 @@
 var linqJs = linqJs || {};
 
 /**
- * .Net Linq-like functions for JavaScript arrays - by Anthony Chambers.
+ * .Net LINQ-like functions for JavaScript arrays - by Anthony Chambers.
  */
 linqJs.linqCore = (function () {
 

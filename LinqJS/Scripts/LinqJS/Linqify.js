@@ -9,10 +9,10 @@
 const linqCoreModule = require('./linq-core');
 
 /**
- * Adds Linq methods to an array.
+ * Adds LINQ methods to an array.
  * @template T The type of the items in @list.
- * @param {Array<T>} list The array to add the Linq methods to.
- * @returns {Array<T>} Returns an array with Linq methods attached.
+ * @param {Array<T>} list The array to add the LINQ methods to.
+ * @returns {Array<T>} Returns an array with LINQ methods added.
  */
 function linqify(list) {
 
@@ -310,7 +310,7 @@ function linqify(list) {
 }
 
 /**
- * Removes Linq functions from a previously linqified array.
+ * Removes LINQ functions from a previously linqified array.
  * @param {ArrayLike} list 
  */
 /*export*/
@@ -360,8 +360,8 @@ function deLinqify(list) {
 }
 
 /**
- * Makes all arrays Linq-able.
- * @returns {LinqableArray} Returns an array with Linq functions attached.
+ * Give all arrays the ability to be self-LINQ-able, i.e. so we can do ```var someArray = [1, 2, 3]; someArray.linqify();```
+ * @returns {LinqableArray} Returns an array with LINQ functions attached.
  */
 Array.prototype.linqify = function () {
 
@@ -370,8 +370,8 @@ Array.prototype.linqify = function () {
     return this;
 };
 
-/** Stops an array being Linq-able.
- * @returns {[]} Returns an non-Linq-able.
+/** Gives all arrays the ability to remove LINQ functions from themselves, i.e. so we can do ```var someArray = [1, 2, 3]; someArray.linqify(); someArray.deLinqify();```
+ * @returns {[]} Returns an array with no LINQ functions attached to it.
  */
 Array.prototype.deLinqify = function () {
 

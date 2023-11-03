@@ -36,7 +36,7 @@ it("supports method chaining", function () {
     _items.linqify();
 
     let firstOver4times10 = _items
-        .where(function (i) { return i > 4 })
+        .where((i) => i > 4)
         .select((i) => i * 10)
         .first();
 
