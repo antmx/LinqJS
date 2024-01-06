@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <!--<Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -88,14 +88,51 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Scripts\specs\aggregate.test.js" />
-    <Content Include="Scripts\specs\aggregateWithSeed.test.js" />
-    <Content Include="Scripts\specs\aggregateWithSeedAndResultSelector.test.js" />
-    <Content Include="Scripts\specs\all.test.js" />
-    <Content Include="Scripts\specs\any.test.js" />
-    <Content Include="Scripts\specs\average.test.js" />
-    <Content Include="Scripts\specs\averageWithTransform.test.js" />
-    <Content Include="Scripts\specs\chutzpah.json" />
+    <Content Include="__tests__\aggregate.test.js" />
+    <Content Include="__tests__\aggregateWithSeed.test.js" />
+    <Content Include="__tests__\aggregateWithSeedAndResultSelector.test.js" />
+    <Content Include="__tests__\all.test.js" />
+    <Content Include="__tests__\any.test.js" />
+    <Content Include="__tests__\async.test.js" />
+    <Content Include="__tests__\average.test.js" />
+    <Content Include="__tests__\averageWithTransform.test.js" />
+    <Content Include="__tests__\concat.test.js" />
+    <Content Include="__tests__\contains.test.js" />
+    <Content Include="__tests__\count.test.js" />
+    <Content Include="__tests__\defaultIfEmpty.test.js" />
+    <Content Include="__tests__\deLinqify.test.js" />
+    <Content Include="__tests__\distinct.test.js" />
+    <Content Include="__tests__\elementAt.test.js" />
+    <Content Include="__tests__\ensureFunc.test.js" />
+    <Content Include="__tests__\enum.test.js" />
+    <Content Include="__tests__\except.test.js" />
+    <Content Include="__tests__\first.test.js" />
+    <Content Include="__tests__\firstOrDefault.test.js" />
+    <Content Include="__tests__\forEach.test.js" />
+    <Content Include="__tests__\groupBy.test.js" />
+    <Content Include="__tests__\helloWorld.test.js" />
+    <Content Include="__tests__\intersect.test.js" />
+    <Content Include="__tests__\isArray.test.js" />
+    <Content Include="__tests__\last.test.js" />
+    <Content Include="__tests__\linqify.test.js" />
+    <Content Include="__tests__\max.test.js" />
+    <Content Include="__tests__\min.test.js" />
+    <Content Include="__tests__\orderBy.test.js" />
+    <Content Include="__tests__\orderByDescending.test.js" />
+    <Content Include="__tests__\reverse.test.js" />
+    <Content Include="__tests__\select.test.js" />
+    <Content Include="__tests__\selectMany.test.js" />
+    <Content Include="__tests__\setValue.test.js" />
+    <Content Include="__tests__\single.test.js" />
+    <Content Include="__tests__\singleOrDefault.test.js" />
+    <Content Include="__tests__\skip.test.js" />
+    <Content Include="__tests__\skipWhile.test.js" />
+    <Content Include="__tests__\sum.test.js" />
+    <Content Include="__tests__\take.test.js" />
+    <Content Include="__tests__\takeWhile.test.js" />
+    <Content Include="__tests__\union.test.js" />
+    <Content Include="__tests__\where.test.js" />
+    <Content Include="__tests__\zip.test.js" />
     <None Include="lib\jquery\jquery-3.7.1.intellisense.js" />
     <Content Include="lib\jquery\jquery-3.7.1.js" />
     <Content Include="lib\jquery\jquery-3.7.1.min.js" />
@@ -106,28 +143,6 @@
     <Content Include="Scripts\linqJs\linq-core.js" />
     <Content Include="Scripts\linqJs\linqify-jquery.js" />
     <Content Include="Scripts\linqJs\typeDefs.js" />
-    <Content Include="Scripts\specs\concat.test.js" />
-    <Content Include="Scripts\specs\contains.test.js" />
-    <Content Include="Scripts\specs\count.test.js" />
-    <Content Include="Scripts\specs\defaultIfEmpty.test.js" />
-    <Content Include="Scripts\specs\distinct.test.js" />
-    <Content Include="Scripts\specs\elementAt.test.js" />
-    <Content Include="Scripts\specs\enum.test.js" />
-    <Content Include="Scripts\specs\except.test.js" />
-    <Content Include="Scripts\specs\first.test.js" />
-    <Content Include="Scripts\specs\firstOrDefault.test.js" />
-    <Content Include="Scripts\specs\forEach.test.js" />
-    <Content Include="Scripts\specs\groupBy.test.js" />
-    <Content Include="Scripts\specs\helloWorld.test.js" />
-    <Content Include="Scripts\specs\intersect.test.js" />
-    <Content Include="Scripts\specs\isArray.test.js" />
-    <Content Include="Scripts\specs\last.test.js" />
-    <Content Include="Scripts\specs\linqify.test.js" />
-    <Content Include="Scripts\specs\max.test.js" />
-    <Content Include="Scripts\specs\min.test.js" />
-    <Content Include="Scripts\specs\orderBy.test.js" />
-    <Content Include="Scripts\specs\orderByDescending.test.js" />
-    <Content Include="Scripts\specs\README.md" />
     <Content Include="lib\bootstrap\bootstrap.min.js.map" />
     <Content Include="lib\bootstrap\bootstrap.js.map" />
     <Content Include="lib\bootstrap\bootstrap.esm.min.js.map" />
@@ -142,26 +157,14 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="__tests__\chutzpah.json" />
+    <Content Include="__tests__\getEnumerator.todo" />
+    <Content Include="__tests__\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\bootstrap\favicon.ico" />
     <Content Include="Index.html" />
-    <Content Include="Scripts\specs\reverse.test.js" />
-    <Content Include="Scripts\specs\select.test.js" />
-    <Content Include="Scripts\specs\selectMany.test.js" />
-    <Content Include="Scripts\specs\setValue.test.js" />
-    <Content Include="Scripts\specs\single.test.js" />
-    <Content Include="Scripts\specs\singleOrDefault.test.js" />
-    <Content Include="Scripts\specs\skip.test.js" />
-    <Content Include="Scripts\specs\skipWhile.test.js" />
-    <Content Include="Scripts\specs\sum.test.js" />
-    <Content Include="Scripts\specs\take.test.js" />
-    <Content Include="Scripts\specs\takeWhile.test.js" />
-    <Content Include="Scripts\specs\union.test.js" />
-    <Content Include="Scripts\specs\where.test.js" />
-    <Content Include="Scripts\specs\zip.test.js" />
     <Content Include="Scripts\Utilities\Enumerator.js" />
-    <Content Include="Scripts\specs\getEnumerator.js" />
     <Content Include="Scripts\linqJs\linqify.js" />
     <Content Include="Scripts\linqJs\Tests.js" />
     <Content Include="Scripts\Utilities\Extend.js" />
