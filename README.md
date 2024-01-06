@@ -15,5 +15,5 @@ let firstOver4times10 = items
     .select((i) => i * 10)
     .first();
 
-// firstOver4times10 = 50
+// firstOver4times10 === 50
 ```
