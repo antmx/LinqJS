@@ -63,6 +63,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="jest.config.js" />
     <Content Include="linqArray.html" />
     <Content Include="jasmine.html" />
     <Content Include="packages.config" />
@@ -91,51 +92,52 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\linqArray\linqArray-test.js" />
     <Content Include="Scripts\linqArray\linqArray.js" />
-    <Content Include="__tests__\aggregate.test.js" />
-    <Content Include="__tests__\aggregateWithSeed.test.js" />
-    <Content Include="__tests__\aggregateWithSeedAndResultSelector.test.js" />
-    <Content Include="__tests__\all.test.js" />
-    <Content Include="__tests__\any.test.js" />
-    <Content Include="__tests__\async.test.js" />
-    <Content Include="__tests__\average.test.js" />
-    <Content Include="__tests__\averageWithTransform.test.js" />
-    <Content Include="__tests__\concat.test.js" />
-    <Content Include="__tests__\contains.test.js" />
-    <Content Include="__tests__\count.test.js" />
-    <Content Include="__tests__\defaultIfEmpty.test.js" />
-    <Content Include="__tests__\deLinqify.test.js" />
-    <Content Include="__tests__\distinct.test.js" />
-    <Content Include="__tests__\elementAt.test.js" />
-    <Content Include="__tests__\ensureFunc.test.js" />
-    <Content Include="__tests__\enum.test.js" />
-    <Content Include="__tests__\except.test.js" />
-    <Content Include="__tests__\first.test.js" />
-    <Content Include="__tests__\firstOrDefault.test.js" />
-    <Content Include="__tests__\forEach.test.js" />
-    <Content Include="__tests__\groupBy.test.js" />
-    <Content Include="__tests__\helloWorld.test.js" />
-    <Content Include="__tests__\intersect.test.js" />
-    <Content Include="__tests__\isArray.test.js" />
-    <Content Include="__tests__\last.test.js" />
-    <Content Include="__tests__\linqify.test.js" />
-    <Content Include="__tests__\max.test.js" />
-    <Content Include="__tests__\min.test.js" />
-    <Content Include="__tests__\orderBy.test.js" />
-    <Content Include="__tests__\orderByDescending.test.js" />
-    <Content Include="__tests__\reverse.test.js" />
-    <Content Include="__tests__\select.test.js" />
-    <Content Include="__tests__\selectMany.test.js" />
-    <Content Include="__tests__\setValue.test.js" />
-    <Content Include="__tests__\single.test.js" />
-    <Content Include="__tests__\singleOrDefault.test.js" />
-    <Content Include="__tests__\skip.test.js" />
-    <Content Include="__tests__\skipWhile.test.js" />
-    <Content Include="__tests__\sum.test.js" />
-    <Content Include="__tests__\take.test.js" />
-    <Content Include="__tests__\takeWhile.test.js" />
-    <Content Include="__tests__\union.test.js" />
-    <Content Include="__tests__\where.test.js" />
-    <Content Include="__tests__\zip.test.js" />
+    <Content Include="__tests__\linqJs\aggregate.test.js" />
+    <Content Include="__tests__\linqJs\aggregateWithSeed.test.js" />
+    <Content Include="__tests__\linqJs\aggregateWithSeedAndResultSelector.test.js" />
+    <Content Include="__tests__\linqJs\all.test.js" />
+    <Content Include="__tests__\linqJs\any.test.js" />
+    <Content Include="__tests__\linqJs\async.test.js" />
+    <Content Include="__tests__\linqJs\average.test.js" />
+    <Content Include="__tests__\linqJs\averageWithTransform.test.js" />
+    <Content Include="__tests__\linqJs\concat.test.js" />
+    <Content Include="__tests__\linqJs\contains.test.js" />
+    <Content Include="__tests__\linqJs\count.test.js" />
+    <Content Include="__tests__\linqJs\defaultIfEmpty.test.js" />
+    <Content Include="__tests__\linqJs\deLinqify.test.js" />
+    <Content Include="__tests__\linqJs\distinct.test.js" />
+    <Content Include="__tests__\linqJs\elementAt.test.js" />
+    <Content Include="__tests__\linqJs\ensureFunc.test.js" />
+    <Content Include="__tests__\linqJs\enum.test.js" />
+    <Content Include="__tests__\linqJs\except.test.js" />
+    <Content Include="__tests__\linqJs\first.test.js" />
+    <Content Include="__tests__\linqJs\firstOrDefault.test.js" />
+    <Content Include="__tests__\linqJs\forEach.test.js" />
+    <Content Include="__tests__\linqJs\groupBy.test.js" />
+    <Content Include="__tests__\linqJs\helloWorld.test.js" />
+    <Content Include="__tests__\linqJs\intersect.test.js" />
+    <Content Include="__tests__\linqJs\isArray.test.js" />
+    <Content Include="__tests__\linqJs\last.test.js" />
+    <Content Include="__tests__\linqJs\linqify.test.js" />
+    <Content Include="__tests__\linqJs\max.test.js" />
+    <Content Include="__tests__\linqJs\min.test.js" />
+    <Content Include="__tests__\linqJs\orderBy.test.js" />
+    <Content Include="__tests__\linqJs\orderByDescending.test.js" />
+    <Content Include="__tests__\linqJs\reverse.test.js" />
+    <Content Include="__tests__\linqJs\select.test.js" />
+    <Content Include="__tests__\linqJs\selectMany.test.js" />
+    <Content Include="__tests__\linqJs\setValue.test.js" />
+    <Content Include="__tests__\linqJs\single.test.js" />
+    <Content Include="__tests__\linqJs\singleOrDefault.test.js" />
+    <Content Include="__tests__\linqJs\skip.test.js" />
+    <Content Include="__tests__\linqJs\skipWhile.test.js" />
+    <Content Include="__tests__\linqJs\sum.test.js" />
+    <Content Include="__tests__\linqJs\take.test.js" />
+    <Content Include="__tests__\linqJs\takeWhile.test.js" />
+    <Content Include="__tests__\linqJs\union.test.js" />
+    <Content Include="__tests__\linqJs\where.test.js" />
+    <Content Include="__tests__\linqJs\zip.test.js" />
+    <Content Include="launch.json" />
     <None Include="lib\jquery\jquery-3.7.1.intellisense.js" />
     <Content Include="lib\jquery\jquery-3.7.1.js" />
     <Content Include="lib\jquery\jquery-3.7.1.min.js" />
@@ -160,9 +162,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="__tests__\chutzpah.json" />
-    <Content Include="__tests__\getEnumerator.todo" />
-    <Content Include="__tests__\README.md" />
+    <Content Include="__tests__\linqJs\chutzpah.json" />
+    <Content Include="__tests__\linqJs\getEnumerator.todo" />
+    <Content Include="__tests__\linqJs\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\bootstrap\favicon.ico" />
@@ -177,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="__tests__\linqArray\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

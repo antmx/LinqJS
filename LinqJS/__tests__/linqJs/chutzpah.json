@@ -1,0 +1,22 @@
+{
+  "Framework": "jasmine",
+  "FrameworkVersion": "2.0",
+  "RootReferencePathMode": "SettingsFileDirectory",
+  "EnableTestFileBatching": true,
+  "TestFileTimeout": 10000,
+  "References": [
+    {
+      "Path": "Scripts/linqJs/linq-all.js"
+    },
+    {
+      "Path": "Scripts/linqArray/linqArray.js"
+    }
+  ],
+  "Tests": [
+    {
+      //"Path": "Scripts/specs/",
+      "Path": "__tests__/",
+      "Includes": [ "*.js" ]
+    }
+  ]
+}

@@ -48,7 +48,7 @@ namespace ConsoleApp
             {
                 var items = new Person[] { };
 
-                foreach(var item in items)
+                foreach (var item in items)
                 {
 
                 }
