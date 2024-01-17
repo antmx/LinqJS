@@ -63,6 +63,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="linqArray.html" />
     <Content Include="jasmine.html" />
     <Content Include="packages.config" />
     <Content Include="lib\bootstrap\bootstrap.bundle.js" />
@@ -88,6 +89,8 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\linqArray\linqArray-test.js" />
+    <Content Include="Scripts\linqArray\linqArray.js" />
     <Content Include="__tests__\aggregate.test.js" />
     <Content Include="__tests__\aggregateWithSeed.test.js" />
     <Content Include="__tests__\aggregateWithSeedAndResultSelector.test.js" />
