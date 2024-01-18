@@ -57,7 +57,7 @@ class linqArray extends Array {
         }
 
         return true;
-    };
+    }
 
     //#endregion
 
@@ -369,7 +369,7 @@ class linqArray extends Array {
         });
 
         return results;
-    };
+    }
 
 }
 
