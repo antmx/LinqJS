@@ -278,7 +278,7 @@ class linqArray extends Array {
 
             if (comparerFn(valueOfElement, value)) {
                 result = true;
-                return false; // break out of forEach
+                return false; // break out of forEachItem
             }
         });
 
@@ -324,7 +324,7 @@ class linqArray extends Array {
             this.#ensureFunc(comparerFn);
         }
 
-        let results = new linqArray([]);
+        let results = new linqArray();
 
         this.forEachItem(function (indexInArray, valueOfElement) {
 
@@ -412,9 +412,8 @@ class linqArray extends Array {
 
     groupBy(keySelectorFn) {
 
-        let self = this;
         this.#ensureFunc(keySelectorFn);
-        let groups = new linqArray([]);
+        let groups = new linqArray();
 
         if (this.length === 0) {
             return groups;
@@ -597,9 +596,334 @@ class linqArray extends Array {
     }
 
     /// orderByDescending
-    orderByDescending  ( keySelectorFunc, comparerPredicate) {
+    orderByDescending(keySelectorFunc, comparerPredicate) {
 
-        return this.orderBy(keySelectorFunc, comparerPredicate).reverse();
+        return this.orderBy(keySelectorFunc, comparerPredicate).reverse2();
+    }
+
+    reverse2() {
+
+        if (this.length === 0) {
+            return this;
+        }
+
+        let copiedItems = this.slice(); // Clone the array so .reverse doesn't re-order the original
+
+        return new linqArray(copiedItems.reverse());
+    }
+
+    select(transformFunc) {
+
+        let results = new linqArray();
+        let item;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            item = transformFunc(valueOfElement, indexInArray);
+            results.push(item);
+        });
+
+        return results;
+    }
+
+    selectMany(collectionSelectorFn, transformFn) {
+
+        let self = this;
+        this.#ensureFunc(collectionSelectorFn);
+        this.#ensureFuncIfDefined(transformFn);
+
+        if (this.length === 0) {
+            return this;
+        }
+
+        let result = new linqArray();
+        let subElements;
+        let tranformed;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            subElements = new linqArray(collectionSelectorFn(valueOfElement));
+
+            subElements.forEachItem(function (subIndexInArray, subValueOfElement) {
+
+                if (transformFn) {
+                    tranformed = transformFn(subValueOfElement, indexInArray);
+                    result.push(tranformed);
+                } else {
+                    result.push(subValueOfElement);
+                }
+            });
+        });
+
+        return result;
+    }
+
+    setValue(value, indices) {
+
+        if (typeof indices === "number") {
+            indices = [indices];
+        }
+
+        this.#ensureItems(indices, false);
+
+        let currentDimensionArray = this;
+        let currentIndicee = -1;
+
+        for (let idx = 0; idx < indices.length; idx += 1) {
+
+            currentIndicee = indices[idx];
+
+            if (idx < indices.length - 1) {
+                currentDimensionArray = currentDimensionArray[indices[idx]];
+            }
+        }
+
+        currentDimensionArray[currentIndicee] = value;
+    }
+
+    single(predicateFn) {
+
+        this.#ensureItems(this);
+
+        let count = 0;
+
+        if (predicateFn === undefined) {
+            predicateFn = function () {
+                return true;
+            };
+        }
+        else {
+            this.#ensureFunc(predicateFn);
+        }
+
+        let result;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (predicateFn(valueOfElement)) {
+                result = valueOfElement;
+                count += 1;
+            }
+        });
+
+        switch (count) {
+            case 0: throw new Error("No match found");
+            case 1: return result;
+        }
+
+        throw new Error("More than 1 match found");
+    }
+
+    /**
+     * singleOrDefault
+     * @param {predicateFunc} predicateFn
+     * @param {any} defaultValue
+     * @returns {any}
+     */
+    singleOrDefault(predicateFn, defaultValue) {
+
+        let count = 0;
+
+        if (predicateFn === undefined) {
+            predicateFn = function () {
+                return true;
+            };
+        }
+        else {
+            this.#ensureFunc(predicateFn);
+        }
+
+        let result;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (predicateFn(valueOfElement)) {
+                result = valueOfElement;
+                count += 1;
+            }
+        });
+
+        switch (count) {
+            case 0: return defaultValue;
+            case 1: return result;
+        }
+
+        throw new Error("More than 1 match found");
+    }
+
+    /**
+     * 
+     * @param {Number} count 
+     * @returns 
+     */
+    skip(count) {
+
+        let results = new linqArray();
+
+        if (count <= 0) {
+            return results;
+        }
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (indexInArray + 1 > count) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /**
+     * 
+     * @param {*} predicateFn 
+     * @returns 
+     */
+    skipWhile(predicateFn) {
+
+        let results = new linqArray();
+        let yielding = false;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!yielding && !predicateFn(valueOfElement, indexInArray)) {
+                yielding = true;
+            }
+
+            if (yielding) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /** sum Calculates the sum total of the items
+    * @param {Function(any, number):number} [valueSelectorFn] Optional function that transforms, or selects a property of, the items before summing them.
+    * @returns {number} Returns a number representing the sum total.
+    */
+    sum(valueSelectorFn) {
+
+        if (valueSelectorFn === undefined) {
+
+            valueSelectorFn = function (o) {
+
+                let parsed = parseFloat(o);
+
+                return isNaN(parsed) ? 0 : parsed;
+            };
+        }
+        else {
+            this.#ensureFunc(valueSelectorFn)
+        }
+
+        let total = 0;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            total += valueSelectorFn(valueOfElement, indexInArray);
+        });
+
+        return total;
+    }
+
+    /// take
+    take(count) {
+
+        let results = new linqArray();
+
+        if (count <= 0) {
+            return results;
+        }
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (indexInArray < count) {
+                results.push(valueOfElement);
+            }
+            else {
+                return false;
+            }
+        });
+
+        return results;
+    }
+
+    /**
+     * 
+     * @param {Function} predicateFn e.g. (val, idx) => idx < 4
+     * @returns 
+     */
+    takeWhile(predicateFn) {
+
+        this.#ensureFunc(predicateFn);
+
+        let results = new linqArray();
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (predicateFn(valueOfElement, indexInArray)) {
+                results.push(valueOfElement);
+            } else {
+                return false; // break out of forEachItem
+            }
+        });
+
+        return results;
+    }
+
+    /**
+     * 
+     * @param {ArrayLike} secondItems 
+     * @param {Function=} comparerFn 
+     * @returns 
+     */
+    union(secondItems, comparerFn) {
+
+        let results = new linqArray();
+        let firstItems = this.distinct(comparerFn);
+
+        secondItems = new linqArray(secondItems);
+        secondItems = secondItems.distinct(comparerFn);
+
+        results.push(...firstItems);
+
+        secondItems.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!results.contains(valueOfElement, comparerFn)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /**
+     * Applies a specified function to the corresponding elements of two sequences, producing a sequence of the results
+     * @param {ArrayLike} items2 
+     * @param {Function} fn 
+     * @returns 
+     */
+    zip(items2, fn) {
+
+        this.#ensureItems(items2);
+        this.#ensureFunc(fn);
+
+        let result = new linqArray([]);
+        let item;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (items2.length >= indexInArray + 1) {
+                item = fn(valueOfElement, items2[indexInArray]);
+                result.push(item);
+            }
+            else {
+                return false; // break out of forEachItem
+            }
+        });
+
+        return result;
     }
 
 }
