@@ -59,6 +59,17 @@ class linqArray extends Array {
         return true;
     }
 
+    /**
+     * Checks the specified object is a function. If it isn't undefined and isn't a function, throws an error
+     * @param {Function} possibleFunc the object to test for being a function
+     */
+    #ensureFuncIfDefined(possibleFunc) {
+
+        if (possibleFunc !== undefined) {
+            this.#ensureFunc(possibleFunc);
+        }
+    }
+
     //#endregion
 
     /**
@@ -364,6 +375,81 @@ class linqArray extends Array {
         secondItems.forEachItem(function (indexInArray, valueOfElement) {
 
             if (!firstItems.contains(valueOfElement, comparerFn)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    firstOrDefault(predicateFn, defaultValue) {
+
+        this.#ensureFuncIfDefined(predicateFn);
+
+        if (predicateFn == null) {
+
+            this.#ensureItems(this, true);
+
+            return this.length === 0 ? defaultValue : this[0];
+        }
+
+        for (let idx = 0, itm; idx < this.length; idx += 1) {
+            itm = this[idx];
+
+            if (predicateFn(itm)) {
+                return itm;
+            }
+        }
+
+        return defaultValue;
+    }
+
+    groupBy(keySelectorFn) {
+
+        let self = this;
+        this.#ensureFunc(keySelectorFn);
+        let groups = new linqArray([]);
+
+        if (this.length === 0) {
+            return groups;
+        }
+
+        let itemGroupKey;
+        /** @type {{ Key: any, Items: [] }} */
+        let group;
+        let firstOrDefaultPredicate = function (o) { return o.Key == itemGroupKey; };
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            // Get item's key
+            itemGroupKey = keySelectorFn(valueOfElement);
+
+            // Look for the item's expected group
+            group = groups.firstOrDefault(
+                firstOrDefaultPredicate,
+                { Key: itemGroupKey, Items: [] });
+
+            if (group.Items.length === 0) {
+                groups.push(group);
+            }
+
+            group.Items.push(valueOfElement);
+        });
+
+        return groups;
+    }
+
+    intersect(secondItems, comparerFn) {
+
+        var self = this;
+        var results = [];
+
+        let firstItems = this.distinct(comparerFn);
+        secondItems = new linqArray(secondItems);
+
+        firstItems.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (secondItems.contains(valueOfElement, comparerFn)) {
                 results.push(valueOfElement);
             }
         });
