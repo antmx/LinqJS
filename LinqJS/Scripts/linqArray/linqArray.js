@@ -1,5 +1,5 @@
 ﻿/**
- * An array with Linq functions.
+ * An array with LINQ-like functions.
  */
 class linqArray extends Array {
 
@@ -551,6 +551,56 @@ class linqArray extends Array {
         return result;
     }
 
+    /// orderBy
+    orderBy(keySelectorFunc, comparerPredicate) {
+
+        this.#ensureItems(this, true);
+
+        let items = this.slice(); // Clone the array so .sort doesn't re-order the original
+
+        this.#ensureFuncIfDefined(keySelectorFunc);
+
+        this.#ensureFuncIfDefined(comparerPredicate);
+
+        if (keySelectorFunc === undefined) {
+            keySelectorFunc = function (o) { return o; };
+        }
+
+        let comparefn;
+
+        if (comparerPredicate === undefined) {
+            comparefn = function (a, b) {
+
+                if (keySelectorFunc(a) < keySelectorFunc(b)) {
+                    return -1;
+                }
+
+                if (keySelectorFunc(a) > keySelectorFunc(b)) {
+                    return 1;
+                }
+
+                return 0;
+
+            };
+        } else {
+            comparefn = function (a, b) {
+                a = keySelectorFunc(a);
+                b = keySelectorFunc(b);
+
+                return comparerPredicate(a, b);
+            };
+        }
+
+        items.sort(comparefn);
+
+        return new linqArray(items);
+    }
+
+    /// orderByDescending
+    orderByDescending  ( keySelectorFunc, comparerPredicate) {
+
+        return this.orderBy(keySelectorFunc, comparerPredicate).reverse();
+    }
 
 }
 
