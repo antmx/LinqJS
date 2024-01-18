@@ -1,0 +1,1 @@
+# The folder contains linqArray Jest tests

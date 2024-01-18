@@ -352,8 +352,8 @@ class linqArray extends Array {
 
     /**
      * Produces the set difference of this array and another array
-     * @param {*} secondItems 
-     * @param {*} comparerFn 
+     * @param {[]} secondItems 
+     * @param {Function=} comparerFn 
      * @returns 
      */
     except(secondItems, comparerFn) {
@@ -382,6 +382,12 @@ class linqArray extends Array {
         return results;
     }
 
+    /**
+     * 
+     * @param {Function=} predicateFn 
+     * @param {*} defaultValue 
+     * @returns 
+     */
     firstOrDefault(predicateFn, defaultValue) {
 
         this.#ensureFuncIfDefined(predicateFn);
@@ -439,10 +445,15 @@ class linqArray extends Array {
         return groups;
     }
 
+    /**
+     * 
+     * @param {[]} secondItems 
+     * @param {Function=} comparerFn 
+     * @returns 
+     */
     intersect(secondItems, comparerFn) {
 
-        var self = this;
-        var results = [];
+        let results = [];
 
         let firstItems = this.distinct(comparerFn);
         secondItems = new linqArray(secondItems);
@@ -457,6 +468,11 @@ class linqArray extends Array {
         return results;
     }
 
+    /**
+     * 
+     * @param {Function=} predicateFn 
+     * @returns 
+     */
     last(predicateFn) {
 
         if (predicateFn === undefined) {
@@ -479,7 +495,11 @@ class linqArray extends Array {
         throw new Error("Array contains no matching items");
     }
 
-
+    /**
+     * 
+     * @param {Function=} comparerFn 
+     * @returns 
+     */
     max(comparerFn) {
 
         if (comparerFn === undefined) {
@@ -491,7 +511,7 @@ class linqArray extends Array {
             this.#ensureFunc(comparerFn);
         }
 
-        var result;
+        let result;
 
         this.forEachItem(function (indexInArray, valueOfElement) {
 
@@ -503,9 +523,14 @@ class linqArray extends Array {
         return result;
     }
 
+    /**
+     * 
+     * @param {Function=} comparerFn 
+     * @returns 
+     */
     min(comparerFn) {
 
-        if (comparerFn == undefined) {
+        if (comparerFn === undefined) {
             comparerFn = function (first, second) {
                 return first < second;
             };
@@ -514,7 +539,7 @@ class linqArray extends Array {
             this.#ensureFunc(comparerFn);
         }
 
-        var result;
+        let result;
 
         this.forEachItem(function (indexInArray, valueOfElement) {
 
