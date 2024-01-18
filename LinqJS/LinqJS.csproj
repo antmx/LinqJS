@@ -92,6 +92,13 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\linqArray\linqArray-test.js" />
     <Content Include="Scripts\linqArray\linqArray.js" />
+    <Content Include="__tests__\linqArray\aggregate.test.js" />
+    <Content Include="__tests__\linqArray\all.test.js" />
+    <Content Include="__tests__\linqArray\any.test.js" />
+    <Content Include="__tests__\linqArray\average.test.js" />
+    <Content Include="__tests__\linqArray\concat.test.js" />
+    <Content Include="__tests__\linqArray\forEachItem.test.js" />
+    <Content Include="__tests__\linqArray\where.test.js" />
     <Content Include="__tests__\linqJs\aggregate.test.js" />
     <Content Include="__tests__\linqJs\aggregateWithSeed.test.js" />
     <Content Include="__tests__\linqJs\aggregateWithSeedAndResultSelector.test.js" />
@@ -179,7 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="__tests__\linqArray\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

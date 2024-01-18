@@ -7,13 +7,6 @@ const linqArray = require('../../Scripts/linqArray/linqArray');
  */
 let _items;
 
-let _obj = {
-    a: 1,
-    b: 2,
-    c: 3,
-    d: function () { }
-};
-
 beforeEach(function () {
     _items =new linqArray( [1, 2, 3, 4, 5, 6, 7, 8])        ;
 });

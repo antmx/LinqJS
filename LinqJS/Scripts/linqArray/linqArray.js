@@ -235,14 +235,141 @@ class linqArray extends Array {
      * 
      * @param {[]=} additionalItems 
      */
-    concat (additionalItems) {
-        
+    concat(additionalItems) {
+
         let result = new linqArray(this);
 
         result.push(...additionalItems);
 
         return result;
-    };    
+    }
+
+    /**
+     * 
+     * @param {*} value 
+     * @param {Function=} comparerFn 
+     * @returns 
+     */
+    contains(value, comparerFn) {
+
+        if (comparerFn === undefined) {
+            comparerFn = function (first, second) {
+                return first == second;
+            };
+        }
+        else {
+            this.#ensureFunc(comparerFn);
+        }
+
+        let result = false;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (comparerFn(valueOfElement, value)) {
+                result = true;
+                return false; // break out of forEach
+            }
+        });
+
+        return result;
+    }
+
+    /**
+     * Gets or sets the length of the array. This is a number one higher than the highest index in the array.
+     * @param {Number=} len 
+     * @returns 
+     */
+    count(len) {
+
+        if (len !== undefined) {
+            this.length = len;
+        }
+
+        return this.length;
+    }
+
+    /**
+     * Checks if the array is empty. If not, the array is returned; otherwise, a new array containing the default value is returned.
+     * @param {*} defaultValue 
+     * @returns 
+     */
+    // defaultIfEmpty(defaultValue) {
+
+    //     if (this.length > 0) {
+    //         return this;
+    //     }
+
+    //     return new linqArray([defaultValue]);
+    // }
+
+    /**
+     * Returns distinct elements from a sequence.
+     * @param {Function=} comparerFn Optional function to compare values. If not specified, the default equality is used to compare values
+     * @returns 
+     */
+    distinct(comparerFn) {
+
+        if (comparerFn !== undefined) {
+            this.#ensureFunc(comparerFn);
+        }
+
+        let results = new linqArray([]);
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!results.contains(valueOfElement, comparerFn)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    }
+
+    /**
+     * Gets the value of the element at the specified index. If the array is smaller than the specified index, null is returned.
+     * @param {Number} index The index of the item whose value we want to return
+     * @returns 
+     */
+    elementAt(index) {
+
+        if (this.length > index) {
+            return this[index];
+        }
+
+        return null;
+    }
+
+    /**
+     * Produces the set difference of this array and another array
+     * @param {*} secondItems 
+     * @param {*} comparerFn 
+     * @returns 
+     */
+    except(secondItems, comparerFn) {
+
+        let results = new linqArray();
+
+        let firstItems = this.distinct(comparerFn);
+
+        secondItems = new linqArray(secondItems);
+        secondItems = secondItems.distinct(comparerFn);
+
+        firstItems.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!secondItems.contains(valueOfElement, comparerFn)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        secondItems.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!firstItems.contains(valueOfElement, comparerFn)) {
+                results.push(valueOfElement);
+            }
+        });
+
+        return results;
+    };
 
 }
 

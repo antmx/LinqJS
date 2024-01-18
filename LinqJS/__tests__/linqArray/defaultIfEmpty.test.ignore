@@ -1,0 +1,32 @@
+/// <reference path="../../Scripts/linqArray/linqArray.js" />
+
+const linqArray = require('../../Scripts/linqArray/linqArray');
+
+/**
+ * @type {linqArray}
+ */
+let _items;
+
+beforeEach(function () {
+
+	_items = new linqArray([1, 2, 3]);
+});
+
+test("Returns default value when list is empty", function () {
+
+	let emptyArray = new linqArray([]);
+	let result = emptyArray.defaultIfEmpty(1);
+	let expected = [1];
+
+	expect(result.length).toEqual(1);
+	expect(result).toEqual(expected);
+});
+
+test("Returns list when list is not empty", function () {
+
+	let result = _items.defaultIfEmpty(1);
+	let expected = _items;
+
+	expect(result.length).toEqual(3);
+	expect(result).toEqual(expected);
+});
