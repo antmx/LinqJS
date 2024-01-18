@@ -457,6 +457,76 @@ class linqArray extends Array {
         return results;
     }
 
+    last(predicateFn) {
+
+        if (predicateFn === undefined) {
+
+            this.#ensureItems(this);
+
+            return this[this.length - 1];
+        }
+
+        this.#ensureFunc(predicateFn);
+
+        for (let idx = this.length - 1, itm; idx >= 0; idx -= 1) {
+            itm = this[idx];
+
+            if (predicateFn(itm)) {
+                return itm;
+            }
+        }
+
+        throw new Error("Array contains no matching items");
+    }
+
+
+    max(comparerFn) {
+
+        if (comparerFn === undefined) {
+            comparerFn = function (first, second) {
+                return first > second;
+            };
+        }
+        else {
+            this.#ensureFunc(comparerFn);
+        }
+
+        var result;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!result || comparerFn(valueOfElement, result)) {
+                result = valueOfElement;
+            }
+        });
+
+        return result;
+    }
+
+    min(comparerFn) {
+
+        if (comparerFn == undefined) {
+            comparerFn = function (first, second) {
+                return first < second;
+            };
+        }
+        else {
+            this.#ensureFunc(comparerFn);
+        }
+
+        var result;
+
+        this.forEachItem(function (indexInArray, valueOfElement) {
+
+            if (!result || comparerFn(valueOfElement, result)) {
+                result = valueOfElement;
+            }
+        });
+
+        return result;
+    }
+
+
 }
 
 module.exports = linqArray;
