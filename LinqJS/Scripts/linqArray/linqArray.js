@@ -4,7 +4,7 @@
 class linqArray extends Array {
 
     /**
-     * @param {[]} [items] An optional array of items to add to the new linqArray instance
+     * @param {ArrayLike} [items] An optional array of items to add to the new linqArray instance
      */
     constructor(items) {
         if (Object.prototype.toString.call(items) === '[object Array]') {
@@ -22,11 +22,15 @@ class linqArray extends Array {
     //#region Private methods
 
     #isArray(arr) {
-        return Object.prototype.toString.call(arr) === '[object Array]';
+        return Object.prototype.toString.call(arr) === "[object Array]";
     }
 
     #isFunction(fn) {
-        return Object.prototype.toString.call(fn) === '[object Function]';
+        return Object.prototype.toString.call(fn) === "[object Function]";
+    }
+
+    #isNumber(num) {
+        return Object.prototype.toString.call(num) === "[object Number]";
     }
 
     #ensureFunc(possibleFunc) {
@@ -73,8 +77,8 @@ class linqArray extends Array {
     //#endregion
 
     /**
-     * 
-     * @param {[]} items
+     * Adds the given sequence to the instance.
+     * @param {ArrayLike} items List of items to add.
      */
     addItems(items) {
         items.forEach(item => this.push(item));
@@ -82,7 +86,7 @@ class linqArray extends Array {
 
     /**
      * Filters a sequence of values based on a predicate.
-     * @param {Function} predicateFn
+     * @param {Function} predicateFn A function to test each element for a condition.
      * @returns
      */
     where(predicateFn) {
@@ -102,7 +106,7 @@ class linqArray extends Array {
 
     /**
      * Returns the first element of a sequence.
-     * @param {Function=} predicateFn
+     * @param {Function=} predicateFn An optional function to test each element for a condition.
      * @returns The first matching item
      */
     first(predicateFn) {
@@ -150,7 +154,7 @@ class linqArray extends Array {
     }
 
     /** Performs an operation on each item in the array
-    @param {function} runFunc The function to run against each array item, or object property. To break out of forEachItem, return false from runFunc. Should be function(indexInArray, valueOfElement) { .... }
+    @param {Function} runFunc The function to run against each array item, or object property. To break out of forEachItem, return false from runFunc. Should be function(indexInArray, valueOfElement) { .... }
     */
     forEachItem(runFunc) {
 
@@ -171,9 +175,9 @@ class linqArray extends Array {
 
     /**
      * Applies an accumulator function over a sequence.
-     * @param {Function} accumulatorFn 
-     * @param {any?} seed 
-     * @param {Function?} resultSelectorFn 
+     * @param {Function} accumulatorFn An accumulator function to be invoked on each element.
+     * @param {any?} seed The initial accumulator value.
+     * @param {Function?} resultSelectorFn A function to transform the final accumulator value into the result value.
      * @returns 
      */
     aggregate(accumulatorFn, seed, resultSelectorFn) {
@@ -196,8 +200,8 @@ class linqArray extends Array {
 
     /**
      * Determines whether all elements of an array satisfy a condition
-     * @param {function} predicateFn a function to test each item for a condition
-     * @returns {boolean} true if every element of the array passes the test in the specified predicate, or if the array is empty; otherwise, false
+     * @param {Function} predicateFn a function to test each item for a condition
+     * @returns {Boolean} true if every element of the array passes the test in the specified predicate, or if the array is empty; otherwise, false
      */
     all(predicateFn) {
 
@@ -243,8 +247,8 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {[]=} additionalItems 
+     * Concatenates two sequences.
+     * @param {[]=} additionalItems The sequence to concatenate to the first sequence.
      */
     concat(additionalItems) {
 
@@ -256,9 +260,9 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {*} value 
-     * @param {Function=} comparerFn 
+     * Determines whether a sequence contains a specified element.
+     * @param {*} value The value to locate in the sequence.
+     * @param {Function=} comparerFn An optional equality comparer function to compare values. If not specified, the default equality comparer is used.
      * @returns 
      */
     contains(value, comparerFn) {
@@ -300,20 +304,6 @@ class linqArray extends Array {
     }
 
     /**
-     * Checks if the array is empty. If not, the array is returned; otherwise, a new array containing the default value is returned.
-     * @param {*} defaultValue 
-     * @returns 
-     */
-    // defaultIfEmpty(defaultValue) {
-
-    //     if (this.length > 0) {
-    //         return this;
-    //     }
-
-    //     return new linqArray([defaultValue]);
-    // }
-
-    /**
      * Returns distinct elements from a sequence.
      * @param {Function=} comparerFn Optional function to compare values. If not specified, the default equality is used to compare values
      * @returns 
@@ -352,14 +342,13 @@ class linqArray extends Array {
 
     /**
      * Produces the set difference of this array and another array
-     * @param {[]} secondItems 
-     * @param {Function=} comparerFn 
+     * @param {ArrayLike} secondItems An array whose elements that also occur in the first sequence will cause those elements to be removed from the returned sequence.
+     * @param {Function=} comparerFn An optional function to compare values. If not specified, the default equality comparer is used.
      * @returns 
      */
     except(secondItems, comparerFn) {
 
         let results = new linqArray();
-
         let firstItems = this.distinct(comparerFn);
 
         secondItems = new linqArray(secondItems);
@@ -383,9 +372,9 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {Function=} predicateFn 
-     * @param {*} defaultValue 
+     * Returns the first element of a sequence, or a default value if no element is found.
+     * @param {Function=} predicateFn An optioanl function to test each element for a condition.
+     * @param {*} defaultValue The default value to return if the sequence is empty.
      * @returns 
      */
     firstOrDefault(predicateFn, defaultValue) {
@@ -410,6 +399,11 @@ class linqArray extends Array {
         return defaultValue;
     }
 
+    /**
+     * Groups the elements of a sequence.
+     * @param {Function} keySelectorFn A function to extract the key for each element.
+     * @returns 
+     */
     groupBy(keySelectorFn) {
 
         this.#ensureFunc(keySelectorFn);
@@ -445,9 +439,9 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {[]} secondItems 
-     * @param {Function=} comparerFn 
+     * Produces the set intersection of two sequences.
+     * @param {ArrayLike} secondItems An array whose distinct elements that also appear in the first sequence will be returned.
+     * @param {Function=} comparerFn An optional function to compare values. If not specified, the default equality comparer is used.
      * @returns 
      */
     intersect(secondItems, comparerFn) {
@@ -468,8 +462,8 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {Function=} predicateFn 
+     * Returns the last element of a sequence.
+     * @param {Function=} predicateFn Optional function to test each element for a condition.
      * @returns 
      */
     last(predicateFn) {
@@ -495,8 +489,8 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {Function=} comparerFn 
+     * Returns the maximum value in a sequence of values.
+     * @param {Function=} comparerFn An optional function to compare values. If not specified, the default equality comparer is used.
      * @returns 
      */
     max(comparerFn) {
@@ -523,8 +517,8 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {Function=} comparerFn 
+     * Returns the minimum value in a sequence of values.
+     * @param {Function=} comparerFn An optional function to compare values. If not specified, the default equality comparer is used.
      * @returns 
      */
     min(comparerFn) {
@@ -550,31 +544,36 @@ class linqArray extends Array {
         return result;
     }
 
-    /// orderBy
-    orderBy(keySelectorFunc, comparerPredicate) {
+    /**
+     * Sorts the elements of a sequence in ascending order.
+     * @param {Function=} keySelectorFn A function to extract a key from an element.
+     * @param {Function=} comparerFn An function to compare keys.
+     * @returns 
+     */
+    orderBy(keySelectorFn, comparerFn) {
 
         this.#ensureItems(this, true);
 
         let items = this.slice(); // Clone the array so .sort doesn't re-order the original
 
-        this.#ensureFuncIfDefined(keySelectorFunc);
+        this.#ensureFuncIfDefined(keySelectorFn);
 
-        this.#ensureFuncIfDefined(comparerPredicate);
+        this.#ensureFuncIfDefined(comparerFn);
 
-        if (keySelectorFunc === undefined) {
-            keySelectorFunc = function (o) { return o; };
+        if (keySelectorFn === undefined) {
+            keySelectorFn = function (o) { return o; };
         }
 
         let comparefn;
 
-        if (comparerPredicate === undefined) {
+        if (comparerFn === undefined) {
             comparefn = function (a, b) {
 
-                if (keySelectorFunc(a) < keySelectorFunc(b)) {
+                if (keySelectorFn(a) < keySelectorFn(b)) {
                     return -1;
                 }
 
-                if (keySelectorFunc(a) > keySelectorFunc(b)) {
+                if (keySelectorFn(a) > keySelectorFn(b)) {
                     return 1;
                 }
 
@@ -583,10 +582,10 @@ class linqArray extends Array {
             };
         } else {
             comparefn = function (a, b) {
-                a = keySelectorFunc(a);
-                b = keySelectorFunc(b);
+                a = keySelectorFn(a);
+                b = keySelectorFn(b);
 
-                return comparerPredicate(a, b);
+                return comparerFn(a, b);
             };
         }
 
@@ -595,12 +594,21 @@ class linqArray extends Array {
         return new linqArray(items);
     }
 
-    /// orderByDescending
-    orderByDescending(keySelectorFunc, comparerPredicate) {
+    /**
+     * Sorts the elements of a sequence in descending order.
+     * @param {Function=} keySelectorFn A function to extract a key from an element.
+     * @param {Function=} comparerFn An function to compare keys.
+     * @returns 
+     */
+    orderByDescending(keySelectorFn, comparerFn) {
 
-        return this.orderBy(keySelectorFunc, comparerPredicate).reverse2();
+        return this.orderBy(keySelectorFn, comparerFn).reverse2();
     }
 
+    /**
+     * Inverts the order of the elements in a sequence.
+     * @returns 
+     */
     reverse2() {
 
         if (this.length === 0) {
@@ -612,20 +620,32 @@ class linqArray extends Array {
         return new linqArray(copiedItems.reverse());
     }
 
-    select(transformFunc) {
+    /**
+     * Projects each element of a sequence into a new form.
+     * @param {Function} transformFn A transform function to apply to each source element; the second parameter of the function represents the index of the source element.
+     * @returns 
+     */
+    select(transformFn) {
 
+        this.#ensureFunc(transformFn);
         let results = new linqArray();
         let item;
 
         this.forEachItem(function (indexInArray, valueOfElement) {
 
-            item = transformFunc(valueOfElement, indexInArray);
+            item = transformFn(valueOfElement, indexInArray);
             results.push(item);
         });
 
         return results;
     }
 
+    /**
+     * Projects each element of a sequence to a new array and flattens the resulting sequences into one sequence.
+     * @param {*} collectionSelectorFn A transform function to apply to each element of the input sequence.
+     * @param {*} transformFn A transform function to apply to each element of the intermediate sequence.
+     * @returns 
+     */
     selectMany(collectionSelectorFn, transformFn) {
 
         let self = this;
@@ -658,6 +678,11 @@ class linqArray extends Array {
         return result;
     }
 
+    /**
+     * Sets the value of the specified array index to the given value. Can be used on nested arrays, too.
+     * @param {*} value 
+     * @param {ArrayLike|Number} indices 
+     */
     setValue(value, indices) {
 
         if (typeof indices === "number") {
@@ -681,6 +706,11 @@ class linqArray extends Array {
         currentDimensionArray[currentIndicee] = value;
     }
 
+    /**
+     * Returns a single, specific element of a sequence.
+     * @param {*} predicateFn A function to test an element for a condition.
+     * @returns 
+     */
     single(predicateFn) {
 
         this.#ensureItems(this);
@@ -715,9 +745,9 @@ class linqArray extends Array {
     }
 
     /**
-     * singleOrDefault
-     * @param {predicateFunc} predicateFn
-     * @param {any} defaultValue
+     * Returns a single, specific element of a sequence, or a default value if that element is not found.
+     * @param {Function=} predicateFn A function to test an element for a condition.
+     * @param {any} defaultValue The default value to return if the sequence is empty.
      * @returns {any}
      */
     singleOrDefault(predicateFn, defaultValue) {
@@ -752,8 +782,8 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {Number} count 
+     * Bypasses a specified number of elements in a sequence and then returns the remaining elements.
+     * @param {Number} count The number of elements to skip before returning the remaining elements.
      * @returns 
      */
     skip(count) {
@@ -775,8 +805,8 @@ class linqArray extends Array {
     }
 
     /**
-     * 
-     * @param {*} predicateFn 
+     * Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements
+     * @param {Function} predicateFn A function to test each element for a condition
      * @returns 
      */
     skipWhile(predicateFn) {
@@ -827,22 +857,51 @@ class linqArray extends Array {
         return total;
     }
 
-    /// take
-    take(count) {
+    /**
+     * Returns a specified number of contiguous elements from the start of the array, or a specified range of contiguous elements from the array
+     * @param {Number|ArrayLike<Number>} countOrRange 
+     * @returns 
+     */
+    take(countOrRange) {
 
+        let self = this;
         let results = new linqArray();
 
-        if (count <= 0) {
-            return results;
+        if (this.#isNumber(countOrRange)) {
+            if (countOrRange <= 0) {
+                return results;
+            }
+        }
+        else if (this.#isArray(countOrRange)) {
+            if (countOrRange.length !== 2) {
+                throw new Error("range must contain exactly 2 numers");
+            }
+            else if (countOrRange[0] > countOrRange[1]) {
+                throw new Error("countOrRange must be either a number or an array of 2 numbers");
+            }
+        }
+        else {
+            throw new Error("Start range must be greater than or equal to end range");
         }
 
         this.forEachItem(function (indexInArray, valueOfElement) {
 
-            if (indexInArray < count) {
-                results.push(valueOfElement);
+            if (self.#isNumber(countOrRange)) {
+                if (indexInArray < countOrRange) {
+                    results.push(valueOfElement);
+                }
+                else {
+                    return false; // Break out of forEachItem
+                }
             }
             else {
-                return false;
+                // Range
+                if (indexInArray >= countOrRange[0] && indexInArray <= countOrRange[1]) {
+                    results.push(valueOfElement);
+                }
+                else if (indexInArray > countOrRange[1]) {
+                    return false; // Break out of forEachItem
+                }
             }
         });
 
@@ -850,7 +909,7 @@ class linqArray extends Array {
     }
 
     /**
-     * 
+     * Returns elements from a sequence as long as a specified condition is true, and then skips the remaining elements.
      * @param {Function} predicateFn e.g. (val, idx) => idx < 4
      * @returns 
      */
@@ -873,7 +932,7 @@ class linqArray extends Array {
     }
 
     /**
-     * 
+     * Produces the set union of two sequences by using either the default equality comparer, or the specified equality comparer
      * @param {ArrayLike} secondItems 
      * @param {Function=} comparerFn 
      * @returns 
@@ -901,7 +960,7 @@ class linqArray extends Array {
     /**
      * Applies a specified function to the corresponding elements of two sequences, producing a sequence of the results
      * @param {ArrayLike} items2 
-     * @param {Function} fn 
+     * @param {Function} fn The function to apply to the corresponding elements
      * @returns 
      */
     zip(items2, fn) {

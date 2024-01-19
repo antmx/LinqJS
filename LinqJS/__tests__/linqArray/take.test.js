@@ -43,3 +43,11 @@ test("Returns a specified number of contiguous elements from the start of a list
 
 	expect(result).toEqual(expected);
 });
+
+test("Returns the contiguous elements in a range.", function () {
+
+	let result = _items.take([1, 3]);
+	let expected = ["Bar", "Baz", "Qux"];
+
+	expect(result).toEqual(expected);
+});
