@@ -81,7 +81,7 @@ class linqArray extends Array {
      * @param {ArrayLike} items List of items to add.
      */
     addItems(items) {
-        items.forEach(item => this.push(item));
+        items.forEachItem((indexInArray, valueOfElement) => this.push(valueOfElement));
     }
 
     /**
@@ -95,9 +95,9 @@ class linqArray extends Array {
 
         let result = new linqArray();
 
-        this.forEach(item => {
-            if (predicateFn(item)) {
-                result.push(item);
+        this.forEachItem((indexInArray, valueOfElement) => {
+            if (predicateFn(valueOfElement)) {
+                result.push(valueOfElement);
             }
         });
 
@@ -185,7 +185,7 @@ class linqArray extends Array {
         this.#ensureFunc(accumulatorFn);
         let result = seed !== undefined ? seed : null;
 
-        this.forEach(function (valueOfElement, indexInArray) {
+        this.forEachItem(function (indexInArray, valueOfElement) {
 
             result = accumulatorFn(result, valueOfElement);
         });
@@ -648,7 +648,6 @@ class linqArray extends Array {
      */
     selectMany(collectionSelectorFn, transformFn) {
 
-        let self = this;
         this.#ensureFunc(collectionSelectorFn);
         this.#ensureFuncIfDefined(transformFn);
 

@@ -19,7 +19,7 @@ test("Finds matching items", function () {
 	expect(result.length).toEqual(4);
 
 	result.forEachItem(function (indexInArray, valueOfElement) {
-		debugger;
+
 		expect(valueOfElement).toEqual(expected[indexInArray]);
 	});
 });
