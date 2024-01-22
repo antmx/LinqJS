@@ -21,22 +21,21 @@ class linqArray extends Array {
 
     //#region Private methods
 
-    #isArray(arr) {
-        return Object.prototype.toString.call(arr) === "[object Array]";
-    }
-
-    #isFunction(fn) {
-        return Object.prototype.toString.call(fn) === "[object Function]";
-    }
-
-    #isNumber(num) {
-        return Object.prototype.toString.call(num) === "[object Number]";
-    }
-
     #ensureFunc(possibleFunc) {
 
         if (!this.#isFunction(possibleFunc)) {
             throw new Error("possibleFunc must be a function");
+        }
+    }
+
+    /**
+     * Checks the specified object is a function. If it isn't undefined and isn't a function, throws an error
+     * @param {Function} possibleFunc the object to test for being a function
+     */
+    #ensureFuncIfDefined(possibleFunc) {
+
+        if (possibleFunc !== undefined) {
+            this.#ensureFunc(possibleFunc);
         }
     }
 
@@ -63,15 +62,16 @@ class linqArray extends Array {
         return true;
     }
 
-    /**
-     * Checks the specified object is a function. If it isn't undefined and isn't a function, throws an error
-     * @param {Function} possibleFunc the object to test for being a function
-     */
-    #ensureFuncIfDefined(possibleFunc) {
+    #isArray(arr) {
+        return Object.prototype.toString.call(arr) === "[object Array]";
+    }
 
-        if (possibleFunc !== undefined) {
-            this.#ensureFunc(possibleFunc);
-        }
+    #isFunction(fn) {
+        return Object.prototype.toString.call(fn) === "[object Function]";
+    }
+
+    #isNumber(num) {
+        return Object.prototype.toString.call(num) === "[object Number]";
     }
 
     //#endregion
@@ -82,95 +82,6 @@ class linqArray extends Array {
      */
     addItems(items) {
         items.forEachItem((indexInArray, valueOfElement) => this.push(valueOfElement));
-    }
-
-    /**
-     * Filters a sequence of values based on a predicate.
-     * @param {Function} predicateFn A function to test each element for a condition.
-     * @returns
-     */
-    where(predicateFn) {
-
-        this.#ensureFunc(predicateFn);
-
-        let result = new linqArray();
-
-        this.forEachItem((indexInArray, valueOfElement) => {
-            if (predicateFn(valueOfElement)) {
-                result.push(valueOfElement);
-            }
-        });
-
-        return result;
-    }
-
-    /**
-     * Returns the first element of a sequence.
-     * @param {Function=} predicateFn An optional function to test each element for a condition.
-     * @returns The first matching item
-     */
-    first(predicateFn) {
-
-        if (predicateFn === undefined) {
-            this.#ensureItems(this);
-            return this[0];
-        }
-
-        this.#ensureFunc(predicateFn);
-
-        for (let idx = 0, itm; idx < this.length; idx += 1) {
-            itm = this[idx];
-
-            if (predicateFn(itm)) {
-                return itm;
-            }
-        }
-
-        throw new Error("Array contains no matching items");
-    }
-
-    /**
-     * Determines whether any elements of an array satisfy a condition
-     * @param {Function=} predicateFn optional function to test each element for a condition
-     * @returns {boolean} true if any element of the array passes the test in the specified predicate; otherwise, false
-     */
-    any(predicateFn) {
-
-        if (predicateFn === undefined) {
-            return this.length > 0;
-        }
-
-        this.#ensureFunc(predicateFn);
-
-        for (let idx = 0, itm; idx < this.length; idx += 1) {
-            itm = this[idx];
-
-            if (predicateFn(itm)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /** Performs an operation on each item in the array
-    @param {Function} runFunc The function to run against each array item, or object property. To break out of forEachItem, return false from runFunc. Should be function(indexInArray, valueOfElement) { .... }
-    */
-    forEachItem(runFunc) {
-
-        this.#ensureFunc(runFunc);
-
-        this.#ensureItems(this, true);
-
-        let valueOfElement;
-
-        for (let indexInArray = 0; indexInArray < this.length; indexInArray += 1) {
-            valueOfElement = this[indexInArray];
-
-            if (runFunc(indexInArray, valueOfElement) === false) {
-                break;
-            }
-        }
     }
 
     /**
@@ -216,6 +127,30 @@ class linqArray extends Array {
         }
 
         return true;
+    }
+
+    /**
+     * Determines whether any elements of an array satisfy a condition
+     * @param {Function=} predicateFn optional function to test each element for a condition
+     * @returns {boolean} true if any element of the array passes the test in the specified predicate; otherwise, false
+     */
+    any(predicateFn) {
+
+        if (predicateFn === undefined) {
+            return this.length > 0;
+        }
+
+        this.#ensureFunc(predicateFn);
+
+        for (let idx = 0, itm; idx < this.length; idx += 1) {
+            itm = this[idx];
+
+            if (predicateFn(itm)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -372,6 +307,31 @@ class linqArray extends Array {
     }
 
     /**
+     * Returns the first element of a sequence.
+     * @param {Function=} predicateFn An optional function to test each element for a condition.
+     * @returns The first matching item
+     */
+    first(predicateFn) {
+
+        if (predicateFn === undefined) {
+            this.#ensureItems(this);
+            return this[0];
+        }
+
+        this.#ensureFunc(predicateFn);
+
+        for (let idx = 0, itm; idx < this.length; idx += 1) {
+            itm = this[idx];
+
+            if (predicateFn(itm)) {
+                return itm;
+            }
+        }
+
+        throw new Error("Array contains no matching items");
+    }
+
+    /**
      * Returns the first element of a sequence, or a default value if no element is found.
      * @param {Function=} predicateFn An optioanl function to test each element for a condition.
      * @param {*} defaultValue The default value to return if the sequence is empty.
@@ -397,6 +357,26 @@ class linqArray extends Array {
         }
 
         return defaultValue;
+    }
+
+    /** Performs an operation on each item in the array
+    @param {Function} runFunc The function to run against each array item, or object property. To break out of forEachItem, return false from runFunc. Should be function(indexInArray, valueOfElement) { .... }
+    */
+    forEachItem(runFunc) {
+
+        this.#ensureFunc(runFunc);
+
+        this.#ensureItems(this, true);
+
+        let valueOfElement;
+
+        for (let indexInArray = 0; indexInArray < this.length; indexInArray += 1) {
+            valueOfElement = this[indexInArray];
+
+            if (runFunc(indexInArray, valueOfElement) === false) {
+                break;
+            }
+        }
     }
 
     /**
@@ -954,6 +934,26 @@ class linqArray extends Array {
         });
 
         return results;
+    }
+
+    /**
+     * Filters a sequence of values based on a predicate.
+     * @param {Function} predicateFn A function to test each element for a condition.
+     * @returns
+     */
+    where(predicateFn) {
+
+        this.#ensureFunc(predicateFn);
+
+        let result = new linqArray();
+
+        this.forEachItem((indexInArray, valueOfElement) => {
+            if (predicateFn(valueOfElement)) {
+                result.push(valueOfElement);
+            }
+        });
+
+        return result;
     }
 
     /**
