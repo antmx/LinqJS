@@ -17,3 +17,40 @@ let firstOver4times10 = items
 
 // firstOver4times10 === 50
 ```
+
+linqJs includes equivalents of the common .NET Linq methods, i.e.
+- aggregate
+- all
+- any
+- average
+- concat
+- contains
+- count
+- distinct
+- elementAt
+- except
+- first
+- firstOrDefault
+- forEach
+- groupBy
+- intersect
+- last
+- max
+- min
+- orderBy
+- orderByDescending
+- reverse
+- select
+- selectMany
+- setValue
+- single
+- singleOrDefault
+- skip
+- skipWhile
+- sum
+- take
+- takeWhile
+- union
+- where
+- zip
+
