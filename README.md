@@ -19,7 +19,7 @@ let firstOver4times10 = items
 // firstOver4times10 === 50
 ```
 
-linqJs includes equivalents of the common .NET Linq and Generic methods, i.e.
+linqJs includes equivalents of the common .NET Linq, Generic and Array methods, i.e.
 - [aggregate](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - [all](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [any](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
@@ -43,7 +43,7 @@ linqJs includes equivalents of the common .NET Linq and Generic methods, i.e.
 - [reverse](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse)
 - [select](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
 - [selectMany](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectMany)
-- [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.setValue)
+- [setValue](https://learn.microsoft.com/en-us/dotnet/api/system.array.setvalue)
 - [single](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single)
 - [singleOrDefault](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleOrDefault)
 - [skip](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip)
