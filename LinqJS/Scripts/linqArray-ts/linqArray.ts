@@ -2,11 +2,11 @@
 /**
  * An array with LINQ-like functions.
  */
-export class linqArray<TItem> extends Array<TItem> {
+export class LinqArray<TItem> extends Array<TItem> {
 
     /**
      * 
-     * @param items An optional array of items to add to the new linqArray instance
+     * @param items An optional array of items to add to the new LinqArray instance
      */
     constructor(items?: Array<TItem>) {
         if (items != null) {
@@ -18,7 +18,7 @@ export class linqArray<TItem> extends Array<TItem> {
     }
 
     // /**
-    //  * @param {ArrayLike} [items] An optional array of items to add to the new linqArray instance
+    //  * @param {ArrayLike} [items] An optional array of items to add to the new LinqArray instance
     //  */
     // constructor(items) {
     //     if (Object.prototype.toString.call(items) === '[object Array]') {
@@ -41,9 +41,9 @@ export class linqArray<TItem> extends Array<TItem> {
         items.forEach(item => this.push(item));
     }
 
-    where(predicateFn: (val: TItem) => boolean): Array<TItem> {
+    where(predicateFn: (val: TItem) => boolean): LinqArray<TItem> {
 
-        let result = new linqArray<TItem>();
+        let result = new LinqArray<TItem>();
 
         this.forEach((val, idx) => {
             if (predicateFn(val)) {
@@ -55,4 +55,4 @@ export class linqArray<TItem> extends Array<TItem> {
     }
 }
 
-//module.exports = linqArray;
+//module.exports = LinqArray;
