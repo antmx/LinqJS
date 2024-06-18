@@ -20,7 +20,7 @@ let firstOver4times10 = items
 ```
 
 linqJs includes equivalents of the common .NET Linq methods, i.e.
-- aggregate
+- [aggregate](https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - all
 - any
 - average
