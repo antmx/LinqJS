@@ -418,6 +418,10 @@ class linqArray extends Array {
         return groups;
     }
 
+    // TODO: join
+    
+    // TODO: groupJoin
+
     /**
      * Produces the set intersection of two sequences.
      * @param {ArrayLike} secondItems An array whose distinct elements that also appear in the first sequence will be returned.
